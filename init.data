@@ -1,0 +1,14 @@
+rails generate scaffold Cuvee   libelle:string
+rails generate scaffold Domaine libelle:string
+rails generate scaffold Format  valeur:string
+rails generate scaffold Millesime  valeur:string
+rails generate scaffold Type    libelle:string
+
+rails generate scaffold Bouteille    appellation:string type:references description:text cuvee:references domaine:references format:references millesime:references prix:decimal nouveau:boolean
+
+rails generate active_admin:resource Type
+rails generate active_admin:resource Domaine
+rails generate active_admin:resource Cuvee
+rails generate active_admin:resource Format
+rails generate active_admin:resource Millesime
+rails generate active_admin:resource Bouteille
