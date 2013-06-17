@@ -18,4 +18,16 @@ class Bouteille < ActiveRecord::Base
   def display_name
     appellation
   end
+  
+  def bouteille_location
+    "#{Rails.root}/pdfs/bouteille-#{self.id}.pdf"
+  end
+  
+  
+  def as_json(options={})
+    super(
+      :only => [:id, :appellation, :description, :prix,:nouveau],
+      :include => { type: { only: [:libelle] },domaine: { only: [:libelle] },cuvee: { only: [:libelle] },format: { only: [:valeur] },millesime: { only: [:valeur] }}
+    )
+  end
 end
