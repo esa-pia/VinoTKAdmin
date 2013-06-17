@@ -28,12 +28,21 @@ module VinoTKAdmin
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
-
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    
+    
     config.i18n.default_locale = :fr
     #Adding the below makes it work as expected at heroku
     config.i18n.locale = :fr 
+    
+    
+    # workaround for i18n & active admin: http://stackoverflow.com/questions/7193043/activeadmin-internationalization
+    I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+    I18n.locale = config.i18n.locale = config.i18n.default_locale
+    I18n.available_locales = config.i18n.available_locales
+    I18n.reload!
+    
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

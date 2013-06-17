@@ -1,9 +1,20 @@
 ActiveAdmin.register Bouteille do
   
+  # Create sections on the index screen
+  scope :all, :default => true
+  scope :rouge
+  scope :blanc 
+  scope :rose 
+  scope :effervescent
+  scope :alcool_digestif
+  scope :aperitif
+  scope :whisky 
+
+  # Filterable attributes on the index screen
   filter :appellation
-  filter :type#_id, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-  filter :domaine
-  filter :cuvee
+  filter :type, :as => :check_boxes, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
+  filter :domaine, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Domaine.order.all)
+  filter :cuvee, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
   filter :format
   filter :millesime
   filter :prix
@@ -35,8 +46,8 @@ ActiveAdmin.register Bouteille do
   form do |f|
     f.inputs do
       f.input :type#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :domaine
-      f.input :cuvee
+      f.input :domaine, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :cuvee, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :format
       f.input :millesime
       f.input :appellation

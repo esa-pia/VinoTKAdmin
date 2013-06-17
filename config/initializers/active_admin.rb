@@ -206,5 +206,9 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
+    # Disable entirely
+    config.download_links = false
 
+    # Want PDF added to default download links
+    config.download_links = [:csv, :json]
 end

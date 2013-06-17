@@ -3,3 +3,6 @@
 
 en:
   hello: "Hello world"
+  chozen:
+    no_results_text: "No results" 
+  no_results: "No results"

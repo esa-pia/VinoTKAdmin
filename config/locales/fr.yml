@@ -220,3 +220,4 @@ fr:
   activerecord:
     errors:
       <<: *errors
+  no_results_text: "Pas de résultat"
