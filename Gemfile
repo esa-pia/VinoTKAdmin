@@ -36,7 +36,7 @@ end
 # gem 'debugger'
 
  # Gemfile in Rails >= 3.1
-   gem 'jquery-rails',   '2.3.0'
+  gem 'jquery-rails',   '2.3.0'
   gem 'activeadmin'
   gem 'sass-rails',     '~> 3.2.3'
   gem 'meta_search',    '>= 1.1.0.pre'
