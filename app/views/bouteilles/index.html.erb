@@ -1,0 +1,39 @@
+<h1>Listing bouteilles</h1>
+
+<table>
+  <tr>
+    <th>Appellation</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Cuvee</th>
+    <th>Domaine</th>
+    <th>Format</th>
+    <th>Millesime</th>
+    <th>Prix</th>
+    <th>Nouveau</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bouteilles.each do |bouteille| %>
+  <tr>
+    <td><%= bouteille.appellation %></td>
+    <td><%= bouteille.type %></td>
+    <td><%= bouteille.description %></td>
+    <td><%= bouteille.cuvee %></td>
+    <td><%= bouteille.domaine %></td>
+    <td><%= bouteille.format %></td>
+    <td><%= bouteille.millesime %></td>
+    <td><%= bouteille.prix %></td>
+    <td><%= bouteille.nouveau %></td>
+    <td><%= link_to 'Show', bouteille %></td>
+    <td><%= link_to 'Edit', edit_bouteille_path(bouteille) %></td>
+    <td><%= link_to 'Destroy', bouteille, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bouteille', new_bouteille_path %>

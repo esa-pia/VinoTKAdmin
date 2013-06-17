@@ -1,0 +1,21 @@
+<%= form_for(@domaine) do |f| %>
+  <% if @domaine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@domaine.errors.count, "error") %> prohibited this domaine from being saved:</h2>
+
+      <ul>
+      <% @domaine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :libelle %><br />
+    <%= f.text_field :libelle %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

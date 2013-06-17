@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Appellation:</b>
+  <%= @bouteille.appellation %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @bouteille.type %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @bouteille.description %>
+</p>
+
+<p>
+  <b>Cuvee:</b>
+  <%= @bouteille.cuvee %>
+</p>
+
+<p>
+  <b>Domaine:</b>
+  <%= @bouteille.domaine %>
+</p>
+
+<p>
+  <b>Format:</b>
+  <%= @bouteille.format %>
+</p>
+
+<p>
+  <b>Millesime:</b>
+  <%= @bouteille.millesime %>
+</p>
+
+<p>
+  <b>Prix:</b>
+  <%= @bouteille.prix %>
+</p>
+
+<p>
+  <b>Nouveau:</b>
+  <%= @bouteille.nouveau %>
+</p>
+
+
+<%= link_to 'Edit', edit_bouteille_path(@bouteille) %> |
+<%= link_to 'Back', bouteilles_path %>

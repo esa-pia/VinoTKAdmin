@@ -1,0 +1,21 @@
+<%= form_for(@millesime) do |f| %>
+  <% if @millesime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@millesime.errors.count, "error") %> prohibited this millesime from being saved:</h2>
+
+      <ul>
+      <% @millesime.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :valeur %><br />
+    <%= f.text_field :valeur %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

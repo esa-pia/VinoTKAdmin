@@ -1,0 +1,23 @@
+<h1>Listing cuvees</h1>
+
+<table>
+  <tr>
+    <th>Libelle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cuvees.each do |cuvee| %>
+  <tr>
+    <td><%= cuvee.libelle %></td>
+    <td><%= link_to 'Show', cuvee %></td>
+    <td><%= link_to 'Edit', edit_cuvee_path(cuvee) %></td>
+    <td><%= link_to 'Destroy', cuvee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cuvee', new_cuvee_path %>

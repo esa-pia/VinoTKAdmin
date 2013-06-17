@@ -1,0 +1,23 @@
+<h1>Listing domaines</h1>
+
+<table>
+  <tr>
+    <th>Libelle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @domaines.each do |domaine| %>
+  <tr>
+    <td><%= domaine.libelle %></td>
+    <td><%= link_to 'Show', domaine %></td>
+    <td><%= link_to 'Edit', edit_domaine_path(domaine) %></td>
+    <td><%= link_to 'Destroy', domaine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Domaine', new_domaine_path %>

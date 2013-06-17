@@ -1,0 +1,21 @@
+<%= form_for(@cuvee) do |f| %>
+  <% if @cuvee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cuvee.errors.count, "error") %> prohibited this cuvee from being saved:</h2>
+
+      <ul>
+      <% @cuvee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :libelle %><br />
+    <%= f.text_field :libelle %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

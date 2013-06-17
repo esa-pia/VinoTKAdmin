@@ -1,0 +1,53 @@
+<%= form_for(@bouteille) do |f| %>
+  <% if @bouteille.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bouteille.errors.count, "error") %> prohibited this bouteille from being saved:</h2>
+
+      <ul>
+      <% @bouteille.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :appellation %><br />
+    <%= f.text_field :appellation %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :cuvee %><br />
+    <%= f.text_field :cuvee %>
+  </div>
+  <div class="field">
+    <%= f.label :domaine %><br />
+    <%= f.text_field :domaine %>
+  </div>
+  <div class="field">
+    <%= f.label :format %><br />
+    <%= f.text_field :format %>
+  </div>
+  <div class="field">
+    <%= f.label :millesime %><br />
+    <%= f.text_field :millesime %>
+  </div>
+  <div class="field">
+    <%= f.label :prix %><br />
+    <%= f.text_field :prix %>
+  </div>
+  <div class="field">
+    <%= f.label :nouveau %><br />
+    <%= f.check_box :nouveau %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

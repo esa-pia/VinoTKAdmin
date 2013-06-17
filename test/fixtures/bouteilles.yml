@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  appellation: MyString
+  type: 
+  description: MyText
+  cuvee: 
+  domaine: 
+  format: 
+  millesime: 
+  prix: 9.99
+  nouveau: false
+
+two:
+  appellation: MyString
+  type: 
+  description: MyText
+  cuvee: 
+  domaine: 
+  format: 
+  millesime: 
+  prix: 9.99
+  nouveau: false

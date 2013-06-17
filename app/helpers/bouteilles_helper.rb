@@ -1,0 +1,2 @@
+module BouteillesHelper
+end
