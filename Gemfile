@@ -5,7 +5,7 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
 
 
 # Gems used only for assets and not required
@@ -13,7 +13,8 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'jquery-rails',   '2.3.0'
+  gem 'therubyracer'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
@@ -36,8 +37,16 @@ end
 # gem 'debugger'
 
  # Gemfile in Rails >= 3.1
-  gem 'jquery-rails',   '2.3.0'
+  
   gem 'activeadmin'
   gem 'sass-rails',     '~> 3.2.3'
   gem 'meta_search',    '>= 1.1.0.pre'
 
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production, :staging do
+  gem 'pg'
+  gem 'thin'
+end
