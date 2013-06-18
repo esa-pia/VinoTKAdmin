@@ -1,0 +1,25 @@
+<%= form_for(@catalogues_bouteille) do |f| %>
+  <% if @catalogues_bouteille.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@catalogues_bouteille.errors.count, "error") %> prohibited this catalogues_bouteille from being saved:</h2>
+
+      <ul>
+      <% @catalogues_bouteille.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bouteille %><br />
+    <%= f.text_field :bouteille %>
+  </div>
+  <div class="field">
+    <%= f.label :catalogue %><br />
+    <%= f.text_field :catalogue %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

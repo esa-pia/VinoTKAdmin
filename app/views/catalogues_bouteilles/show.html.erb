@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bouteille:</b>
+  <%= @catalogues_bouteille.bouteille %>
+</p>
+
+<p>
+  <b>Catalogue:</b>
+  <%= @catalogues_bouteille.catalogue %>
+</p>
+
+
+<%= link_to 'Edit', edit_catalogues_bouteille_path(@catalogues_bouteille) %> |
+<%= link_to 'Back', catalogues_bouteilles_path %>

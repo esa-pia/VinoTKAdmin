@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614125100) do
+ActiveRecord::Schema.define(:version => 20130618192748) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -65,6 +65,46 @@ ActiveRecord::Schema.define(:version => 20130614125100) do
   add_index "bouteilles", ["format_id"], :name => "index_bouteilles_on_format_id"
   add_index "bouteilles", ["millesime_id"], :name => "index_bouteilles_on_millesime_id"
   add_index "bouteilles", ["type_id"], :name => "index_bouteilles_on_type_id"
+
+  create_table "catalogues", :force => true do |t|
+    t.string   "titre"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "image1_file_name"
+    t.string   "image1_content_type"
+    t.integer  "image1_file_size"
+    t.datetime "image1_updated_at"
+    t.string   "image2_file_name"
+    t.string   "image2_content_type"
+    t.integer  "image2_file_size"
+    t.datetime "image2_updated_at"
+    t.string   "image3_file_name"
+    t.string   "image3_content_type"
+    t.integer  "image3_file_size"
+    t.datetime "image3_updated_at"
+    t.string   "image4_file_name"
+    t.string   "image4_content_type"
+    t.integer  "image4_file_size"
+    t.datetime "image4_updated_at"
+    t.string   "image5_file_name"
+    t.string   "image5_content_type"
+    t.integer  "image5_file_size"
+    t.datetime "image5_updated_at"
+    t.string   "image6_file_name"
+    t.string   "image6_content_type"
+    t.integer  "image6_file_size"
+    t.datetime "image6_updated_at"
+  end
+
+  create_table "catalogues_bouteilles", :force => true do |t|
+    t.integer  "bouteille_id"
+    t.integer  "catalogue_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "catalogues_bouteilles", ["bouteille_id"], :name => "index_catalogues_bouteilles_on_bouteille_id"
+  add_index "catalogues_bouteilles", ["catalogue_id"], :name => "index_catalogues_bouteilles_on_catalogue_id"
 
   create_table "cuvees", :force => true do |t|
     t.string   "libelle"

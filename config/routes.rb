@@ -1,4 +1,10 @@
 VinoTKAdmin::Application.routes.draw do
+  resources :catalogues_bouteilles
+
+
+  resources :catalogues
+
+
   resources :bouteilles
 
 

@@ -12,3 +12,8 @@ rails generate active_admin:resource Cuvee
 rails generate active_admin:resource Format
 rails generate active_admin:resource Millesime
 rails generate active_admin:resource Bouteille
+
+
+
+rails generate scaffold Catalogue    titre:string
+rails generate scaffold Catalogues_Bouteilles    bouteille:references catalogue:references

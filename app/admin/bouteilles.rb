@@ -93,7 +93,7 @@ ActiveAdmin.register Bouteille do
       end_of_association_chain.includes([:type, :domaine, :cuvee, :format, :millesime])
     end
     def per_page 
-   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json'
+   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'text/json'
    		return max_per_page if active_admin_config.paginate == false 
    		@per_page || active_admin_config.per_page 
  	end 

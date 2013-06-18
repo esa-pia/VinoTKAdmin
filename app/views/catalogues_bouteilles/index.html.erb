@@ -1,0 +1,25 @@
+<h1>Listing catalogues_bouteilles</h1>
+
+<table>
+  <tr>
+    <th>Bouteille</th>
+    <th>Catalogue</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @catalogues_bouteilles.each do |catalogues_bouteille| %>
+  <tr>
+    <td><%= catalogues_bouteille.bouteille %></td>
+    <td><%= catalogues_bouteille.catalogue %></td>
+    <td><%= link_to 'Show', catalogues_bouteille %></td>
+    <td><%= link_to 'Edit', edit_catalogues_bouteille_path(catalogues_bouteille) %></td>
+    <td><%= link_to 'Destroy', catalogues_bouteille, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Catalogues bouteille', new_catalogues_bouteille_path %>
