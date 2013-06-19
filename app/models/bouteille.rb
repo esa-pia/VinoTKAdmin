@@ -18,6 +18,9 @@ class Bouteille < ActiveRecord::Base
   def display_name
     appellation
   end
+  def type_libelle
+    type.libelle
+  end
   
   def bouteille_location
     "#{Rails.root}/pdfs/bouteille-#{self.id}.pdf"

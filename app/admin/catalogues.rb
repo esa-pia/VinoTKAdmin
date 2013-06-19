@@ -1,6 +1,9 @@
 ActiveAdmin.register Catalogue do
   
-
+   # Filterable attributes on the index screen
+  filter :titre
+  #filter :bouteilles, :as => :check_boxes, :collection => (Bouteille.order.all)#.map{|o| [o.libelle, o.id]}
+  
   show do |catalogue|
     attributes_table do
       row :id
@@ -54,7 +57,10 @@ ActiveAdmin.register Catalogue do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
       f.input :titre#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+      
+      #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
+      
       f.input :image1, :as => :file, :hint => (f.template.image_tag(f.object.image1(:medium)) if f.object.image1)
       f.input :image2, :as => :file, :hint => (f.template.image_tag(f.object.image2(:medium)) if f.object.image2)
       f.input :image3, :as => :file, :hint => (f.template.image_tag(f.object.image3(:medium)) if f.object.image3)
@@ -68,21 +74,50 @@ ActiveAdmin.register Catalogue do
   
   index do |catalogue|
     column :id
+    column :titre
     column "nb bouteille" do |catalogue|
       catalogue.bouteilles.count
     end
-    column :created_at
-    column :updated_at
+    column :image1 do |catalogue|
+      image_tag(catalogue.image1(:thumb)) if catalogue.image1
+    end
+    column :image2 do |catalogue|
+      image_tag(catalogue.image2(:thumb)) if catalogue.image2
+    end
+    column :image3 do |catalogue|
+      image_tag(catalogue.image3(:thumb)) if catalogue.image3
+    end
+    column :image4 do |catalogue|
+      image_tag(catalogue.image4(:thumb)) if catalogue.image4
+    end
+    column :image5 do |catalogue|
+      image_tag(catalogue.image5(:thumb)) if catalogue.image5
+    end
+    column :image6 do |catalogue|
+      image_tag(catalogue.image6(:thumb)) if catalogue.image6
+    end
     default_actions
+    column do |catalogue|
+      a :href => generate_pdf_admin_catalogue_path(catalogue) do
+        image_tag('/assets/pdf.png')
+      end
+    end
   end
   
+  index :as => :grid, :columns => 5 do |catalogue|
+    div do
+      a :href => admin_catalogue_path(catalogue) do
+        image_tag(catalogue.image1(:thumb))
+      end
+    end
+    a truncate(catalogue.titre), :href => admin_catalogue_path(catalogue)
+  end
   # -----------------------------------------------------------------------------------
   # PDF
   
   action_item :only => :show do
-    link_to "Generate PDF", generate_pdf_admin_catalogue_path(resource)
+    link_to "Generer PDF", generate_pdf_admin_catalogue_path(resource)
   end
-  
   member_action :generate_pdf do
     @catalogue = Catalogue.find(params[:id])
     generate_catalogue(@catalogue)

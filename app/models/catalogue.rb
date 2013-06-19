@@ -6,22 +6,22 @@ class Catalogue < ActiveRecord::Base
   has_many :bouteilles , :through => :catalogues_bouteilles
   
   has_attached_file :image1, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>", 
-                                   :thumb => "100x100>"
+                                   :thumb => "60x60>"
                                  }
   has_attached_file :image2, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>", 
-                                   :thumb => "100x100>"
+                                   :thumb => "60x60>"
                                  }
   has_attached_file :image3, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>", 
-                                   :thumb => "100x100>"
+                                   :thumb => "60x60>"
                                  }
   has_attached_file :image4, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>", 
-                                   :thumb => "100x100>"
+                                   :thumb => "60x60>"
                                  }
   has_attached_file :image5, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>", 
-                                   :thumb => "100x100>"
+                                   :thumb => "60x60>"
                                  }
   has_attached_file :image6, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>", 
-                                   :thumb => "100x100>"
+                                   :thumb => "60x60>"
                                  }
   def display_name
     titre
