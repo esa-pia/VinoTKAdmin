@@ -24,7 +24,10 @@ ActiveAdmin.register Bouteille do
     attributes_table do
       row :id
       row :appellation
-      row :type #do
+      row :type do  |bouteille|
+        status_tag(bouteille.type.libelle)
+      end
+      #row :type do
         #link_to bouteille.type.libelle, admin_type_path(bouteille.type.id) 
       #end
       row :description
@@ -59,7 +62,6 @@ ActiveAdmin.register Bouteille do
   end
   
   index do |bouteille|
-    column :id
     column :appellation
     column :type, :sortable => 'types.libelle' do  |bouteille|
         status_tag(bouteille.type.libelle)

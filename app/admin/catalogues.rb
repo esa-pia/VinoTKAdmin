@@ -15,10 +15,12 @@ ActiveAdmin.register Catalogue do
       row :updated_at
     end
     panel "Bouteilles" do
-      table_for catalogue.bouteilles do |t|
-        t.column :id
-        t.column :appellation
+      table_for catalogue.bouteilles.find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC') do |t|
         t.column :type
+        t.column :type do  |bouteille|
+          status_tag(bouteille.type.libelle)
+        end
+        t.column :appellation
         t.column :domaine
         t.column :cuvee
         t.column :format
@@ -57,16 +59,16 @@ ActiveAdmin.register Catalogue do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
       f.input :titre#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+      f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
       
       #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
       
-      f.input :image1, :as => :file, :hint => (f.template.image_tag(f.object.image1(:medium)) if f.object.image1)
-      f.input :image2, :as => :file, :hint => (f.template.image_tag(f.object.image2(:medium)) if f.object.image2)
-      f.input :image3, :as => :file, :hint => (f.template.image_tag(f.object.image3(:medium)) if f.object.image3)
-      f.input :image4, :as => :file, :hint => (f.template.image_tag(f.object.image4(:medium)) if f.object.image4)
-      f.input :image5, :as => :file, :hint => (f.template.image_tag(f.object.image5(:medium)) if f.object.image5)
-      f.input :image6, :as => :file, :hint => (f.template.image_tag(f.object.image6(:medium)) if f.object.image6)
+      f.input :image1, :as => :file, :hint => (f.template.image_tag(f.object.image1()) if f.object.image1)
+      f.input :image2, :as => :file, :hint => (f.template.image_tag(f.object.image2()) if f.object.image2)
+      f.input :image3, :as => :file, :hint => (f.template.image_tag(f.object.image3()) if f.object.image3)
+      f.input :image4, :as => :file, :hint => (f.template.image_tag(f.object.image4()) if f.object.image4)
+      f.input :image5, :as => :file, :hint => (f.template.image_tag(f.object.image5()) if f.object.image5)
+      f.input :image6, :as => :file, :hint => (f.template.image_tag(f.object.image6()) if f.object.image6)
       
     end
     f.buttons
@@ -104,10 +106,10 @@ ActiveAdmin.register Catalogue do
     end
   end
   
-  index :as => :grid, :columns => 5 do |catalogue|
+  index :as => :grid, :columns => 3 do |catalogue|
     div do
       a :href => admin_catalogue_path(catalogue) do
-        image_tag(catalogue.image1(:thumb))
+        image_tag(catalogue.image1(:medium))
       end
     end
     a truncate(catalogue.titre), :href => admin_catalogue_path(catalogue)
@@ -116,7 +118,7 @@ ActiveAdmin.register Catalogue do
   # PDF
   
   action_item :only => :show do
-    link_to "Generer PDF", generate_pdf_admin_catalogue_path(resource)
+    link_to I18n.translate("catalogue.generate.pdf"), generate_pdf_admin_catalogue_path(resource)
   end
   member_action :generate_pdf do
     @catalogue = Catalogue.find(params[:id])

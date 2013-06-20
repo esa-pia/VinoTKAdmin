@@ -221,3 +221,6 @@ fr:
     errors:
       <<: *errors
   no_results_text: "Pas de résultat"
+  catalogue:
+    generate:
+      pdf: "Générer PDF"

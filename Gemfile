@@ -43,7 +43,8 @@ end
   gem 'meta_search',    '>= 1.1.0.pre'
   gem 'prawn'
   gem 'paperclip',      '~> 3.0'
-
+  gem 'paperclip-storage-ftp'
+  
 group :development, :test do
   gem 'sqlite3'
 end
