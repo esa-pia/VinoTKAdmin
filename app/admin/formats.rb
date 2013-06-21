@@ -1,6 +1,7 @@
 ActiveAdmin.register Format do
   
   index do
+    selectable_column
     column :id
     column :valeur
     default_actions

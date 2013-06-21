@@ -82,6 +82,7 @@ ActiveAdmin.register Catalogue do
   end
   
   index do |catalogue|
+    selectable_column
     column :id
     column :titre
     column "nb bouteille" do |catalogue|

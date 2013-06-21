@@ -4,9 +4,9 @@
 
 $(document).ready(function(){
   $(".chzn-select").chosen({no_results_text: "Pas de resultat correspondant à "});
-  $('.chzn-single').css('width','230px');
-  $('.chzn-drop').css('width','238px');
-  $('.chzn-search input').css('width','203px');
+  $('.chzn-single').css('min-width','230px');
+  $('.chzn-drop').css('min-width','238px');
+  $('.chzn-search input').css('min-width','203px');
 
    $("form").submit(function() {
     var spinner = new Spinner().spin();

@@ -1,6 +1,7 @@
 ActiveAdmin.register Cuvee do
   
   index do
+    selectable_column
     column :id
     column :libelle
     default_actions

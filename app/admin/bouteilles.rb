@@ -62,6 +62,7 @@ ActiveAdmin.register Bouteille do
   end
   
   index do |bouteille|
+    selectable_column
     column :type, :sortable => 'types.libelle' do  |bouteille|
         status_tag(bouteille.type.libelle.parameterize)
     end
