@@ -4,7 +4,10 @@
 
 $(document).ready(function(){
   $(".chzn-select").chosen({no_results_text: "Pas de resultat correspondant à "});
-  
+  $('.chzn-single').css('width','230px');
+  $('.chzn-drop').css('width','238px');
+  $('.chzn-search input').css('width','203px');
+
    $("form").submit(function() {
     var spinner = new Spinner().spin();
     $("form").append(spinner.el);

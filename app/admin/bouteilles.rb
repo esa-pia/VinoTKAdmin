@@ -48,7 +48,7 @@ ActiveAdmin.register Bouteille do
   
   form do |f|
     f.inputs do
-      f.input :type#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :type, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :domaine, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :cuvee, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :format, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }
