@@ -28,3 +28,70 @@
 // .active_admin       applies to any Active Admin namespace
 // .admin_namespace    applies to the admin namespace (eg: /admin)
 // .other_namespace    applies to a custom namespace named other (eg: /other)
+
+
+span.status_tag.rouge{
+background-color: rgb(209, 0, 0);
+}
+
+span.status_tag.whisky{
+background-color: rgb(238, 123, 33);
+}
+span.status_tag.rose{
+background-color: rgb(224, 187, 214)
+}
+span.status_tag.blanc{
+background-color: rgb(228, 233, 193)
+}
+span.status_tag.aperitif{
+background-color: rgb(62, 138, 33)
+}
+span.status_tag.effervescent{
+background-color: rgb(71, 152, 255)
+}
+
+a.member_link.delete_link{
+    text-indent:-9999px!important;
+    display: inline-block!important;
+    background-image:url('/assets/trash.png');
+    height:32px;
+    width:32px;
+}
+a.member_link.view_link{
+    text-indent:-9999px!important;
+    display: inline-block!important;
+    background-image:url('/assets/view.png');
+    height:32px;
+    width:32px;
+}
+a.member_link.edit_link{
+    text-indent:-9999px!important;
+    display: inline-block!important;
+    background-image:url('/assets/edit.png');
+    height:32px;
+    width:32px;
+}
+
+th.prix{
+	max-width: 50px;
+	min-width: 50px;
+}
+
+
+div.index_as_table th:last-child
+{
+	width: 120px;
+}
+
+td.prix{
+  text-align: right;
+}
+td.format{
+  text-align: right;
+}
+td.millesime{
+  text-align: right;
+}
+
+.inline-hints img {max-height: 238px; max-width: auto;}
+.inline-hints img {max-height: auto; max-width: 238px;}

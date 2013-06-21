@@ -17,7 +17,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Recommended image height is 21px to properly fit in the header
   #
-  # config.site_title_image = "/images/logo.png"
+  config.site_title_image = "/assets/logo21x21.png"
 
   # == Default Namespace
   #
@@ -210,5 +210,7 @@ ActiveAdmin.setup do |config|
     config.download_links = false
 
     # Want PDF added to default download links
-    config.download_links = [:csv, :json]
+    config.download_links = [:csv, :json
+    
+    ]
 end

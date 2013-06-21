@@ -15,8 +15,8 @@ ActiveAdmin.register Bouteille do
   filter :type, :as => :check_boxes, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
   filter :domaine, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Domaine.order.all)
   filter :cuvee, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
-  filter :format
-  filter :millesime
+  filter :format, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }
+  filter :millesime, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }
   filter :prix
   filter :nouveau
   
@@ -36,7 +36,7 @@ ActiveAdmin.register Bouteille do
       row :format
       row :millesime
       row :prix do
-        number_to_currency bouteille.prix, :unit => "&euro;"
+        number_to_currency bouteille.prix
       end
       row :nouveau
       row :created_at
@@ -51,8 +51,8 @@ ActiveAdmin.register Bouteille do
       f.input :type#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :domaine, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :cuvee, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :format
-      f.input :millesime
+      f.input :format, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }
+      f.input :millesime, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }
       f.input :appellation
       f.input :description
       f.input :prix
@@ -62,18 +62,24 @@ ActiveAdmin.register Bouteille do
   end
   
   index do |bouteille|
-    column :appellation
     column :type, :sortable => 'types.libelle' do  |bouteille|
-        status_tag(bouteille.type.libelle)
+        status_tag(bouteille.type.libelle.parameterize)
     end
+    column :appellation
     column :domaine, :sortable => 'domaines.libelle'
     column :cuvee, :sortable => 'cuvees.libelle'
     column :format, :sortable => 'formats.valeur'
     column :millesime, :sortable => 'millesimes.valeur'
     column :prix, :sortable => :prix do |bouteille|
-      number_to_currency bouteille.prix, :unit => "&euro;"
+      div :class => "prix" do
+        number_to_currency bouteille.prix
+      end
     end
-    column :nouveau
+    column :nouveau do  |bouteille|
+      if(bouteille.nouveau)
+        image_tag('/assets/new.png')
+      end
+    end
     default_actions
   end
   
@@ -92,6 +98,12 @@ ActiveAdmin.register Bouteille do
   controller do
     def scoped_collection
       end_of_association_chain.includes([:type, :domaine, :cuvee, :format, :millesime])
+    end
+    def index
+      if(!params[:order])
+        params[:order] = "types.libelle_asc"
+      end
+      super
     end
     def per_page 
    		return max_csv_records if request.format == 'text/csv' ||  request.format == 'text/json'

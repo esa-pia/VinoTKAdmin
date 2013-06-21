@@ -1,3 +1,5 @@
+require "open-uri"
+
 ActiveAdmin.register Catalogue do
   
    # Filterable attributes on the index screen
@@ -16,9 +18,8 @@ ActiveAdmin.register Catalogue do
     end
     panel "Bouteilles" do
       table_for catalogue.bouteilles.find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC') do |t|
-        t.column :type
         t.column :type do  |bouteille|
-          status_tag(bouteille.type.libelle)
+          status_tag(bouteille.type.libelle.parameterize)
         end
         t.column :appellation
         t.column :domaine
@@ -26,9 +27,15 @@ ActiveAdmin.register Catalogue do
         t.column :format
         t.column :millesime
         t.column :prix do |bouteille|
-          number_to_currency bouteille.prix, :unit => "&euro;"
+          div :class => "prix" do
+            number_to_currency bouteille.prix
+          end
         end
-        t.column :nouveau
+        t.column :nouveau do  |bouteille|
+          if(bouteille.nouveau)
+            image_tag('/assets/new.png')
+          end
+        end
       end
     end
     panel "Images" do
@@ -63,12 +70,12 @@ ActiveAdmin.register Catalogue do
       
       #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
       
-      f.input :image1, :as => :file, :hint => (f.template.image_tag(f.object.image1()) if f.object.image1)
-      f.input :image2, :as => :file, :hint => (f.template.image_tag(f.object.image2()) if f.object.image2)
-      f.input :image3, :as => :file, :hint => (f.template.image_tag(f.object.image3()) if f.object.image3)
-      f.input :image4, :as => :file, :hint => (f.template.image_tag(f.object.image4()) if f.object.image4)
-      f.input :image5, :as => :file, :hint => (f.template.image_tag(f.object.image5()) if f.object.image5)
-      f.input :image6, :as => :file, :hint => (f.template.image_tag(f.object.image6()) if f.object.image6)
+      f.input :image1, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image1.url()) if f.object.image1)
+      f.input :image2, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image2.url()) if f.object.image2)
+      f.input :image3, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image3.url()) if f.object.image3)
+      f.input :image4, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image4.url()) if f.object.image4)
+      f.input :image5, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image5.url()) if f.object.image5)
+      f.input :image6, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image6.url()) if f.object.image6)
       
     end
     f.buttons
@@ -98,12 +105,13 @@ ActiveAdmin.register Catalogue do
     column :image6 do |catalogue|
       image_tag(catalogue.image6(:thumb)) if catalogue.image6
     end
-    default_actions
     column do |catalogue|
       a :href => generate_pdf_admin_catalogue_path(catalogue) do
         image_tag('/assets/pdf.png')
       end
     end
+    default_actions
+    
   end
   
   index :as => :grid, :columns => 3 do |catalogue|
@@ -127,7 +135,19 @@ ActiveAdmin.register Catalogue do
     # Send file to user
     send_file @catalogue.catalogue_location
   end
-  
+  controller do
+    def per_page 
+   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json'
+   		return max_per_page if active_admin_config.paginate == false 
+   		@per_page || active_admin_config.per_page 
+ 	end
+    def index
+      if(!params[:order])
+        params[:order] = "id_asc"
+      end
+      super
+    end
+  end
   
 end
 
@@ -158,16 +178,16 @@ def generate_catalogue(catalogue)
 #
 
 	if(catalogue.image1)
-      pdf.image "#{Rails.root}/public#{catalogue.image1}".sub!(/\?.+\Z/, ''), :height => 200
+      pdf.image open("#{catalogue.image1}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
     
     if(!"#{catalogue.image2}".eql?("/assets/missing.png"))
-      pdf.image "#{Rails.root}/public#{catalogue.image2}".sub!(/\?.+\Z/, ''), :height => 200
+      pdf.image open("#{catalogue.image2}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
     if(!"#{catalogue.image3}".eql?("/assets/missing.png"))
-      pdf.image "#{Rails.root}/public#{catalogue.image3}".sub!(/\?.+\Z/, ''), :height => 200
+      pdf.image open("#{catalogue.image3}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
     pdf.start_new_page
@@ -197,15 +217,15 @@ def generate_catalogue(catalogue)
     pdf.start_new_page
     
     if(!"#{catalogue.image4}".eql?("/assets/missing.png"))
-      pdf.image "#{Rails.root}/public#{catalogue.image4}".sub!(/\?.+\Z/, ''), :height => 200
+      pdf.image open("#{catalogue.image4}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
     if(!"#{catalogue.image5}".eql?("/assets/missing.png"))
-      pdf.image "#{Rails.root}/public#{catalogue.image5}".sub!(/\?.+\Z/, ''), :height => 200
+      pdf.image open("#{catalogue.image5}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
     if(!"#{catalogue.image6}".eql?("/assets/missing.png"))
-      pdf.image "#{Rails.root}/public#{catalogue.image6}".sub!(/\?.+\Z/, ''), :height => 200
+      pdf.image open("#{catalogue.image6}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
 

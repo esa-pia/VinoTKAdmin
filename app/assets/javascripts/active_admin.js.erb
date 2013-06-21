@@ -1,6 +1,46 @@
 //= require active_admin/base
 //= require chosen.jquery.min.js
+//= require spin.min.js
 
 $(document).ready(function(){
   $(".chzn-select").chosen({no_results_text: "Pas de resultat correspondant à "});
+  
+   $("form").submit(function() {
+    var spinner = new Spinner().spin();
+    $("form").append(spinner.el);
+    return true;
+  });
 })
+
+
+
+  
+  
+  function readURL(evt){
+    var files = evt.target.files; // FileList object
+    $(evt.target).closest('li').find('.inline-hints img').addClass("loading")
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          $('.inline-hints img.loading').attr('src',e.target.result);
+          $('.inline-hints img.loading').removeClass('loading');
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+  
+ 
