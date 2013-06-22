@@ -85,13 +85,13 @@ div.index_as_table th:last-child
 	width: 120px;
 }
 
-.prix{
+#collection_selection .prix, #main_content .prix{
   text-align: right;
 }
-.format a{
+#collection_selection .format, #main_content .format{
   text-align: right;
 }
-.millesime a{
+#collection_selection .millesime, #main_content .millesime {
   text-align: right;
 }
 

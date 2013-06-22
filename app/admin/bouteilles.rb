@@ -76,7 +76,7 @@ ActiveAdmin.register Bouteille do
         number_to_currency bouteille.prix
       end
     end
-    column :nouveau do  |bouteille|
+    column :nouveau, :sortable => :nouveau do  |bouteille|
       if(bouteille.nouveau)
         image_tag('/assets/new.png')
       end

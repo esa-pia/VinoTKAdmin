@@ -4,8 +4,8 @@ ActiveAdmin.register Catalogue do
   
    # Filterable attributes on the index screen
   filter :titre
-  #filter :bouteilles, :as => :check_boxes, :collection => (Bouteille.order.all)#.map{|o| [o.libelle, o.id]}
-  
+  filter :bouteilles, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+  #, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ , o.id]}
   show do |catalogue|
     attributes_table do
       row :id
@@ -195,25 +195,48 @@ def generate_catalogue(catalogue)
     
     
     # Items
+
     header = ['Appellation', 'Domaine', 'Cuvee', 'Format', 'Millesime', 'Prix']
-    items = catalogue.bouteilles.collect do |bouteille|
-      [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   bouteille.prix]
+
+
+    items = catalogue.bouteilles.find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').collect do |bouteille|
+      [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
     end
     
     #items = items + [["", "", "Discount:", "#{number_with_delimiter(invoice.discount)}%"]] \
     #              + [["", "", "Sub-total:", "#{number_to_currency(invoice.subtotal)}"]] \
     #              + [["", "", "Taxes:", "#{number_to_currency(invoice.taxes)} (#{number_with_delimiter(invoice.tax)}%)"]] \
     #              + [["", "", "Total:", "#{number_to_currency(invoice.total)}"]]
-    # 
+    #  .
+    pdf.font_size 8
     pdf.table [header] + items, :header => true, :width => pdf.bounds.width do
       row(-4..-1).borders = [:bottom, :top, :left, :right]
       row(-4..-1).border_width = 1
-      row(-4..-1).column(3).align = :right
-      row(-4..-1).column(4).align = :right
-      row(-4..-1).column(5).align = :right
+      row(-200..-1).column(3).align = :right
+      row(-200..-1).column(4).align = :right
+      row(-200..-1).column(5).align = :right
       row(0).style :font_style => :bold
       #row(-1).style :font_style => :bold
     end
+    pdf.font_size 12
+ #   items = catalogue.bouteilles.joins(:type).find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').where('types.libelle' => 'Blanc').collect do |bouteille|
+ #     [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   bouteille.prix]
+ #   end
+
+    #items = items + [["", "", "Discount:", "#{number_with_delimiter(invoice.discount)}%"]] \
+    #              + [["", "", "Sub-total:", "#{number_to_currency(invoice.subtotal)}"]] \
+    #              + [["", "", "Taxes:", "#{number_to_currency(invoice.taxes)} (#{number_with_delimiter(invoice.tax)}%)"]] \
+    #              + [["", "", "Total:", "#{number_to_currency(invoice.total)}"]]
+    #
+ #   pdf.table [header] + items, :header => true, :width => pdf.bounds.width do
+ #     row(-4..-1).borders = [:bottom, :top, :left, :right]
+ #     row(-4..-1).border_width = 1
+ #     row(-100..-1).column(3).align = :right
+ #     row(-100..-1).column(4).align = :right
+ #     row(-100..-1).column(5).align = :right
+ #     row(0).style :font_style => :bold
+ #     #row(-1).style :font_style => :bold
+ #   end
 
     pdf.start_new_page
     
