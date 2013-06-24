@@ -134,7 +134,7 @@ ActiveAdmin.register Catalogue do
       image_tag(catalogue.image6(:thumb)) if catalogue.image6
     end
     column do |catalogue|
-      a :href => generate_pdf_admin_catalogue_path(catalogue) do
+      a :href => generate_pdf_admin_catalogue_path(catalogue), :class => 'generatePDF' do
         image_tag('/assets/pdf.png')
       end
     end
@@ -181,7 +181,7 @@ end
 
 def generate_catalogue(catalogue)
   # Generate catalogue
-  Prawn::Document.generate @catalogue.catalogue_location do |pdf|
+  Prawn::Document.generate @catalogue.catalogue_location,  :left_margin => 40, :right_margin => 40, :top_margin=> 50, :bottom_margin => 50 do |pdf|
     # Title
     pdf.image "#{Rails.root}/app/assets/images/logo.jpg", :width => 500
    # pdf.text "Catalogue ##{catalogue.id}", :size => 25
@@ -255,28 +255,17 @@ def generate_catalogue(catalogue)
       pdf.move_down 40
     end
 
-#    # Footer
-#    num_pag=0 
-#    pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do 
-#      pdf.font "Helvetica" do 
-#        pdf.stroke_horizontal_rule 
-#        pdf.move_down 5 
-#        pdf.text "PAGE FOOTER", :style => :bold, :size => 10 
-#        pdf.move_up 12 
-#        num_pag += 1 
-#        pdf.text " - "+p+": Page "+num_pag.to_s+" of " + pdf.page_count.to_s, :align => :center, :size => 8, :align => :right 
-#      end
-#    end
-    string = "page <page> / <total>"
-   # Green page numbers 1 to 7
-    options = { :at => [pdf.bounds.right - 150, 0],
-                :width => 150,
-                :align => :right,
-                :page_filter => (1..20),
-                :start_count_at => 1,
-                :color => "FFFFFF" }
-    pdf.number_pages string, options
+    # Footer
+    pdf.page_count.times do |i|
+      pdf.go_to_page(i+1)
+      pdf.fill_color "FF3333"
+      pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.bottom-10 ], pdf.bounds.right+80, pdf.bounds.bottom+40
+      pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.top+50 ], pdf.bounds.right+80, pdf.bounds.bottom+40
 
+      pdf.fill_color "FFFFFF"
+      pdf.draw_text "page #{i+1} / #{pdf.page_count}", :at => [pdf.bounds.right-55, pdf.bounds.bottom-35]
+
+    end
 
 
     pdf.draw_text "fait le #{l(Time.now, :format => :short)}", :at => [0, 0]

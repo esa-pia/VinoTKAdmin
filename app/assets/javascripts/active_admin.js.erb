@@ -10,7 +10,8 @@ $(document).ready(function(){
 
    $("form").submit(function() {
     var spinner = new Spinner().spin();
-    $("form").append(spinner.el);
+    spinnerContainer=document.createElement('div');
+    $("form").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
     return true;
   });
 })
