@@ -1,5 +1,5 @@
 ActiveAdmin.register Type do
-  
+  menu :parent => I18n.t('menu.bouteilles_info')
   
   index do
     selectable_column

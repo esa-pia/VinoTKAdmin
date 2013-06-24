@@ -5,7 +5,18 @@ class Bouteille < ActiveRecord::Base
   belongs_to :format
   belongs_to :millesime
   attr_accessible :type_id, :domaine_id, :cuvee_id, :format_id, :millesime_id, :appellation, :description, :nouveau, :prix
-  
+
+
+  validates :appellation, :presence => true
+  validates :type, :presence => true
+  validates :cuvee, :presence => true
+  validates :domaine, :presence => true
+  validates :format, :presence => true
+  validates :millesime, :presence => true
+  validates :prix, :presence => true
+
+
+
   scope :rouge, where(:type_id => Type.where(:libelle => 'Rouge'))
   scope :blanc, where(:type_id => Type.where(:libelle => 'Blanc'))
   scope :rose, where(:type_id => Type.where("libelle like ?",'%Ros%'))

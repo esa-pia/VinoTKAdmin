@@ -224,3 +224,6 @@ fr:
   catalogue:
     generate:
       pdf: "Générer PDF"
+  menu:
+    bouteilles_info: "Bouteilles Info"
+    users: "Utilisateurs"

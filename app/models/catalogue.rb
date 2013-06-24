@@ -5,29 +5,22 @@ class Catalogue < ActiveRecord::Base
   has_many :catalogues_bouteilles
   has_many :bouteilles , :through => :catalogues_bouteilles
 
-  has_attached_file :image1, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>",
-                                   :thumb => "60x60>"
-                                 }
+  has_attached_file :image1, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
-  has_attached_file :image2, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>",
-                                   :thumb => "60x60>"
-                                 }
+  has_attached_file :image2, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
-  has_attached_file :image3, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>",
-                                   :thumb => "60x60>"
-                                 }
+  has_attached_file :image3, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
-  has_attached_file :image4, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>",
-                                   :thumb => "60x60>"
-                                 }
+  has_attached_file :image4, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
-  has_attached_file :image5, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>",
-                                   :thumb => "60x60>"
-                                 }
+  has_attached_file :image5, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
-  has_attached_file :image6, :default_url => "/assets/missing.png", :styles => { :medium => "238x238>",
-                                   :thumb => "60x60>"
-                                 }
+  has_attached_file :image6, :styles => {:medium => "238x238>", :thumb => "60x60>"}
+
+  validates :titre, :presence => true
+  validates :bouteilles, :presence => true
+  validates :image1, :presence => true
+
 
   def display_name
     titre

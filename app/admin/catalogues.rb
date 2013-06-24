@@ -1,7 +1,7 @@
 require "open-uri"
 
 ActiveAdmin.register Catalogue do
-  
+
    # Filterable attributes on the index screen
   filter :titre
   filter :bouteilles, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
@@ -17,7 +17,8 @@ ActiveAdmin.register Catalogue do
       row :updated_at
     end
     panel "Bouteilles" do
-      table_for catalogue.bouteilles.find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC') do |t|
+
+      table_for catalogue.bouteilles.joins(:type).order('types.libelle ASC, appellation ASC, domaine_id ASC, cuvee_id ASC')  do |t|
         t.column :type do  |bouteille|
           status_tag(bouteille.type.libelle.parameterize)
         end
@@ -37,6 +38,32 @@ ActiveAdmin.register Catalogue do
           end
         end
       end
+
+#      Type.all.each do |type|
+#        bouteilleList = catalogue.bouteilles.order('appellation ASC, domaine_id ASC, cuvee_id ASC').where('type_id' => type.id)
+#        if (bouteilleList.count>0)
+#          table_for bouteilleList  do |t|
+#            t.column :type do  |bouteille|
+#              status_tag(bouteille.type.libelle.parameterize)
+#            end
+#            t.column :appellation
+#            t.column :domaine
+#            t.column :cuvee
+#            t.column :format
+#            t.column :millesime
+#            t.column :prix do |bouteille|
+#              div :class => "prix" do
+#                number_to_currency bouteille.prix
+#              end
+#            end
+#            t.column :nouveau do  |bouteille|
+#              if(bouteille.nouveau)
+#                image_tag('/assets/new.png')
+#              end
+#            end
+#          end
+#        end
+#      end
     end
     panel "Images" do
       attributes_table_for catalogue do
@@ -163,13 +190,6 @@ def generate_catalogue(catalogue)
     
     pdf.start_new_page
 
-#    # Client info
-#    pdf.text bouteille.type.libelle
-#    pdf.text bouteille.domaine.libelle
-#
-#    #pdf.draw_text "#{t('.created_at')}: #{l(invoice.created_at, :format => :short)}", :at => [pdf.bounds.width / 2, pdf.bounds.height - 30]
-#
-#
 #    # Our company info
 #    # pdf.float do
 #    #   pdf.bounding_box [0, pdf.bounds.top - 5], :width => pdf.bounds.width do
@@ -178,11 +198,10 @@ def generate_catalogue(catalogue)
 #    # end
 #
 
-	if(catalogue.image1)
+	  if(catalogue.image1)
       pdf.image open("#{catalogue.image1}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
-    
     if(!"#{catalogue.image2}".eql?("/assets/missing.png"))
       pdf.image open("#{catalogue.image2}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
@@ -190,7 +209,7 @@ def generate_catalogue(catalogue)
     if(!"#{catalogue.image3}".eql?("/assets/missing.png"))
       pdf.image open("#{catalogue.image3}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
-    end
+     end
     pdf.start_new_page
     
     
@@ -199,44 +218,27 @@ def generate_catalogue(catalogue)
     header = ['Appellation', 'Domaine', 'Cuvee', 'Format', 'Millesime', 'Prix']
 
 
-    items = catalogue.bouteilles.find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').collect do |bouteille|
-      [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
+    Type.all.each do |type|
+      items = catalogue.bouteilles.order('appellation ASC, domaine_id ASC, cuvee_id ASC').where('type_id' => type.id).collect do |bouteille|
+        [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
+      end
+      if(items.count>0)
+        pdf.text "#{type.libelle}", :size => 18
+        pdf.move_down 10
+        pdf.font_size 8
+        pdf.table [header] + items, :header => true, :width => pdf.bounds.width, :row_colors => %w{e0e0e0 f0f0f0} do
+          row(-4..-1).borders = [:bottom, :top, :left, :right]
+          row(-4..-1).border_width = 1
+          row(-200..-1).column(3).align = :right
+          row(-200..-1).column(4).align = :right
+          row(-200..-1).column(5).align = :right
+          row(0).style :font_style => :bold
+          #row(-1).style :font_style => :bold
+        end
+        pdf.move_down 40
+        pdf.font_size 12
+      end
     end
-    
-    #items = items + [["", "", "Discount:", "#{number_with_delimiter(invoice.discount)}%"]] \
-    #              + [["", "", "Sub-total:", "#{number_to_currency(invoice.subtotal)}"]] \
-    #              + [["", "", "Taxes:", "#{number_to_currency(invoice.taxes)} (#{number_with_delimiter(invoice.tax)}%)"]] \
-    #              + [["", "", "Total:", "#{number_to_currency(invoice.total)}"]]
-    #  .
-    pdf.font_size 8
-    pdf.table [header] + items, :header => true, :width => pdf.bounds.width do
-      row(-4..-1).borders = [:bottom, :top, :left, :right]
-      row(-4..-1).border_width = 1
-      row(-200..-1).column(3).align = :right
-      row(-200..-1).column(4).align = :right
-      row(-200..-1).column(5).align = :right
-      row(0).style :font_style => :bold
-      #row(-1).style :font_style => :bold
-    end
-    pdf.font_size 12
- #   items = catalogue.bouteilles.joins(:type).find(:all, :order => 'type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').where('types.libelle' => 'Blanc').collect do |bouteille|
- #     [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   bouteille.prix]
- #   end
-
-    #items = items + [["", "", "Discount:", "#{number_with_delimiter(invoice.discount)}%"]] \
-    #              + [["", "", "Sub-total:", "#{number_to_currency(invoice.subtotal)}"]] \
-    #              + [["", "", "Taxes:", "#{number_to_currency(invoice.taxes)} (#{number_with_delimiter(invoice.tax)}%)"]] \
-    #              + [["", "", "Total:", "#{number_to_currency(invoice.total)}"]]
-    #
- #   pdf.table [header] + items, :header => true, :width => pdf.bounds.width do
- #     row(-4..-1).borders = [:bottom, :top, :left, :right]
- #     row(-4..-1).border_width = 1
- #     row(-100..-1).column(3).align = :right
- #     row(-100..-1).column(4).align = :right
- #     row(-100..-1).column(5).align = :right
- #     row(0).style :font_style => :bold
- #     #row(-1).style :font_style => :bold
- #   end
 
     pdf.start_new_page
     
@@ -253,30 +255,7 @@ def generate_catalogue(catalogue)
       pdf.move_down 40
     end
 
-#    
-#                     # :border_style => :grid, 
-#                     # :headers => header, 
-#                     # :width => pdf.bounds.width, 
-#                     # :row_colors => %w{cccccc eeeeee},
-#                     # :align => { 0 => :right, 1 => :left, 2 => :right, 3 => :right, 4 => :right }
-#
-#
-#    # Terms
-#    #if invoice.terms != ''
-#    #  pdf.move_down 20
-#    #  pdf.text 'Terms', :size => 18
-#    #  pdf.text invoice.terms
-#    #end
-
-#
-#    # Notes
-#    #if invoice.notes != ''
-#    #  pdf.move_down 20
-#    #  pdf.text 'Notes', :size => 18
-#    #  pdf.text invoice.notes
-#    #end
-#
-    # Footer
+#    # Footer
 #    num_pag=0 
 #    pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do 
 #      pdf.font "Helvetica" do 
@@ -288,7 +267,18 @@ def generate_catalogue(catalogue)
 #        pdf.text " - "+p+": Page "+num_pag.to_s+" of " + pdf.page_count.to_s, :align => :center, :size => 8, :align => :right 
 #      end
 #    end
-    
+    string = "page <page> / <total>"
+   # Green page numbers 1 to 7
+    options = { :at => [pdf.bounds.right - 150, 0],
+                :width => 150,
+                :align => :right,
+                :page_filter => (1..20),
+                :start_count_at => 1,
+                :color => "FFFFFF" }
+    pdf.number_pages string, options
+
+
+
     pdf.draw_text "fait le #{l(Time.now, :format => :short)}", :at => [0, 0]
   end
   

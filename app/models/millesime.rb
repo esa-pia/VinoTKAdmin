@@ -1,6 +1,8 @@
 class Millesime < ActiveRecord::Base
   attr_accessible :valeur
-  
+
+  validates :valeur, :presence => true
+
   def display_name
     valeur
   end
