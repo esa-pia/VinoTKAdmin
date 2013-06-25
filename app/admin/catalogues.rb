@@ -261,9 +261,12 @@ def generate_catalogue(catalogue)
     pdf.fill_color "e30014"
     pdf.fill_rectangle [pdf.bounds.right-220, pdf.bounds.bottom+110 ], 220, 110
     pdf.fill_color "FFFFFF"
-    pdf.draw_text "Vino TK",      :at => [pdf.bounds.right-210, pdf.bounds.bottom+90]
-    pdf.draw_text "2 rue Guenot", :at => [pdf.bounds.right-210, pdf.bounds.bottom+70]
-    pdf.draw_text "75011 Paris",  :at => [pdf.bounds.right-210, pdf.bounds.bottom+50]
+
+    pdf.draw_text "Vino - TK",         :at => [pdf.bounds.right-210, pdf.bounds.bottom+90]
+    pdf.draw_text "2 rue Guenot",    :at => [pdf.bounds.right-210, pdf.bounds.bottom+70]
+    pdf.draw_text "75011 Paris",     :at => [pdf.bounds.right-210, pdf.bounds.bottom+50]
+    pdf.draw_text "01 43 71 76 06",  :at => [pdf.bounds.right-210, pdf.bounds.bottom+30]
+
     pdf.image open("http://maps.googleapis.com/maps/api/staticmap?size=220x178&maptype=roadmap&markers=color:0xcd150e%7Clabel:S%7C48.850892,2.3923963&sensor=false"), :height => 89, :at => [pdf.bounds.right-120, pdf.bounds.bottom+100]
 
 
@@ -272,15 +275,23 @@ def generate_catalogue(catalogue)
       pdf.go_to_page(i+1)
       pdf.fill_color "e30014"
       pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.bottom-10 ], pdf.bounds.right+80, pdf.bounds.bottom+40
-      pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.top+50 ], pdf.bounds.right+80, pdf.bounds.bottom+40
 
       pdf.fill_color "FFFFFF"
       pdf.draw_text "page #{i+1} / #{pdf.page_count}", :at => [pdf.bounds.right-55, pdf.bounds.bottom-35]
 
     end
+    # Header
+    pdf.page_count.times do |i|
+      pdf.go_to_page(i+1)
+      pdf.fill_color "e30014"
+      pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.top+50 ], pdf.bounds.right+80, pdf.bounds.bottom+40
+      if(i>=1)
+        pdf.fill_color "FFFFFF"
+        pdf.draw_text "#{catalogue.titre}", :at => [pdf.bounds.left, pdf.bounds.top+26]
+      end
+    end
 
-
-    pdf.draw_text "fait le #{l(Time.now, :format => :short)}", :at => [0, 0]
+    pdf.draw_text "fait le #{l(Time.now, :format => :short)}", :at => [0, -35]
   end
   
   
