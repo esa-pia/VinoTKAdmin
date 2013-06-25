@@ -1,0 +1,10 @@
+fr:
+  formtastic:
+    :yes: "Oui"
+    :no: "NON"
+    :create: "Créer %{model}"
+    :update: "Modifier %{model}"
+    :submit: "Roumettre %{model}"
+    :cancel: "Annuler %{model}"
+    :reset: "Effacer %{model}"
+    :required: "requis"

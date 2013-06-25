@@ -183,10 +183,11 @@ def generate_catalogue(catalogue)
   # Generate catalogue
   Prawn::Document.generate @catalogue.catalogue_location,  :left_margin => 40, :right_margin => 40, :top_margin=> 50, :bottom_margin => 50 do |pdf|
     # Title
-    pdf.image "#{Rails.root}/app/assets/images/logo.jpg", :width => 500
+    pdf.move_down 30
+    pdf.image "#{Rails.root}/app/assets/images/logo.jpg", :width => 325
    # pdf.text "Catalogue ##{catalogue.id}", :size => 25
-    pdf.move_down 20
-    pdf.text catalogue.titre, :size => 30
+    pdf.move_down 70
+    pdf.text catalogue.titre, :size => 40
     
     pdf.start_new_page
 
@@ -235,7 +236,7 @@ def generate_catalogue(catalogue)
           row(0).style :font_style => :bold
           #row(-1).style :font_style => :bold
         end
-        pdf.move_down 40
+        pdf.move_down 20
         pdf.font_size 12
       end
     end
@@ -255,10 +256,21 @@ def generate_catalogue(catalogue)
       pdf.move_down 40
     end
 
+    pdf.start_new_page
+
+    pdf.fill_color "e30014"
+    pdf.fill_rectangle [pdf.bounds.right-220, pdf.bounds.bottom+110 ], 220, 110
+    pdf.fill_color "FFFFFF"
+    pdf.draw_text "Vino TK",      :at => [pdf.bounds.right-210, pdf.bounds.bottom+90]
+    pdf.draw_text "2 rue Guenot", :at => [pdf.bounds.right-210, pdf.bounds.bottom+70]
+    pdf.draw_text "75011 Paris",  :at => [pdf.bounds.right-210, pdf.bounds.bottom+50]
+    pdf.image open("http://maps.googleapis.com/maps/api/staticmap?size=220x178&maptype=roadmap&markers=color:0xcd150e%7Clabel:S%7C48.850892,2.3923963&sensor=false"), :height => 89, :at => [pdf.bounds.right-120, pdf.bounds.bottom+100]
+
+
     # Footer
     pdf.page_count.times do |i|
       pdf.go_to_page(i+1)
-      pdf.fill_color "FF3333"
+      pdf.fill_color "e30014"
       pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.bottom-10 ], pdf.bounds.right+80, pdf.bounds.bottom+40
       pdf.fill_rectangle [pdf.bounds.left-40, pdf.bounds.top+50 ], pdf.bounds.right+80, pdf.bounds.bottom+40
 
