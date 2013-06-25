@@ -17,3 +17,6 @@ rails generate active_admin:resource Bouteille
 
 rails generate scaffold Catalogue    titre:string
 rails generate scaffold Catalogues_Bouteilles    bouteille:references catalogue:references
+
+
+rails generate scaffold Client   nom:string nom:string email:string

@@ -7,8 +7,8 @@ $(document).ready(function(){
   $('.chzn-single').css('min-width','230px');
   $('.chzn-drop').css('min-width','238px');
   $('.chzn-search input').css('min-width','203px');
-
-   $("form").submit(function() {
+  $('head').append("<link rel='shortcut icon' href='/assets/favicon.ico'>");
+  $("form").submit(function() {
     var spinner = new Spinner().spin();
     spinnerContainer=document.createElement('div');
     $("form").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));

@@ -1,4 +1,7 @@
 VinoTKAdmin::Application.routes.draw do
+  resources :clients
+
+
   resources :catalogues_bouteilles
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618192748) do
+ActiveRecord::Schema.define(:version => 20130625152825) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -105,6 +105,14 @@ ActiveRecord::Schema.define(:version => 20130618192748) do
 
   add_index "catalogues_bouteilles", ["bouteille_id"], :name => "index_catalogues_bouteilles_on_bouteille_id"
   add_index "catalogues_bouteilles", ["catalogue_id"], :name => "index_catalogues_bouteilles_on_catalogue_id"
+
+  create_table "clients", :force => true do |t|
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "cuvees", :force => true do |t|
     t.string   "libelle"

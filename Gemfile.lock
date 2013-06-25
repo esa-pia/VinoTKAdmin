@@ -189,6 +189,7 @@ DEPENDENCIES
   activeadmin
   coffee-rails (~> 3.2.1)
   jquery-rails (= 2.3.0)
+  mail
   meta_search (>= 1.1.0.pre)
   paperclip (~> 3.0)
   paperclip-storage-ftp

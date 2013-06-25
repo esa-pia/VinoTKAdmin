@@ -199,7 +199,7 @@ def generate_catalogue(catalogue)
 #    # end
 #
 
-	  if(catalogue.image1)
+    if(!"#{catalogue.image1}".eql?("/assets/missing.png"))
       pdf.image open("#{catalogue.image1}".sub!(/\?.+\Z/, '')), :height => 200
       pdf.move_down 40
     end
