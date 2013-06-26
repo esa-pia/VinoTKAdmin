@@ -21,7 +21,7 @@ class Bouteille < ActiveRecord::Base
   scope :blanc, where(:type_id => Type.where(:libelle => 'Blanc'))
   scope :rose, where(:type_id => Type.where("libelle like ?",'%Ros%'))
   scope :effervescent, where(:type_id => Type.where(:libelle => 'Effervescent'))
-  scope :alcool_digestif, where(:type_id => Type.where(:libelle => 'Alcool / Digestif'))
+  scope :alcool_digestif, where(:type_id => Type.where("libelle like ? or libelle like ? ",'%Alcool%', '%Digestif%'))
   scope :aperitif, where(:type_id => Type.where("libelle like ?",'%Ap%'))
   scope :whisky, where(:type_id => Type.where(:libelle => 'Whisky'))
   
