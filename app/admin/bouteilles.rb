@@ -85,7 +85,6 @@ ActiveAdmin.register Bouteille do
   end
   
   csv do
-    column :id
     column :appellation
     column (:type)      { |bouteille| bouteille.type.libelle    }
     column (:domaine)   { |bouteille| bouteille.domaine.libelle }
@@ -95,7 +94,24 @@ ActiveAdmin.register Bouteille do
     column :prix
     column :nouveau
   end
-  
+
+  xlsx(:i18n_scope => [:active_admin, :axlsx, :bouteilles],
+       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+
+    # deleting columns from the report
+    delete_columns :id, :created_at, :updated_at , :type, :domaine, :cuvee, :format, :description, :millesime  , :appellation, :prix, :nouveau
+
+    column (:type)        { |bouteille| bouteille.type.libelle    }
+    column (:appellation) { |bouteille| bouteille.appellation    }
+    column (:domaine)     { |bouteille| bouteille.domaine.libelle }
+    column (:cuvee)       { |bouteille| bouteille.cuvee.libelle   }
+    column (:format)      { |bouteille| bouteille.format.valeur   }
+    column (:millesime)   { |bouteille| bouteille.format.valeur   }
+    column (:prix)        { |bouteille| bouteille.prix    }
+    column (:nouveau)     { |bouteille| bouteille.nouveau    }
+  end
+
+
   controller do
     def scoped_collection
       end_of_association_chain.includes([:type, :domaine, :cuvee, :format, :millesime])
@@ -107,9 +123,9 @@ ActiveAdmin.register Bouteille do
       super
     end
     def per_page 
-   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'text/json'
+   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'text/json'  ||  request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
    		return max_per_page if active_admin_config.paginate == false 
    		@per_page || active_admin_config.per_page 
- 	end 
+   	end
   end
 end

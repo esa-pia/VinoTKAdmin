@@ -8,7 +8,6 @@ ActiveAdmin.register Catalogue do
   #, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ , o.id]}
   show do |catalogue|
     attributes_table do
-      row :id
       row :titre
       row "Nb bouteiles" do
         catalogue.bouteilles.count 
@@ -110,7 +109,6 @@ ActiveAdmin.register Catalogue do
   
   index do |catalogue|
     selectable_column
-    column :id
     column :titre
     column "nb bouteille" do |catalogue|
       catalogue.bouteilles.count
@@ -150,6 +148,24 @@ ActiveAdmin.register Catalogue do
     end
     a truncate(catalogue.titre), :href => admin_catalogue_path(catalogue)
   end
+
+  # -----------------------------------------------------------------------------------
+  # XLS
+  xlsx(:i18n_scope => [:active_admin, :axlsx, :catalogues],
+       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+
+    # deleting columns from the report
+    delete_columns :id, :created_at, :updated_at , :titre,  :bouteilles,
+                   :image1_file_name, :image1_content_type, :image1_file_size, :image1_updated_at,
+                   :image2_file_name, :image2_content_type, :image2_file_size, :image2_updated_at,
+                   :image3_file_name, :image3_content_type, :image3_file_size, :image3_updated_at,
+                   :image4_file_name, :image4_content_type, :image4_file_size, :image4_updated_at,
+                   :image5_file_name, :image5_content_type, :image5_file_size, :image5_updated_at,
+                   :image6_file_name, :image6_content_type, :image6_file_size, :image6_updated_at
+
+    column (:titre)        { |catalogue| catalogue.titre }
+    column (:nb)           { |catalogue| catalogue.bouteilles.count }
+  end
   # -----------------------------------------------------------------------------------
   # PDF
   
@@ -165,7 +181,7 @@ ActiveAdmin.register Catalogue do
   end
   controller do
     def per_page 
-   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json'
+   		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json' ||  request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
    		return max_per_page if active_admin_config.paginate == false 
    		@per_page || active_admin_config.per_page 
  	end

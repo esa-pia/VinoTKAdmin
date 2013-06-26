@@ -45,6 +45,7 @@ end
   gem 'paperclip',      '~> 3.0'
   gem 'paperclip-storage-ftp'
   gem 'mail'
+  gem 'activeadmin-axlsx'
 
 group :development, :test do
   gem 'sqlite3'

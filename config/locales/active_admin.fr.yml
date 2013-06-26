@@ -84,3 +84,39 @@ fr:
         sign_in: "Connectez-vous"
         forgot_your_password: "Vous avez oublié votre mot de passe?"
         sign_in_with_omniauth_provider: "Connectez-vous avec %{provider}"
+    axlsx:
+     cuvees:
+       libelle: "Cuvée"
+     domaines:
+       libelle: "Domaine"
+     types:
+       libelle: "Type de vin"
+     formats:
+       valeur: "Format"
+     millesimes:
+       valeur: "Millesime"
+     users:
+       email:    "Email"
+       current_sign_in_at: "Courante Connexion"
+       last_sign_in_at: "Date de dernière connexion"
+       sign_in_count: "Nombre de connexion"
+     clients:
+       nom: "Nom"
+       email: "Email"
+     catalogues:
+       titre: "Titre"
+       nb: "Nombre de bouteilles"
+     bouteilles:
+       appellation: "Appellation"
+       type: "Type"
+       domaine: "Domaine"
+       cuvee: "Cuvée"
+       format: "Format"
+       millesime: "Millesime"
+       prix: "Prix"
+       nouveau: "Nouveau"
+  users:
+    email: "Email"
+    current_sign_in_at: "Courante Connexion"
+    last_sign_in_at: "Date de dernière connexion"
+    sign_in_count: "Nombre de connexion"
