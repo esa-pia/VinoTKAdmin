@@ -214,20 +214,21 @@ def generate_catalogue(catalogue)
 #    #   end
 #    # end
 #
-
-    if(!"#{catalogue.image1}".eql?("/assets/missing.png"))
-      pdf.image open("#{catalogue.image1}".sub!(/\?.+\Z/, '')), :height => 200
-      pdf.move_down 40
+	if((!"#{catalogue.image1}".eql?("/assets/missing.png"))||(!"#{catalogue.image2}".eql?("/assets/missing.png"))||(!"#{catalogue.image2}".eql?("/assets/missing.png")))
+      if(!"#{catalogue.image1}".eql?("/assets/missing.png"))
+        pdf.image open("#{catalogue.image1}".sub!(/\?.+\Z/, '')), :height => 200
+        pdf.move_down 40
+      end
+      if(!"#{catalogue.image2}".eql?("/assets/missing.png"))
+        pdf.image open("#{catalogue.image2}".sub!(/\?.+\Z/, '')), :height => 200
+        pdf.move_down 40
+      end
+      if(!"#{catalogue.image3}".eql?("/assets/missing.png"))
+        pdf.image open("#{catalogue.image3}".sub!(/\?.+\Z/, '')), :height => 200
+        pdf.move_down 40
+      end
+      pdf.start_new_page
     end
-    if(!"#{catalogue.image2}".eql?("/assets/missing.png"))
-      pdf.image open("#{catalogue.image2}".sub!(/\?.+\Z/, '')), :height => 200
-      pdf.move_down 40
-    end
-    if(!"#{catalogue.image3}".eql?("/assets/missing.png"))
-      pdf.image open("#{catalogue.image3}".sub!(/\?.+\Z/, '')), :height => 200
-      pdf.move_down 40
-     end
-    pdf.start_new_page
     
     
     # Items
@@ -258,21 +259,21 @@ def generate_catalogue(catalogue)
     end
 
     pdf.start_new_page
-    
-    if(!"#{catalogue.image4}".eql?("/assets/missing.png"))
-      pdf.image open("#{catalogue.image4}".sub!(/\?.+\Z/, '')), :height => 200
-      pdf.move_down 40
+    if((!"#{catalogue.image4}".eql?("/assets/missing.png"))||(!"#{catalogue.image5}".eql?("/assets/missing.png"))||(!"#{catalogue.image6}".eql?("/assets/missing.png")))
+      if(!"#{catalogue.image4}".eql?("/assets/missing.png"))
+        pdf.image open("#{catalogue.image4}".sub!(/\?.+\Z/, '')), :height => 200
+        pdf.move_down 40
+      end
+      if(!"#{catalogue.image5}".eql?("/assets/missing.png"))
+        pdf.image open("#{catalogue.image5}".sub!(/\?.+\Z/, '')), :height => 200
+        pdf.move_down 40
+      end
+      if(!"#{catalogue.image6}".eql?("/assets/missing.png"))
+        pdf.image open("#{catalogue.image6}".sub!(/\?.+\Z/, '')), :height => 200
+        pdf.move_down 40
+      end
+      pdf.start_new_page
     end
-    if(!"#{catalogue.image5}".eql?("/assets/missing.png"))
-      pdf.image open("#{catalogue.image5}".sub!(/\?.+\Z/, '')), :height => 200
-      pdf.move_down 40
-    end
-    if(!"#{catalogue.image6}".eql?("/assets/missing.png"))
-      pdf.image open("#{catalogue.image6}".sub!(/\?.+\Z/, '')), :height => 200
-      pdf.move_down 40
-    end
-
-    pdf.start_new_page
 
     pdf.fill_color "e30014"
     pdf.fill_rectangle [pdf.bounds.right-220, pdf.bounds.bottom+110 ], 220, 110
