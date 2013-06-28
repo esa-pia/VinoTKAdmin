@@ -1,5 +1,7 @@
-ActiveAdmin.register AdminUser, :as => I18n.t('menu.users') do
+ActiveAdmin.register AdminUser, :as => I18n.t('menu.user') do
   menu  :label => proc{I18n.t('menu.users')}
+
+  filter :email, :label => I18n.t('users.email')
 
   index do
     selectable_column
@@ -10,6 +12,24 @@ ActiveAdmin.register AdminUser, :as => I18n.t('menu.users') do
     default_actions                   
   end
 
+  show do |user|
+    panel I18n.t('users.section_title') do
+      attributes_table_for user do
+        row (I18n.t('users.id')) {user.id}
+        row (I18n.t('users.email')) {user.email}
+      end
+    end
+    active_admin_comments
+  end
+
+  form do |f|                         
+    f.inputs I18n.t('users.section_title') do       
+      f.input :email, :label => I18n.t('users.email')   
+      f.input :password , :label => I18n.t('users.password')                 
+      f.input :password_confirmation , :label => I18n.t('users.password_confirmation')                
+    end                               
+    f.actions                         
+  end
   # -----------------------------------------------------------------------------------
   # XLS
   xlsx(:i18n_scope => [:active_admin, :axlsx, :users],
@@ -20,19 +40,8 @@ ActiveAdmin.register AdminUser, :as => I18n.t('menu.users') do
 
     column :sign_in_count
   end
-
-
-  filter :email                       
-
-  form do |f|                         
-    f.inputs "Admin Details" do       
-      f.input :email                  
-      f.input :password               
-      f.input :password_confirmation  
-    end                               
-    f.actions                         
-  end
-
+  # -----------------------------------------------------------------------------------
+  # CONTROLLER
   controller do
     def per_page
       return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json' ||  request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'

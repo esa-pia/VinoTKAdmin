@@ -1,6 +1,32 @@
-ActiveAdmin.register Cuvee do
-  menu :parent => I18n.t('menu.bouteilles_info')
+ActiveAdmin.register Cuvee   do
+  menu :parent => I18n.t('menu.bouteilles_info') , :label => proc{I18n.t('menu.cuvees')}
 
+  filter :libelle, :label => I18n.t('cuvees.libelle')
+
+  index do
+    selectable_column
+    column I18n.t('cuvees.libelle'),:libelle
+    default_actions
+  end
+
+  show do |cuvee|
+    panel I18n.t('cuvees.section_title') do
+      attributes_table_for cuvee do
+        row (I18n.t('cuvees.id')) {cuvee.id}
+        row (I18n.t('cuvees.libelle')) {cuvee.libelle}
+      end
+    end
+    active_admin_comments
+  end
+
+  form do |f|                         
+    f.inputs I18n.t('cuvees.section_title') do       
+      f.input :libelle , :label => I18n.t('cuvees.libelle')
+    end                               
+    f.actions                         
+  end
+  # -----------------------------------------------------------------------------------
+  # XLS
   xlsx(:i18n_scope => [:active_admin, :axlsx, :cuvees],
        :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
@@ -10,13 +36,8 @@ ActiveAdmin.register Cuvee do
     # adding a column to the report
     #column(:libelle)
   end
-
-  index do
-    selectable_column
-    column :libelle
-    default_actions
-  end
-  
+  # -----------------------------------------------------------------------------------
+  # CONTROLLER
   controller do
     def per_page 
    		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json'  ||  request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'

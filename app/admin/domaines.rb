@@ -1,6 +1,33 @@
 ActiveAdmin.register Domaine do
   menu :parent => I18n.t('menu.bouteilles_info')
 
+  
+  filter :libelle, :label => I18n.t('domaines.libelle')
+
+  index do
+    selectable_column
+    column I18n.t('domaines.libelle'),:libelle
+    default_actions
+  end
+
+  show do |domaine|
+    panel I18n.t('domaines.section_title') do
+      attributes_table_for domaine do
+        row (I18n.t('domaines.id')) {domaine.id}
+        row (I18n.t('domaines.libelle')) {domaine.libelle}
+      end
+    end
+    active_admin_comments
+  end
+
+  form do |f|                         
+    f.inputs I18n.t('domaines.section_title') do       
+      f.input :libelle , :label => I18n.t('domaines.libelle')
+    end                               
+    f.actions                         
+  end
+  # -----------------------------------------------------------------------------------
+  # XLS
   xlsx(:i18n_scope => [:active_admin, :axlsx, :domaines],
        :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
@@ -10,13 +37,8 @@ ActiveAdmin.register Domaine do
     # adding a column to the report
     #column(:libelle)
   end
-
-  index do
-    selectable_column
-    column :libelle
-    default_actions
-  end
-  
+  # -----------------------------------------------------------------------------------
+  # CONTROLLER
   controller do
     def per_page
       logger.warn request.format

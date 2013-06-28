@@ -1,7 +1,32 @@
 ActiveAdmin.register Millesime do
   menu :parent => I18n.t('menu.bouteilles_info')
 
+  filter :valeur, :label => I18n.t('millesimes.valeur')
 
+  index do
+    selectable_column
+    column I18n.t('millesimes.valeur'),:valeur
+    default_actions
+  end
+
+  show do |millesime|
+    panel I18n.t('millesimes.section_title') do
+      attributes_table_for millesime do
+        row (I18n.t('millesimes.id')) {millesime.id}
+        row (I18n.t('millesimes.valeur')) {millesime.valeur}
+      end
+    end
+    active_admin_comments
+  end
+
+  form do |f|                         
+    f.inputs I18n.t('millesimes.section_title') do       
+      f.input :valeur , :label => I18n.t('millesimes.valeur')
+    end                               
+    f.actions                         
+  end
+  # -----------------------------------------------------------------------------------
+  # XLS
   xlsx(:i18n_scope => [:active_admin, :axlsx, :millesimes],
        :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
@@ -11,19 +36,14 @@ ActiveAdmin.register Millesime do
     # adding a column to the report
     #column(:valeur)
   end
-
-  index do
-    selectable_column
-    column :valeur
-    default_actions
-  end
-
+  # -----------------------------------------------------------------------------------
+  # CONTROLLER
   controller do
     def per_page 
    		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json'  ||  request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
    		return max_per_page if active_admin_config.paginate == false 
    		@per_page || active_admin_config.per_page 
- 	end
+ 	  end
     def index
       if(!params[:order])
         params[:order] = "valeur_asc"
