@@ -1,5 +1,5 @@
 ActiveAdmin.register Millesime do
-  menu :parent => I18n.t('menu.bouteilles_info')
+  menu :parent => I18n.t('menu.bouteilles_info') , :label => proc{I18n.t('menu.millesimes')}
 
   filter :valeur, :label => I18n.t('millesimes.valeur')
 

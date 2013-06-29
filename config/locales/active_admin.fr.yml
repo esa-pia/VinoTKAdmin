@@ -94,7 +94,7 @@ fr:
      formats:
        valeur: "Format"
      millesimes:
-       valeur: "Millesime"
+       valeur: "Millésime"
      users:
        email:    "Email"
        current_sign_in_at: "Courante Connexion"
@@ -112,8 +112,8 @@ fr:
        domaine: "Domaine"
        cuvee: "Cuvée"
        format: "Format"
-       millesime: "Millesime"
-       prix: "Prix"
+       millesime: "Millésime"
+       prix: "Prix Unité € TTC"
        nouveau: "Nouveau"
   users:
     section_title: "Détails utilisateur"
@@ -153,15 +153,15 @@ fr:
     domaine: "Domaine"
     cuvee: "Cuvée"
     format: "Format"
-    millesime: "Millesime"
-    prix: "Prix"
+    millesime: "Millésime"
+    prix: "Prix Unité € TTC"
     nouveau: "Nouveau"
     choose:
       type: "Veuillez choisir un type de vin"
       domaine: "Veuillez choisir un Domaine"
       cuvee: "Veuillez choisir une cuvée"
       format: "Veuillez choisir un format"
-      millesime: "Veuillez choisir un millesime"
+      millesime: "Veuillez choisir un millésime"
   cuvees:
     section_title: "Détails cuvée"
     id: "Id"
@@ -175,7 +175,7 @@ fr:
     id: "Id"
     valeur: "Valeur"
   millesimes:
-    section_title: "Détails millesime"
+    section_title: "Détails millésime"
     id: "Id"
     valeur: "Valeur"
   catalogues:

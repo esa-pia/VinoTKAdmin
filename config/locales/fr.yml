@@ -229,4 +229,7 @@ fr:
     users: "Utilisateurs"
     user: "Utilisateur"
     cuvees: "Cuvées"
-    cuvee: "Cuvee"
+    cuvee: "Cuvée"
+    millesimes: "Millésimes"
+    millesime: "Millésime"
+    
