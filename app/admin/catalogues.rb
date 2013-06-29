@@ -177,13 +177,12 @@ ActiveAdmin.register Catalogue do
   end
   member_action :generate_pdf do
     @catalogue = Catalogue.find(params[:id])
-    
+    generate_catalogue(@catalogue)
     
     # Send file to user
-    send_data(generate_catalogue(@catalogue), :filename => "catalogue.pdf", :type => "application/pdf")
+    send_file @catalogue.catalogue_location
     cookies[:fileDownload] = true
     cookies[:path]= "/"
-    #send_file @catalogue.catalogue_location
   end
   controller do
     def per_page 
