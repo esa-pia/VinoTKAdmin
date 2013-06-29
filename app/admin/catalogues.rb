@@ -3,35 +3,77 @@ require "open-uri"
 ActiveAdmin.register Catalogue do
 
    # Filterable attributes on the index screen
-  filter :titre
-  filter :bouteilles, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
-  #, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ , o.id]}
-  show do |catalogue|
-    attributes_table do
-      row :titre
-      row "Nb bouteiles" do
-        catalogue.bouteilles.count 
-      end
-      row :created_at
-      row :updated_at
+  filter :titre, :label => I18n.t('catalogues.titre')
+  filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+  
+  index do |catalogue|
+    selectable_column
+    column I18n.t('catalogues.titre'), :titre
+    column  I18n.t('catalogues.nb_bouteille') do |catalogue|
+      catalogue.bouteilles.count
     end
-    panel "Bouteilles" do
+    column I18n.t('catalogues.image1'), :image1 do |catalogue|
+      image_tag(catalogue.image1(:thumb)) if catalogue.image1
+    end
+    column I18n.t('catalogues.image2'), :image2 do |catalogue|
+      image_tag(catalogue.image2(:thumb)) if catalogue.image2
+    end
+    column I18n.t('catalogues.image3'), :image3 do |catalogue|
+      image_tag(catalogue.image3(:thumb)) if catalogue.image3
+    end
+    column I18n.t('catalogues.image4'), :image4 do |catalogue|
+      image_tag(catalogue.image4(:thumb)) if catalogue.image4
+    end
+    column I18n.t('catalogues.image5'), :image5 do |catalogue|
+      image_tag(catalogue.image5(:thumb)) if catalogue.image5
+    end
+    column I18n.t('catalogues.image6'), :image6 do |catalogue|
+      image_tag(catalogue.image6(:thumb)) if catalogue.image6
+    end
+    column do |catalogue|
+      a :href => generate_pdf_admin_catalogue_path(catalogue), :class => 'generatePDF' do
+        image_tag('/assets/pdf.png')
+      end
+    end
+    default_actions
+    
+  end
+  
+  index :as => :grid, :columns => 3 do |catalogue|
+    resource_selection_cell catalogue
+    div do
+      a :href => admin_catalogue_path(catalogue) do
+        image_tag(catalogue.image1(:medium))
+      end
+    end
+    a truncate(catalogue.titre), :href => admin_catalogue_path(catalogue)
+  end
+
+  show do |catalogue|
+    panel I18n.t('catalogues.section_title') do
+      attributes_table_for catalogue do
+        row (I18n.t('catalogues.id')) {catalogue.id}
+        row (I18n.t('catalogues.titre')) {catalogue.titre}
+        row (I18n.t('catalogues.nb_bouteille')) {catalogue.bouteilles.count}
+      end
+    end
+    panel I18n.t('catalogues.bouteilles') do
 
       table_for catalogue.bouteilles.joins(:type).order('types.libelle ASC, appellation ASC, domaine_id ASC, cuvee_id ASC')  do |t|
-        t.column :type do  |bouteille|
+        t.column I18n.t('bouteilles.type'), :type do  |bouteille|
           status_tag(bouteille.type.libelle.parameterize)
         end
-        t.column :appellation
-        t.column :domaine
-        t.column :cuvee
-        t.column :format
-        t.column :millesime
-        t.column :prix do |bouteille|
+        t.column I18n.t('bouteilles.appellation'), :appellation
+        t.column I18n.t('bouteilles.domaine'), :domaine
+        t.column I18n.t('bouteilles.cuvee'), :cuvee
+        t.column I18n.t('bouteilles.format'), :format
+        t.column I18n.t('bouteilles.millesime'), :millesime
+        t.column I18n.t('bouteilles.prix'), :prix do |bouteille|
           div :class => "prix" do
             number_to_currency bouteille.prix
           end
         end
-        t.column :nouveau do  |bouteille|
+        t.column I18n.t('bouteilles.nouveau'), :nouveau do  |bouteille|
           if(bouteille.nouveau)
             image_tag('/assets/new.png')
           end
@@ -64,90 +106,51 @@ ActiveAdmin.register Catalogue do
 #        end
 #      end
     end
-    panel "Images" do
-      attributes_table_for catalogue do
-        row :image1 do |catalogue|
-          image_tag(catalogue.image1(:thumb)) if catalogue.image1
+    panel I18n.t('catalogues.images') do
+      table do
+        thead do
+          tr do
+            th I18n.t('catalogues.image1')
+            th I18n.t('catalogues.image2')
+            th I18n.t('catalogues.image3')
+            th I18n.t('catalogues.image4')
+            th I18n.t('catalogues.image5')
+            th I18n.t('catalogues.image6')
+          end
         end
-        row :image2 do |catalogue|
-          image_tag(catalogue.image2(:thumb)) if catalogue.image2
+        tr do
+          td image_tag(catalogue.image1(:thumb)) if catalogue.image1
+          td image_tag(catalogue.image2(:thumb)) if catalogue.image2
+          td image_tag(catalogue.image3(:thumb)) if catalogue.image3
+          td image_tag(catalogue.image4(:thumb)) if catalogue.image4
+          td image_tag(catalogue.image5(:thumb)) if catalogue.image5
+          td image_tag(catalogue.image6(:thumb)) if catalogue.image6
         end
-        row :image3 do |catalogue|
-          image_tag(catalogue.image3(:thumb)) if catalogue.image3
-        end
-        row :image4 do |catalogue|
-          image_tag(catalogue.image4(:thumb)) if catalogue.image4
-        end
-        row :image5 do |catalogue|
-          image_tag(catalogue.image5(:thumb)) if catalogue.image5
-        end
-        row :image6 do |catalogue|
-          image_tag(catalogue.image6(:thumb)) if catalogue.image6
-        end
-      end
+      end  
+      
     end
     active_admin_comments
   end
   
   form :html => { :enctype => "multipart/form-data" } do |f|
-    f.inputs do
-      f.input :titre#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+    f.inputs I18n.t('catalogues.section_title') do
+      f.input :titre, :label => I18n.t('catalogues.titre')#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles') }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
       
       #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
       
-      f.input :image1, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image1.url()) if f.object.image1)
-      f.input :image2, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image2.url()) if f.object.image2)
-      f.input :image3, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image3.url()) if f.object.image3)
-      f.input :image4, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image4.url()) if f.object.image4)
-      f.input :image5, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image5.url()) if f.object.image5)
-      f.input :image6, :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image6.url()) if f.object.image6)
+      f.input :image1, :label => I18n.t('catalogues.image1'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image1.url()) if f.object.image1)
+      f.input :image2, :label => I18n.t('catalogues.image2'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image2.url()) if f.object.image2)
+      f.input :image3, :label => I18n.t('catalogues.image3'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image3.url()) if f.object.image3)
+      f.input :image4, :label => I18n.t('catalogues.image4'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image4.url()) if f.object.image4)
+      f.input :image5, :label => I18n.t('catalogues.image5'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image5.url()) if f.object.image5)
+      f.input :image6, :label => I18n.t('catalogues.image6'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image6.url()) if f.object.image6)
       
     end
     f.buttons
   end
   
-  index do |catalogue|
-    selectable_column
-    column :titre
-    column "nb bouteille" do |catalogue|
-      catalogue.bouteilles.count
-    end
-    column :image1 do |catalogue|
-      image_tag(catalogue.image1(:thumb)) if catalogue.image1
-    end
-    column :image2 do |catalogue|
-      image_tag(catalogue.image2(:thumb)) if catalogue.image2
-    end
-    column :image3 do |catalogue|
-      image_tag(catalogue.image3(:thumb)) if catalogue.image3
-    end
-    column :image4 do |catalogue|
-      image_tag(catalogue.image4(:thumb)) if catalogue.image4
-    end
-    column :image5 do |catalogue|
-      image_tag(catalogue.image5(:thumb)) if catalogue.image5
-    end
-    column :image6 do |catalogue|
-      image_tag(catalogue.image6(:thumb)) if catalogue.image6
-    end
-    column do |catalogue|
-      a :href => generate_pdf_admin_catalogue_path(catalogue), :class => 'generatePDF' do
-        image_tag('/assets/pdf.png')
-      end
-    end
-    default_actions
-    
-  end
   
-  index :as => :grid, :columns => 3 do |catalogue|
-    div do
-      a :href => admin_catalogue_path(catalogue) do
-        image_tag(catalogue.image1(:medium))
-      end
-    end
-    a truncate(catalogue.titre), :href => admin_catalogue_path(catalogue)
-  end
 
   # -----------------------------------------------------------------------------------
   # XLS
@@ -233,7 +236,8 @@ def generate_catalogue(catalogue)
     
     # Items
 
-    header = ['Appellation', 'Domaine', 'Cuvee', 'Format', 'Millesime', 'Prix']
+    header = [I18n.t('bouteilles.appellation'), I18n.t('bouteilles.domaine'), I18n.t('bouteilles.cuvee'), 
+              I18n.t('bouteilles.format'), I18n.t('bouteilles.millesime'), I18n.t('bouteilles.prix')]
 
 
     Type.all.each do |type|
@@ -279,10 +283,10 @@ def generate_catalogue(catalogue)
     pdf.fill_rectangle [pdf.bounds.right-220, pdf.bounds.bottom+110 ], 220, 110
     pdf.fill_color "FFFFFF"
 
-    pdf.draw_text "Vino - TK",         :at => [pdf.bounds.right-210, pdf.bounds.bottom+90]
-    pdf.draw_text "2 rue Guenot",    :at => [pdf.bounds.right-210, pdf.bounds.bottom+70]
-    pdf.draw_text "75011 Paris",     :at => [pdf.bounds.right-210, pdf.bounds.bottom+50]
-    pdf.draw_text "01 43 71 76 06",  :at => [pdf.bounds.right-210, pdf.bounds.bottom+30]
+    pdf.draw_text I18n.t('vinotk.name'),         :at => [pdf.bounds.right-210, pdf.bounds.bottom+90]
+    pdf.draw_text I18n.t('vinotk.address'),    :at => [pdf.bounds.right-210, pdf.bounds.bottom+70]
+    pdf.draw_text I18n.t('vinotk.city'),     :at => [pdf.bounds.right-210, pdf.bounds.bottom+50]
+    pdf.draw_text I18n.t('vinotk.phone'),  :at => [pdf.bounds.right-210, pdf.bounds.bottom+30]
 
     pdf.image open("http://maps.googleapis.com/maps/api/staticmap?size=220x178&maptype=roadmap&markers=color:0xcd150e%7Clabel:S%7C48.850892,2.3923963&sensor=false"), :height => 89, :at => [pdf.bounds.right-120, pdf.bounds.bottom+100]
 

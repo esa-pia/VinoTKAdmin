@@ -154,6 +154,12 @@ fr:
     millesime: "Millesime"
     prix: "Prix"
     nouveau: "Nouveau"
+    choose:
+      type: "Veuillez choisir un type de vin"
+      domaine: "Veuillez choisir un Domaine"
+      cuvee: "Veuillez choisir une cuvée"
+      format: "Veuillez choisir un format"
+      millesime: "Veuillez choisir un millesime"
   cuvees:
     section_title: "Détails cuvée"
     id: "Id"
@@ -170,3 +176,24 @@ fr:
     section_title: "Détails millesime"
     id: "Id"
     valeur: "Valeur"
+  catalogues:
+    section_title: "Détails catalogue"
+    id: "Id"
+    titre: "Titre"
+    bouteilles: "Bouteilles"
+    nb_bouteille: "Nbre de bouteilles"
+    images: "Images"
+    image1: "Image n°1"
+    image2: "Image n°2"
+    image3: "Image n°3"
+    image4: "Image n°4"
+    image5: "Image n°5"
+    image6: "Image n°6"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles constituant votre catalogue"
+  vinotk:
+    name: "Vino - TK"
+    address: "2 rue Guénot"
+    city: "75011 Paris"
+    phone: "01 43 71 76 06"
+    
