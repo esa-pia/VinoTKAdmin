@@ -94,7 +94,9 @@ div.index_as_table th:last-child
 #collection_selection .millesime, #main_content .millesime {
   text-align: right;
 }
-
+#collection_selection .type, #main_content .type {
+  width: 110px;
+}
 .inline-hints img {max-height: 238px; max-width: auto;}
 .inline-hints img {max-height: auto; max-width: 238px;}
 
@@ -107,4 +109,10 @@ div.index_as_table th:last-child
   border-radius: 10px;
   margin-left: 300px;
   margin-top: -100px;
+}
+#client-last{
+  width: 33%!important;
+}
+#bouteille-new{
+  width: 65%!important;
 }

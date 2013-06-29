@@ -9,8 +9,8 @@ fr:
     edit: "Modifier"
     delete: "Supprimer"
     delete_confirmation: "Êtes-vous certain de vouloir supprimer ceci ?"
-    new_model: "Nouveau %{model}"
-    create_model: "Nouveau %{model}"
+    new_model: "Créer %{model}"
+    create_model: "Créer %{model}"
     edit_model: "Modifier %{model}"
     update_model: "Modifier %{model}"
     delete_model: "Supprimer %{model}"
@@ -125,6 +125,7 @@ fr:
     password: "Mot de passe"
     password_confirmation: "Confirmation du mot de passe"
   clients:
+    last: "Les 5 derniers clients créés"
     section_title: "Détails client"
     id: "Id"
     nom: "Nom"
@@ -143,6 +144,7 @@ fr:
     aperitif: "Apéritif"
     whisky: "Whisky" 
   bouteilles:
+    new: "Les nouvelles bouteilles"
     section_title: "Détails bouteille"
     id: "Id"
     appellation: "Appellation"
@@ -177,6 +179,7 @@ fr:
     id: "Id"
     valeur: "Valeur"
   catalogues:
+    last: "Dernier catalogue"
     section_title: "Détails catalogue"
     id: "Id"
     titre: "Titre"
