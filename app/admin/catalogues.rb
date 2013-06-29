@@ -31,7 +31,7 @@ ActiveAdmin.register Catalogue do
       image_tag(catalogue.image6(:thumb)) if catalogue.image6
     end
     column do |catalogue|
-      a :href => generate_pdf_admin_catalogue_path(catalogue), :class => 'generatePDF' do
+      a :href => '#', :pdf => generate_pdf_admin_catalogue_path(catalogue), :class => 'generatePDF' do
         image_tag('/assets/pdf.png')
       end
     end
@@ -177,10 +177,13 @@ ActiveAdmin.register Catalogue do
   end
   member_action :generate_pdf do
     @catalogue = Catalogue.find(params[:id])
-    generate_catalogue(@catalogue)
+    
     
     # Send file to user
-    send_file @catalogue.catalogue_location
+    send_data(generate_catalogue(@catalogue), :filename => "catalogue.pdf", :type => "application/pdf")
+    cookies[:fileDownload] = true
+    cookies[:path]= "/"
+    #send_file @catalogue.catalogue_location
   end
   controller do
     def per_page 
