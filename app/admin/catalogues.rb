@@ -173,7 +173,7 @@ ActiveAdmin.register Catalogue do
   # PDF
   
   action_item :only => :show do
-    link_to I18n.translate("catalogue.generate.pdf"), generate_pdf_admin_catalogue_path(resource)
+    link_to I18n.translate("catalogue.generate.pdf"), '#', :class => 'generatePDF', :pdf => generate_pdf_admin_catalogue_path(resource)
   end
   member_action :generate_pdf do
     @catalogue = Catalogue.find(params[:id])
