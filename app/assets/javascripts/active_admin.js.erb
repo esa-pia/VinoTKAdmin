@@ -12,23 +12,22 @@ $(document).ready(function(){
   $('head').append("<link rel='shortcut icon' href='/assets/favicon.ico'>");
   
   $("form").submit(function() {
-    var spinner = new Spinner().spin();
-    spinnerContainer=document.createElement('div');
-    $("#wrapper").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
+    launchSpinner();
     return true;
   });
-
+  
+  $("a.send_newsletter").on("click", function( event ) {
+    launchSpinner();
+  });
   $("a.generatePDF").on("click", function( event ) {
-    var spinner = new Spinner().spin();
-    spinnerContainer=document.createElement('div');
-    $("#wrapper").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
+    launchSpinner();
     $.fileDownload($(this).attr('pdf'),
     {
       successCallback: function (url) {
-        $(spinnerContainer).remove();
+        stopSpinner();
       },
       failCallback: function (responseHtml, url) {
-       $(spinnerContainer).remove();
+        stopSpinner();
       }
     });
     return false;
@@ -36,8 +35,16 @@ $(document).ready(function(){
   
 })
 
+function launchSpinner(){
+  var spinner = new Spinner().spin();
+  spinnerContainer=document.createElement('div');
+  $("#wrapper").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
+}
 
-  
+function stopSpinner(){
+  $('#spinnerContainer').remove();
+}
+
 function readURL(evt){
   var files = evt.target.files; // FileList object
   $(evt.target).closest('li').find('.inline-hints img').addClass("loading")

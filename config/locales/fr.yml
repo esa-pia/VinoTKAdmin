@@ -232,4 +232,14 @@ fr:
     cuvee: "Cuvée"
     millesimes: "Millésimes"
     millesime: "Millésime"
-    
+  activerecord:
+    models:
+      millesime: 
+        one: "Millésime"
+        other: "Millésimes"
+      cuvee: 
+        one: "Cuvée"
+        other: "Cuvées"
+      admin_user: 
+        one: "Utilisateur"
+        other: "Utilisateurs"
