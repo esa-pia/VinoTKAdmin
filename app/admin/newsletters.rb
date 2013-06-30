@@ -1,5 +1,5 @@
 ActiveAdmin.register Newsletter do
-
+	menu :if => proc{ false }
  # Filterable attributes on the index screen
   filter :titre,      :label => I18n.t('newsletters.titre')
   filter :date_debut, :label => I18n.t('newsletters.date_debut')
