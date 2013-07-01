@@ -9,6 +9,14 @@ $(document).ready(function(){
   $('.chzn-drop').css('min-width','238px');
   $('.chzn-search input').css('min-width','203px');
 
+  $(".chzn-select[multiple]").before('<span class="selectAll selectAction">Tout sélectionner</span>');
+  $(".chzn-select[multiple]").before('<span class="deselectAll selectAction">Tout désélectionner</span>');
+
+
+
+
+
+
   $('head').append("<link rel='shortcut icon' href='/assets/favicon.ico'>");
   
   $("form").submit(function() {
@@ -33,6 +41,21 @@ $(document).ready(function(){
     return false;
   });
   
+  $(".selectAll").on("click", function( event ) {
+    $(".chzn-select option ").prop("selected", true);
+    $(".chzn-select").trigger("liszt:updated");
+  });
+$(".deselectAll").on("click", function( event ) {
+    $(".chzn-select option ").prop("selected", false);
+    $('.search-choice').remove()
+    $(".chzn-select").trigger("liszt:updated");
+  });
+//  $(".deselectAll").on("click", function( event ) {
+    //$('.chzn-select option').prop('selected', false);
+    //$('.chzn-select').trigger('liszt:updated');
+//  });​
+
+
 })
 
 function launchSpinner(){
