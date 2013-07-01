@@ -205,4 +205,6 @@ fr:
     address: "2 rue Guénot"
     city: "75011 Paris"
     phone: "01 43 71 76 06"
-    
+  actions:
+    select_all: "Tout sélectionner"
+    unselect_all: "Tout désélectionner"
