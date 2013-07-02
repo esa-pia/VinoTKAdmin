@@ -257,6 +257,14 @@ def generate_catalogue(catalogue)
           row(-200..-1).column(4).align = :right
           row(-200..-1).column(5).align = :right
           row(0).style :font_style => :bold
+
+          column(0).width = 115
+          column(1).width = 125
+          #column(2).width = 8
+          column(3).width = 38
+          column(4).width = 48
+          column(5).width = 48
+          
           #row(-1).style :font_style => :bold
         end
         pdf.move_down 20

@@ -53,11 +53,16 @@ $(".deselectAll").on("click", function( event ) {
 function launchSpinner(){
   var spinner = new Spinner().spin();
   spinnerContainer=document.createElement('div');
+  
   $("#wrapper").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
+  var docHeight = $(document).height();
+  $("body").append("<div id='overlay'></div>");
+  $("#overlay").height(docHeight);
 }
 
 function stopSpinner(){
   $('#spinnerContainer').remove();
+  $("#overlay").remove();
 }
 
 function readURL(evt){

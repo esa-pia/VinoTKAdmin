@@ -46,6 +46,7 @@ end
   gem 'paperclip-storage-ftp'
   gem 'mail'
   gem 'activeadmin-axlsx'
+  gem 'roadie'
 
 group :development, :test do
   gem 'sqlite3'
