@@ -47,6 +47,7 @@ end
   gem 'mail'
   gem 'activeadmin-axlsx'
   gem 'roadie'
+  gem 'just-datetime-picker'
 
 group :development, :test do
   gem 'sqlite3'

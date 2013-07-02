@@ -1,5 +1,5 @@
 ActiveAdmin.register Newsletter do
-	menu :if => proc{ false }
+	menu :if => proc{ true }
  # Filterable attributes on the index screen
   filter :titre,      :label => I18n.t('newsletters.titre')
   filter :date_debut, :label => I18n.t('newsletters.date_debut')
@@ -25,7 +25,28 @@ ActiveAdmin.register Newsletter do
     default_actions
     
   end
+  show do |newsletter|
+    panel I18n.t('newsletters.section_title') do
+      attributes_table_for newsletter do
+        row (I18n.t('newsletters.id')) {newsletter.id}
+        row (I18n.t('newsletters.titre')) {newsletter.titre}
+        row (I18n.t('newsletters.date_debut')) {newsletter.date_debut}
+        row (I18n.t('newsletters.date_fin')) {newsletter.date_fin}
+        row (I18n.t('newsletters.info')) {newsletter.info}
+      end
+    end
+    active_admin_comments
+  end
 
+    form do |f|                         
+    f.inputs I18n.t('newsletters.section_title') do       
+      f.input :titre, :label => I18n.t('newsletters.titre')   
+      f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
+      f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker       
+      f.input :info, :label => I18n.t('newsletters.info')     
+    end                               
+    f.actions                         
+  end
 # -----------------------------------------------------------------------------------
   # Email sending
   
