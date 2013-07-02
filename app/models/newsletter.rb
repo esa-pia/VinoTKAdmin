@@ -8,4 +8,11 @@ class Newsletter < ActiveRecord::Base
   def display_name
     titre
   end
+
+  def date_debut_date
+    date_debut.strftime("%d-%m-%Y")
+  end
+  def date_fin_date
+    date_fin.strftime("%d-%m-%Y")
+  end
 end
