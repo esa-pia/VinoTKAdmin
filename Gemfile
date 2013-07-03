@@ -41,7 +41,7 @@ end
   gem 'activeadmin'
   gem 'sass-rails',     '~> 3.2.3'
   gem 'meta_search',    '>= 1.1.0.pre'
-  gem 'prawn'
+  gem 'prawn',          '~> 1.0.0.rc2'  
   gem 'paperclip',      '~> 3.0'
   gem 'paperclip-storage-ftp'
   gem 'mail'

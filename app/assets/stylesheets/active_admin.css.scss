@@ -12,6 +12,7 @@
 @import "active_admin/base";
 @import "chosen";
 @import "just_datetime_picker/base";
+@import "jquery-ui-1.10.3.custom.min.css";
 @import "bouteilles";
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -98,6 +99,17 @@ div.index_as_table th:last-child
 #collection_selection .type, #main_content .type {
   width: 110px;
 }
+#collection_selection .nouveau, #main_content .nouveau {
+  padding: 0px;
+}
+
+#main_content .nouveau  img{
+  height: 22px;
+}
+#collection_selection .nouveau img{
+  height: 44px;
+}
+
 .inline-hints img {max-height: 238px; max-width: auto;}
 .inline-hints img {max-height: auto; max-width: 238px;}
 
@@ -171,3 +183,14 @@ div.index_as_table th:last-child
   margin-left: 20%;
   display: inline-block;
 }
+
+#main_content .just-datetime-picker-time-hour, #main_content .just-datetime-picker-time-minute
+{
+  width: 25px!important;
+  margin-left: 0ex!important;
+}
+.ui-spinner{
+  margin-left: 1ex!important;
+}
+
+

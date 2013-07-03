@@ -50,6 +50,26 @@ $(".deselectAll").on("click", function( event ) {
   });
 
 $('input.datepicker:not(.hasDatepicker)').datepicker({ dateFormat: 'dd-mm-yy' });
+$('#bouteille_prix').spinner({
+      min: 0,
+      max: 1000,
+      step: 0.05,
+      start: 1000,
+      culture: "de-DE",
+      numberFormat: "C"
+    });
+$('.just-datetime-picker-time-hour').spinner({
+      min: 0,
+      max: 23,
+      step: 1,
+      start: 0
+    });
+$('.just-datetime-picker-time-minute').spinner({
+      min: 0,
+      max: 59,
+      step: 1,
+      start: 0
+    });
 
 })
 

@@ -60,6 +60,11 @@ ActiveAdmin.register Catalogue do
     panel I18n.t('catalogues.bouteilles') do
 
       table_for catalogue.bouteilles.joins(:type).order('types.libelle ASC, appellation ASC, domaine_id ASC, cuvee_id ASC')  do |t|
+        t.column I18n.t('bouteilles.nouveau'), :nouveau do  |bouteille|
+          if(bouteille.nouveau)
+            image_tag('/assets/new_flag.png')
+          end
+        end
         t.column I18n.t('bouteilles.type'), :type do  |bouteille|
           status_tag(bouteille.type.libelle.parameterize)
         end
@@ -73,11 +78,7 @@ ActiveAdmin.register Catalogue do
             number_to_currency bouteille.prix
           end
         end
-        t.column I18n.t('bouteilles.nouveau'), :nouveau do  |bouteille|
-          if(bouteille.nouveau)
-            image_tag('/assets/new.png')
-          end
-        end
+        
       end
 
 #      Type.all.each do |type|
@@ -199,9 +200,16 @@ ActiveAdmin.register Catalogue do
   end
   
 end
-
+def image_nouveau(nouveau)
+  if(nouveau)
+    {:image => "#{Rails.root}/app/assets/images/new_flag.png", :image_height => 22, :image_width => 22}
+  else
+    ""
+  end
+end
 def generate_catalogue(catalogue)
   # Generate catalogue
+  Prawn.debug = true
   Prawn::Document.generate @catalogue.catalogue_location,  :left_margin => 40, :right_margin => 40, :top_margin=> 50, :bottom_margin => 50 do |pdf|
     # Title
     pdf.move_down 30
@@ -238,32 +246,45 @@ def generate_catalogue(catalogue)
     
     # Items
 
-    header = [I18n.t('bouteilles.appellation'), I18n.t('bouteilles.domaine'), I18n.t('bouteilles.cuvee'), 
+    header = ["", I18n.t('bouteilles.appellation'), I18n.t('bouteilles.domaine'), I18n.t('bouteilles.cuvee'), 
               I18n.t('bouteilles.format'), I18n.t('bouteilles.millesime'), I18n.t('bouteilles.prix')]
 
 
     Type.all.each do |type|
       items = catalogue.bouteilles.order('appellation ASC, domaine_id ASC, cuvee_id ASC').where('type_id' => type.id).collect do |bouteille|
-        [bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
+        [image_nouveau(bouteille.nouveau), bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
       end
+      logger.debug items
       if(items.count>0)
         pdf.text "#{type.libelle}", :size => 18
         pdf.move_down 10
         pdf.font_size 8
+        Prawn.debug = true
         pdf.table [header] + items, :header => true, :width => pdf.bounds.width, :row_colors => %w{e0e0e0 f0f0f0} do
-          row(-4..-1).borders = [:bottom, :top, :left, :right]
+          row(-4..-1).borders = [:bottom, :top]
+          column(0).borders = [:left, :bottom, :top]
+          column(1).borders = [:right,:bottom, :top ]
+          column(2).borders = [:right,:bottom, :top ]
+          column(3).borders = [:right,:bottom, :top ]
+          column(4).borders = [:right,:bottom, :top ]
+          column(5).borders = [:right,:bottom, :top ]
+          column(6).borders = [:right,:bottom, :top ]
           row(-4..-1).border_width = 1
-          row(-200..-1).column(3).align = :right
           row(-200..-1).column(4).align = :right
           row(-200..-1).column(5).align = :right
+          row(-200..-1).column(6).align = :right
           row(0).style :font_style => :bold
+          column(0).padding = 1
+          column(1).padding_left = 0
+          column(6).padding_right = 10
+          
+          column(0).width = 26
+          column(1).width = 110
+          column(2).width = 125
 
-          column(0).width = 115
-          column(1).width = 125
-          #column(2).width = 8
-          column(3).width = 38
-          column(4).width = 48
+          column(4).width = 38
           column(5).width = 48
+          column(6).width = 52
           
           #row(-1).style :font_style => :bold
         end

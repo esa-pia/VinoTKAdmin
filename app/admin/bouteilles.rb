@@ -23,6 +23,11 @@ ActiveAdmin.register Bouteille do
   #column I18n.t('clients.nom'), :nom
   index do |bouteille|
     selectable_column
+    column I18n.t('bouteilles.nouveau'), :nouveau, :sortable => :nouveau do  |bouteille|
+      if(bouteille.nouveau)
+        image_tag('/assets/new_flag.png')
+      end
+    end
     column I18n.t('bouteilles.type'), :type, :sortable => 'types.libelle' do  |bouteille|
         status_tag(bouteille.type.libelle.parameterize)
     end
@@ -36,11 +41,7 @@ ActiveAdmin.register Bouteille do
         number_to_currency bouteille.prix
       end
     end
-    column I18n.t('bouteilles.nouveau'), :nouveau, :sortable => :nouveau do  |bouteille|
-      if(bouteille.nouveau)
-        image_tag('/assets/new.png')
-      end
-    end
+    
     default_actions
   end
 
