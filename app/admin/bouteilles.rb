@@ -66,11 +66,11 @@ ActiveAdmin.register Bouteille do
   form do |f|
     f.inputs I18n.t('bouteilles.section_title')do
       f.input :appellation, :label => I18n.t('bouteilles.appellation')
-      f.input :type,        :label => I18n.t('bouteilles.type'),        :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.type') }, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :domaine,     :label => I18n.t('bouteilles.domaine'),     :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine') }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :cuvee,       :label => I18n.t('bouteilles.cuvee'),       :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee') }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :format,      :label => I18n.t('bouteilles.format'),      :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') }
-      f.input :millesime,   :label => I18n.t('bouteilles.millesime'),   :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime') }
+      f.input :type,        :label => I18n.t('bouteilles.type'),        :input_html => { :class => 'chzn-select-type', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.type') }, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :domaine,     :label => I18n.t('bouteilles.domaine'),     :input_html => { :class => 'chzn-select-domaine', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine') }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :cuvee,       :label => I18n.t('bouteilles.cuvee'),       :input_html => { :class => 'chzn-select-cuvee', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee') }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :format,      :label => I18n.t('bouteilles.format'),      :input_html => { :class => 'chzn-select-format', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') }
+      f.input :millesime,   :label => I18n.t('bouteilles.millesime'),   :input_html => { :class => 'chzn-select-millesime', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime') }
       f.input :description, :label => I18n.t('bouteilles.description'), :input_html => { :rows => 4 }
       f.input :prix,        :label => I18n.t('bouteilles.prix'),        :input_html => { :style => "width: 50px"} 
       f.input :nouveau,     :label => I18n.t('bouteilles.nouveau')

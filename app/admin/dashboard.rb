@@ -12,6 +12,13 @@ ActiveAdmin.register_page "Dashboard" do
       a truncate(last_catalogue.titre), :href => admin_catalogue_path(last_catalogue)
     end
   end
+
+  sidebar I18n.t('clients.last') do
+    table_for Client.order('created_at desc').order('nom ASC, prenom ASC').first(5)  do |t|
+      t.column I18n.t('clients.nom'), :nom
+      t.column I18n.t('clients.prenom'), :prenom
+    end
+  end
   content :title => proc{ I18n.t("active_admin.dashboard") } do
     #div :class => "blank_slate_container", :id => "dashboard_default_message" do
     #  span :class => "blank_slate" do
@@ -21,15 +28,7 @@ ActiveAdmin.register_page "Dashboard" do
     #end
     
     columns do
-      column :id => 'client-last' do
-        panel I18n.t('clients.last') do
-          table_for Client.order('created_at desc').order('nom ASC, prenom ASC').first(5)  do |t|
-            t.column I18n.t('clients.nom'), :nom
-            t.column I18n.t('clients.prenom'), :prenom
-            t.column I18n.t('clients.email'), :email
-          end
-        end
-      end
+
       column :id => 'bouteille-new' do
         panel I18n.t('bouteilles.new') do
           table_for Bouteille.order('created_at desc').where(:nouveau => true).joins(:type).order('types.libelle ASC, appellation ASC, domaine_id ASC, cuvee_id ASC')  do |t|
