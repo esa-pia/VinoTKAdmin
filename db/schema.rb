@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130706200915) do
+ActiveRecord::Schema.define(:version => 20130706205348) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20130706200915) do
     t.text     "description"
     t.integer  "cuvee_id"
     t.integer  "domaine_id"
-    t.integer  "format_id"
     t.integer  "millesime_id"
     t.decimal  "prix"
     t.boolean  "nouveau"
@@ -63,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20130706200915) do
 
   add_index "bouteilles", ["cuvee_id"], :name => "index_bouteilles_on_cuvee_id"
   add_index "bouteilles", ["domaine_id"], :name => "index_bouteilles_on_domaine_id"
-  add_index "bouteilles", ["format_id"], :name => "index_bouteilles_on_format_id"
   add_index "bouteilles", ["millesime_id"], :name => "index_bouteilles_on_millesime_id"
   add_index "bouteilles", ["type_id"], :name => "index_bouteilles_on_type_id"
   add_index "bouteilles", ["volume_id"], :name => "index_bouteilles_on_volume_id"
@@ -124,12 +122,6 @@ ActiveRecord::Schema.define(:version => 20130706200915) do
 
   create_table "domaines", :force => true do |t|
     t.string   "libelle"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "formats", :force => true do |t|
-    t.string   "valeur"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

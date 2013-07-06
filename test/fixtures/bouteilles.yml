@@ -6,7 +6,7 @@ one:
   description: MyText
   cuvee: 
   domaine: 
-  format: 
+  volume: 
   millesime: 
   prix: 9.99
   nouveau: false
@@ -17,7 +17,7 @@ two:
   description: MyText
   cuvee: 
   domaine: 
-  format: 
+  volume: 
   millesime: 
   prix: 9.99
   nouveau: false
