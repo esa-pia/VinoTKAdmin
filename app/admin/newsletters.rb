@@ -38,7 +38,7 @@ ActiveAdmin.register Newsletter do
     active_admin_comments
   end
 
-    form do |f|                         
+  form do |f|                         
     f.inputs I18n.t('newsletters.section_title') do       
       f.input :titre, :label => I18n.t('newsletters.titre')   
       f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
@@ -47,6 +47,11 @@ ActiveAdmin.register Newsletter do
     end                               
     f.actions                         
   end
+
+  action_item :only => [:show] do
+    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_name), new_resource_path)
+  end
+  
 # -----------------------------------------------------------------------------------
   # Email sending
   

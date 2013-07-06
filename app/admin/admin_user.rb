@@ -30,6 +30,11 @@ ActiveAdmin.register AdminUser, :as => I18n.t('menu.user') do
     end                               
     f.actions                         
   end
+
+  action_item :only => [:show] do
+    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_name), new_resource_path)
+  end
+  
   # -----------------------------------------------------------------------------------
   # XLS
   xlsx(:i18n_scope => [:active_admin, :axlsx, :users],

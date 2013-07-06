@@ -220,26 +220,3 @@ fr:
   activerecord:
     errors:
       <<: *errors
-  no_results_text: "Pas de resultat correspondant a"
-  catalogue:
-    generate:
-      pdf: "Générer PDF"
-  menu:
-    bouteilles_info: "Bouteilles Info"
-    users: "Utilisateurs"
-    user: "Utilisateur"
-    cuvees: "Cuvées"
-    cuvee: "Cuvée"
-    millesimes: "Millésimes"
-    millesime: "Millésime"
-  activerecord:
-    models:
-      millesime: 
-        one: "Millésime"
-        other: "Millésimes"
-      cuvee: 
-        one: "Cuvée"
-        other: "Cuvées"
-      admin_user: 
-        one: "Utilisateur"
-        other: "Utilisateurs"
