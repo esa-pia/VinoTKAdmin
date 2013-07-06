@@ -40,7 +40,7 @@ ActiveAdmin.register_page "Dashboard" do
             end
             t.column I18n.t('bouteilles.domaine'), :domaine
             t.column I18n.t('bouteilles.cuvee'), :cuvee
-            t.column I18n.t('bouteilles.format'), :format
+            t.column I18n.t('bouteilles.format'), :volume
             t.column I18n.t('bouteilles.millesime'), :millesime
             t.column I18n.t('bouteilles.prix'), :prix do |bouteille|
               div :class => "prix" do

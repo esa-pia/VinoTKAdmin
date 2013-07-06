@@ -4,7 +4,7 @@ ActiveAdmin.register Catalogue do
 
    # Filterable attributes on the index screen
   filter :titre, :label => I18n.t('catalogues.titre')
-  filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+  filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
   
   index do |catalogue|
     selectable_column
@@ -71,7 +71,7 @@ ActiveAdmin.register Catalogue do
         t.column I18n.t('bouteilles.appellation'), :appellation
         t.column I18n.t('bouteilles.domaine'), :domaine
         t.column I18n.t('bouteilles.cuvee'), :cuvee
-        t.column I18n.t('bouteilles.format'), :format
+        t.column I18n.t('bouteilles.format'), :volume
         t.column I18n.t('bouteilles.millesime'), :millesime
         t.column I18n.t('bouteilles.prix'), :prix do |bouteille|
           div :class => "prix" do
@@ -91,7 +91,7 @@ ActiveAdmin.register Catalogue do
 #            t.column :appellation
 #            t.column :domaine
 #            t.column :cuvee
-#            t.column :format
+#            t.column :volume
 #            t.column :millesime
 #            t.column :prix do |bouteille|
 #              div :class => "prix" do
@@ -136,7 +136,7 @@ ActiveAdmin.register Catalogue do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs I18n.t('catalogues.section_title') do
       f.input :titre, :label => I18n.t('catalogues.titre')#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles') }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles') }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
       
       #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
       
@@ -151,7 +151,7 @@ ActiveAdmin.register Catalogue do
     f.buttons
   end
   action_item :only => [:show] do
-    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_name), new_resource_path)
+    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_label), new_resource_path)
   end
   
   
@@ -255,7 +255,7 @@ def generate_catalogue(catalogue)
 
     Type.all.each do |type|
       items = catalogue.bouteilles.order('appellation ASC, domaine_id ASC, cuvee_id ASC').where('type_id' => type.id).collect do |bouteille|
-        [image_nouveau(bouteille.nouveau), bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.format.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
+        [image_nouveau(bouteille.nouveau), bouteille.appellation, bouteille.domaine.libelle, bouteille.cuvee.libelle , bouteille.volume.valeur,  bouteille.millesime.valeur,   "#{ActionController::Base.helpers.number_to_currency(bouteille.prix)}"]
       end
       logger.debug items
       if(items.count>0)

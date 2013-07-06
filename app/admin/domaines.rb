@@ -28,7 +28,7 @@ ActiveAdmin.register Domaine do
   end
 
   action_item :only => [:show] do
-    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_name), new_resource_path)
+    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_label), new_resource_path)
   end
   
   # -----------------------------------------------------------------------------------
@@ -46,7 +46,6 @@ ActiveAdmin.register Domaine do
   # CONTROLLER
   controller do
     def per_page
-      logger.warn request.format
    		return max_csv_records if request.format == 'text/csv' ||  request.format == 'application/json' ||  request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
    		return max_per_page if active_admin_config.paginate == false 
    		@per_page || active_admin_config.per_page 
