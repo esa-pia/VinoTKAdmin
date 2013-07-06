@@ -11,6 +11,7 @@ $(document).ready(function(){
   $(".chzn-select-domaine").chosen({
       no_results_text: "Pas de resultat correspondant à ",
       create_option: function(domaine) {
+          launchSpinner();
           var choosen = this;
           $.ajax({
               url: '/domaines',
@@ -23,6 +24,7 @@ $(document).ready(function(){
                   value: id,
                   text: name
                 });
+                stopSpinner();
               }
           });
       },
@@ -32,6 +34,7 @@ $(document).ready(function(){
   $(".chzn-select-cuvee").chosen({
       no_results_text: "Pas de resultat correspondant à ",
       create_option: function(cuvee) {
+          launchSpinner();
           var choosen = this;
           $.ajax({
               url: '/cuvees',
@@ -44,6 +47,7 @@ $(document).ready(function(){
                   value: id,
                   text: name
                 });
+                stopSpinner();
               }
           });
       },
@@ -53,6 +57,7 @@ $(document).ready(function(){
   $(".chzn-select-type").chosen({
       no_results_text: "Pas de resultat correspondant à ",
       create_option: function(type) {
+          launchSpinner();
           var choosen = this;
           $.ajax({
               url: '/types',
@@ -65,6 +70,7 @@ $(document).ready(function(){
                   value: id,
                   text: name
                 });
+                stopSpinner();
               }
           });
       },
@@ -74,18 +80,20 @@ $(document).ready(function(){
     $(".chzn-select-format").chosen({
       no_results_text: "Pas de resultat correspondant à ",
       create_option: function(format) {
+          launchSpinner();
           var choosen = this;
           $.ajax({
-              url: '/formats',
+              url: '/volumes',
               type: 'POST',
-              data: "format[valeur]="+format,
+              data: "volume[valeur]="+format,
               success: function(data) {
-                var id = parseInt(data.substring(data.indexOf("href=\"/formats/")+"href=\"/formats/".length , data.indexOf("/edit\">Edit</a>")));
+                var id = parseInt(data.substring(data.indexOf("href=\"/volumes/")+"href=\"/volumes/".length , data.indexOf("/edit\">Edit</a>")));
                 var name = format;
                 choosen.append_option({
                   value: id,
                   text: name
                 });
+                stopSpinner();
               }
           });
       },
@@ -95,6 +103,7 @@ $(document).ready(function(){
       $(".chzn-select-millesime").chosen({
       no_results_text: "Pas de resultat correspondant à ",
       create_option: function(millesime) {
+          launchSpinner();
           var choosen = this;
           $.ajax({
               url: '/millesimes',
@@ -107,13 +116,14 @@ $(document).ready(function(){
                   value: id,
                   text: name
                 });
+                stopSpinner();
               }
           });
       },
       persistent_create_option: true,
       create_option_text: 'Créer le nouveau millésime '
    });
-      
+
   $('.chzn-single').css('min-width','230px');
   $('.chzn-drop').css('min-width','240px');
   $('.chzn-search input').css('min-width','210px');

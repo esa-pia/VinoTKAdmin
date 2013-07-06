@@ -4,7 +4,7 @@ ActiveAdmin.register Newsletter do
   filter :titre,      :label => I18n.t('newsletters.titre')
   filter :date_debut, :label => I18n.t('newsletters.date_debut')
   filter :date_fin,   :label => I18n.t('newsletters.date_fin')
-  #filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.format.valeur}- #{o.millesime.valeur}", o.id]}
+  #filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
   
   index do |newsletter|
     selectable_column
@@ -49,7 +49,7 @@ ActiveAdmin.register Newsletter do
   end
 
   action_item :only => [:show] do
-    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_name), new_resource_path)
+    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_label), new_resource_path)
   end
   
 # -----------------------------------------------------------------------------------
