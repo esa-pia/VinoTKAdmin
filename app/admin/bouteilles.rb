@@ -78,6 +78,10 @@ ActiveAdmin.register Bouteille do
     f.buttons
   end
   
+  action_item :only => [:show] do
+    link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_name), new_resource_path)
+  end
+  
   
   # -----------------------------------------------------------------------------------
   # CSV
