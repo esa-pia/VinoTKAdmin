@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130707080910) do
+ActiveRecord::Schema.define(:version => 20130707093501) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -58,11 +58,13 @@ ActiveRecord::Schema.define(:version => 20130707080910) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "volume_id"
+    t.integer  "region_id"
   end
 
   add_index "bouteilles", ["cuvee_id"], :name => "index_bouteilles_on_cuvee_id"
   add_index "bouteilles", ["domaine_id"], :name => "index_bouteilles_on_domaine_id"
   add_index "bouteilles", ["millesime_id"], :name => "index_bouteilles_on_millesime_id"
+  add_index "bouteilles", ["region_id"], :name => "index_bouteilles_on_region_id"
   add_index "bouteilles", ["type_id"], :name => "index_bouteilles_on_type_id"
   add_index "bouteilles", ["volume_id"], :name => "index_bouteilles_on_volume_id"
 
