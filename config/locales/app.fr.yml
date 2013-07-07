@@ -160,7 +160,7 @@ fr:
     titre: "Titre"
     date_debut: "Date de début"
     date_fin: "Date de fin"
-    info: "Bon à savoir ..."
+    info: "Le saviez vous ?"
   millesimes:
     section_title: "Détails millésime"
     id: "Id"

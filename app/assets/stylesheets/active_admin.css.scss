@@ -13,7 +13,9 @@
 @import "chosen";
 @import "just_datetime_picker/base";
 @import "jquery-ui-1.10.3.custom.min.css";
+@import "numeric_range";
 @import "bouteilles";
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
@@ -198,7 +200,7 @@ div.index_as_table th:last-child
   margin-left: 0ex!important;
 }
 .ui-spinner{
-  margin-left: 1ex!important;
+  //margin-left: 1ex!important;
 }
 
 

@@ -18,7 +18,7 @@ ActiveAdmin.register Bouteille do
   filter :region,      :label => I18n.t('bouteilles.region'),    :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region') },  :collection => (Region.order.all)#.map{|o| [o.libelle, o.id]}
   filter :volume,      :label => I18n.t('bouteilles.format'),    :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') }
   filter :millesime,   :label => I18n.t('bouteilles.millesime'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime') }
-  filter :prix,        :label => I18n.t('bouteilles.prix')
+  filter :prix,        :label => I18n.t('bouteilles.prix'),      :as => :numeric_range
   filter :nouveau,     :label => I18n.t('bouteilles.nouveau')
   
   #column I18n.t('clients.nom'), :nom
