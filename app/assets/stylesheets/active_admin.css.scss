@@ -87,19 +87,33 @@ div.index_as_table th:last-child
 	width: 120px;
 }
 
-#collection_selection .prix, #main_content .prix{
+#collection_selection th a, #main_content th a{
+  overflow: hidden!important;
+}
+
+#collection_selection th.prix_unité_€_ttc, #main_content th.prix_unité_€_ttc{
+  max-width: 50px!important;
+}
+#collection_selection th.région_viticole, #main_content th.région_viticole{
+  max-width: 65px!important;
+}
+#collection_selection th.nouveau, #main_content th.neauveau{
+  max-width: 30px!important;
+}
+
+#collection_selection .prix, #main_content table .prix{
   text-align: right;
 }
-#collection_selection .format, #main_content .format{
+#collection_selection .format, #main_content table .format{
   text-align: right;
 }
-#collection_selection .millésime, #main_content .millésime {
+#collection_selection .millésime, #main_content table .millésime {
   text-align: right;
 }
-#collection_selection .type, #main_content .type {
+#collection_selection .type, #main_content table .type {
   width: 110px;
 }
-#collection_selection .nouveau, #main_content .nouveau {
+#collection_selection .nouveau, #main_content table .nouveau {
   padding: 0px;
 }
 
@@ -107,7 +121,7 @@ div.index_as_table th:last-child
   height: 22px;
 }
 #collection_selection .nouveau img{
-  height: 44px;
+  height: 30px;
 }
 
 .inline-hints img {max-height: 238px; max-width: auto;}
@@ -171,8 +185,8 @@ div.index_as_table th:last-child
   color: #5e6469;
 }
 
-#catalogue_bouteille_ids_chzn{
-  width: 615px;
+#catalogue_bouteille_ids_chzn, #region_bouteille_ids_chzn, #cuvee_bouteille_ids_chzn, #millesime_bouteille_ids_chzn, #type_bouteille_ids_chzn, #volume_bouteille_ids_chzn, #domaine_bouteille_ids_chzn{
+  width: 615px!important;
   margin-top: 11px;
   margin-left: 20%;
   display: inline-block;

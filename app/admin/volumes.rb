@@ -22,6 +22,7 @@ ActiveAdmin.register Volume do
   form do |f|                         
     f.inputs I18n.t('formats.section_title') do       
       f.input :valeur , :label => I18n.t('formats.valeur')
+      f.input :bouteilles, :label => I18n.t('formats.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('formats.choose.bouteilles') }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
     end                               
     f.actions                         
   end

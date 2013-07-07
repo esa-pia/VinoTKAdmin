@@ -102,6 +102,9 @@ fr:
     alcool_digestif: "Alcool - Digestif"
     aperitif: "Apéritif"
     whisky: "Whisky" 
+    bouteilles: "Bouteilles"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles associées à ce type" 
   bouteilles:
     new: "Les nouvelles bouteilles"
     section_title: "Détails bouteille"
@@ -127,18 +130,30 @@ fr:
     section_title: "Détails cuvée"
     id: "Id"
     libelle: "Libellé"
+    bouteilles: "Bouteilles"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles associées à cette cuvée"
   regions:
     section_title: "Détails région"
     id: "Id"
     libelle: "Libellé"
+    bouteilles: "Bouteilles"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles associées à cette région"
   domaines:
     section_title: "Détails domaine"
     id: "Id"
     libelle: "Libellé"
+    bouteilles: "Bouteilles"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles associées à ce domaine"
   formats:
     section_title: "Détails format"
     id: "Id"
     valeur: "Valeur"
+    bouteilles: "Bouteilles"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles associées à ce format"
   newsletters:
     section_title: "Détails newsletter"
     id: "Id"
@@ -150,6 +165,9 @@ fr:
     section_title: "Détails millésime"
     id: "Id"
     valeur: "Valeur"
+    bouteilles: "Bouteilles"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles associées à ce millésime"
   catalogues:
     last: "Dernier catalogue"
     section_title: "Détails catalogue"

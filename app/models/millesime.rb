@@ -1,5 +1,6 @@
 class Millesime < ActiveRecord::Base
-  attr_accessible :valeur
+  attr_accessible :valeur, :bouteille_ids
+  has_many :bouteilles
 
   validates :valeur, :presence => true, :uniqueness => true
 
