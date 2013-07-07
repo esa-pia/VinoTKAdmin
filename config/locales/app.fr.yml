@@ -68,6 +68,7 @@ fr:
         type: "Type"
         domaine: "Domaine"
         cuvee: "Cuvée"
+        region: "Région viticole"
         format: "Format"
         volume: "Format"
         millesime: "Millésime"

@@ -54,6 +54,29 @@ $(document).ready(function(){
       persistent_create_option: true,
       create_option_text: 'Créer la nouvelle cuvée '
    });
+  $(".chzn-select-region").chosen({
+      no_results_text: "Pas de resultat correspondant à ",
+      create_option: function(region) {
+          launchSpinner();
+          var choosen = this;
+          $.ajax({
+              url: '/regions',
+              type: 'POST',
+              data: "region[libelle]="+region,
+              success: function(data) {
+                var id = parseInt(data.substring(data.indexOf("href=\"/regions/")+"href=\"/regions/".length , data.indexOf("/edit\">Edit</a>")));
+                var name = region;
+                choosen.append_option({
+                  value: id,
+                  text: name
+                });
+                stopSpinner();
+              }
+          });
+      },
+      persistent_create_option: true,
+      create_option_text: 'Créer la nouvelle région viticole '
+   });
   $(".chzn-select-type").chosen({
       no_results_text: "Pas de resultat correspondant à ",
       create_option: function(type) {

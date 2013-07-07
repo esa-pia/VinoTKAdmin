@@ -1,15 +1,17 @@
 class Bouteille < ActiveRecord::Base
   belongs_to :type
   belongs_to :cuvee
+  belongs_to :region
   belongs_to :domaine
   belongs_to :volume
   belongs_to :millesime
-  attr_accessible :type_id, :domaine_id, :cuvee_id, :volume_id, :millesime_id, :appellation, :description, :nouveau, :prix
+  attr_accessible :type_id, :domaine_id, :cuvee_id, :region_id, :volume_id, :millesime_id, :appellation, :description, :nouveau, :prix
 
 
   validates :appellation, :presence => true
   validates :type, :presence => true
   validates :cuvee, :presence => true
+  validates :region, :presence => true
   validates :domaine, :presence => true
   validates :volume, :presence => true
   validates :millesime, :presence => true
@@ -41,7 +43,7 @@ class Bouteille < ActiveRecord::Base
   def as_json(options={})
     super(
       :only => [:id, :appellation, :description, :prix,:nouveau],
-      :include => { type: { only: [:libelle] },domaine: { only: [:libelle] },cuvee: { only: [:libelle] },volume: { only: [:valeur] },millesime: { only: [:valeur] }}
+      :include => { type: { only: [:libelle] },domaine: { only: [:libelle] },cuvee: { only: [:libelle] },region: { only: [:libelle] },volume: { only: [:valeur] },millesime: { only: [:valeur] }}
     )
   end
 end

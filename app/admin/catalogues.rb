@@ -71,6 +71,7 @@ ActiveAdmin.register Catalogue do
         t.column I18n.t('bouteilles.appellation'), :appellation
         t.column I18n.t('bouteilles.domaine'), :domaine
         t.column I18n.t('bouteilles.cuvee'), :cuvee
+        t.column I18n.t('bouteilles.region'), :region
         t.column I18n.t('bouteilles.format'), :volume
         t.column I18n.t('bouteilles.millesime'), :millesime
         t.column I18n.t('bouteilles.prix'), :prix do |bouteille|
@@ -91,6 +92,7 @@ ActiveAdmin.register Catalogue do
 #            t.column :appellation
 #            t.column :domaine
 #            t.column :cuvee
+#            t.column :region
 #            t.column :volume
 #            t.column :millesime
 #            t.column :prix do |bouteille|

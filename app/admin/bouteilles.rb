@@ -14,7 +14,8 @@ ActiveAdmin.register Bouteille do
   filter :appellation, :label => I18n.t('bouteilles.appellation')
   filter :type,        :label => I18n.t('bouteilles.type'),      :as => :check_boxes, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
   filter :domaine,     :label => I18n.t('bouteilles.domaine'),   :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine') }, :collection => (Domaine.order.all)
-  filter :cuvee,       :label => I18n.t('bouteilles.cuvee'),     :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee') }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
+  filter :cuvee,       :label => I18n.t('bouteilles.cuvee'),     :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee') },   :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
+  filter :region,      :label => I18n.t('bouteilles.region'),    :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region') },  :collection => (Region.order.all)#.map{|o| [o.libelle, o.id]}
   filter :volume,      :label => I18n.t('bouteilles.format'),    :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') }
   filter :millesime,   :label => I18n.t('bouteilles.millesime'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime') }
   filter :prix,        :label => I18n.t('bouteilles.prix')
@@ -34,6 +35,7 @@ ActiveAdmin.register Bouteille do
     column I18n.t('bouteilles.appellation'), :appellation
     column I18n.t('bouteilles.domaine'), :domaine, :sortable => 'domaines.libelle'
     column I18n.t('bouteilles.cuvee'), :cuvee, :sortable => 'cuvees.libelle'
+    column I18n.t('bouteilles.region'), :region, :sortable => 'regions.libelle'
     column I18n.t('bouteilles.format'), :volume, :sortable => 'volumes.valeur'
     column I18n.t('bouteilles.millesime'), :millesime, :sortable => 'millesimes.valeur'
     column I18n.t('bouteilles.prix'), :prix, :sortable => :prix do |bouteille|
@@ -54,6 +56,7 @@ ActiveAdmin.register Bouteille do
         row (I18n.t('bouteilles.description')) {bouteille.description}
         row (I18n.t('bouteilles.domaine')) {bouteille.domaine}
         row (I18n.t('bouteilles.cuvee')) {bouteille.cuvee}
+        row (I18n.t('bouteilles.region')) {bouteille.region}
         row (I18n.t('bouteilles.format')) {bouteille.volume}
         row (I18n.t('bouteilles.millesime')) {bouteille.millesime}
         row (I18n.t('bouteilles.prix')) {number_to_currency bouteille.prix}
@@ -69,6 +72,7 @@ ActiveAdmin.register Bouteille do
       f.input :type,        :label => I18n.t('bouteilles.type'),        :input_html => { :class => 'chzn-select-type', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.type') }, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :domaine,     :label => I18n.t('bouteilles.domaine'),     :input_html => { :class => 'chzn-select-domaine', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine') }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :cuvee,       :label => I18n.t('bouteilles.cuvee'),       :input_html => { :class => 'chzn-select-cuvee', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee') }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
+      f.input :region,      :label => I18n.t('bouteilles.region'),      :input_html => { :class => 'chzn-select-region', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region') }, :collection => (Region.order.all)#.map{|o| [o.libelle, o.id]}
       f.input :volume,      :label => I18n.t('bouteilles.format'),      :input_html => { :class => 'chzn-select-format', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') }
       f.input :millesime,   :label => I18n.t('bouteilles.millesime'),   :input_html => { :class => 'chzn-select-millesime', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime') }
       f.input :description, :label => I18n.t('bouteilles.description'), :input_html => { :rows => 4 }
@@ -90,6 +94,7 @@ ActiveAdmin.register Bouteille do
     column (:type)      { |bouteille| bouteille.type.libelle    }
     column (:domaine)   { |bouteille| bouteille.domaine.libelle }
     column (:cuvee)     { |bouteille| bouteille.cuvee.libelle   }
+    column (:region)    { |bouteille| bouteille.region.libelle   }
     column (:volume)    { |bouteille| bouteille.volume.valeur   }
     column (:millesime) { |bouteille| bouteille.millesime.valeur   }
     column :prix
@@ -102,12 +107,13 @@ ActiveAdmin.register Bouteille do
        :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
     # deleting columns from the report
-    delete_columns :id, :created_at, :updated_at , :type, :domaine, :cuvee, :volume, :description, :millesime  , :appellation, :prix, :nouveau
+    delete_columns :id, :created_at, :updated_at , :type, :domaine, :cuvee, :region, :volume, :description, :millesime  , :appellation, :prix, :nouveau
 
     column (:type)        { |bouteille| bouteille.type.libelle    }
     column (:appellation) { |bouteille| bouteille.appellation    }
     column (:domaine)     { |bouteille| bouteille.domaine.libelle }
     column (:cuvee)       { |bouteille| bouteille.cuvee.libelle   }
+    column (:region)      { |bouteille| bouteille.region.libelle if bouteille.region   }
     column (:volume)      { |bouteille| bouteille.volume.valeur   }
     column (:millesime)   { |bouteille| bouteille.millesime.valeur   }
     column (:prix)        { |bouteille| bouteille.prix    }
@@ -118,7 +124,7 @@ ActiveAdmin.register Bouteille do
   # CONTROLLER
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:type, :domaine, :cuvee, :volume, :millesime])
+      end_of_association_chain.includes([:type, :domaine, :cuvee, :region, :volume, :millesime])
     end
     def index
       if(!params[:order])
