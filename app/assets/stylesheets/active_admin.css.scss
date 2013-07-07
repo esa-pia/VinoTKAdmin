@@ -34,8 +34,16 @@
 // .other_namespace    applies to a custom namespace named other (eg: /other)
 
 .chzn-select{
-  min-width:200px;
+  min-width:282px;
+  width:282px;
+   
 }
+
+#edit_bouteille select[class*='chzn-select-']{
+  min-width:282px;
+}
+
+
 span.status_tag.rouge{
 background-color: rgb(209, 0, 0);
 }

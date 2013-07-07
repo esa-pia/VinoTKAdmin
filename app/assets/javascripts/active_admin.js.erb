@@ -3,8 +3,8 @@
 //= require spin.min.js
 //= require jquery.fileDownload.js
 //= require jquery.ui.datepicker-fr.js
-//= require just_datetime_picker/nested_form_workaround
 
+//= require just_datetime_picker/nested_form_workaround
 
 $(document).ready(function(){
   $(".chzn-select").chosen({no_results_text: "Pas de resultat correspondant à "});
@@ -193,9 +193,7 @@ $('#prix_gte_numeric, #prix_lte_numeric, #bouteille_prix').spinner({
       min: 0,
       max: 1000,
       step: 0.05,
-      start: 1000,
-      culture: "de-DE",
-      numberFormat: "C"
+      start: 1000
     });
 $('.just-datetime-picker-time-hour').spinner({
       min: 0,
