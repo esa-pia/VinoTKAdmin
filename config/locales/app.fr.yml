@@ -9,10 +9,15 @@ fr:
     user: "Utilisateur"
     cuvees: "Cuvées"
     cuvee: "Cuvée"
+    regions: "Régions viticoles"
+    region: "Région viticole"
     millesimes: "Millésimes"
     millesime: "Millésime"
   activerecord:
     models:
+      region: 
+        one: "Région viticole"
+        other: "Régions viticoles"
       millesime: 
         one: "Millésime"
         other: "Millésimes"
@@ -22,7 +27,6 @@ fr:
       admin_user: 
         one: "Utilisateur"
         other: "Utilisateurs"
-
       volume: 
         one: "Format"
         other: "Formats"
@@ -30,15 +34,21 @@ fr:
       admin_user:
         email: "Email"
         password: "Mot de passe"
-  activeadmin:
+      region: 
+        libelle: "Libellé"
+  active_admin:
     axlsx:
       cuvees:
         libelle: "Cuvée"
       domaines:
         libelle: "Domaine"
+      regions:
+        libelle: "Région viticole"
       types:
         libelle: "Type de vin"
       formats:
+        valeur: "Format"
+      volumes:
         valeur: "Format"
       millesimes:
         valeur: "Millésime"
@@ -59,6 +69,7 @@ fr:
         domaine: "Domaine"
         cuvee: "Cuvée"
         format: "Format"
+        volume: "Format"
         millesime: "Millésime"
         prix: "Prix Unité € TTC"
         nouveau: "Nouveau"
@@ -98,6 +109,7 @@ fr:
     type: "Type"
     description: "Description"
     domaine: "Domaine"
+    region: "Région viticole"
     cuvee: "Cuvée"
     format: "Format"
     millesime: "Millésime"
@@ -107,10 +119,15 @@ fr:
       type: "Veuillez choisir un type de vin"
       domaine: "Veuillez choisir un Domaine"
       cuvee: "Veuillez choisir une cuvée"
+      region: "Veuillez choisir une région"
       format: "Veuillez choisir un format"
       millesime: "Veuillez choisir un millésime"
   cuvees:
     section_title: "Détails cuvée"
+    id: "Id"
+    libelle: "Libellé"
+  regions:
+    section_title: "Détails région"
     id: "Id"
     libelle: "Libellé"
   domaines:
