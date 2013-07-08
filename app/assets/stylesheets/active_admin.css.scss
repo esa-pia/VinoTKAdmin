@@ -17,6 +17,8 @@
 @import "fontello.css";
 @import "animation.css";
 @import "bouteilles";
+/*jquery-ui-bootstrap file-input */
+@import "enhanced.css";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -216,8 +218,8 @@ div.index_as_table th:last-child
 
 
 
-
-.action i{
+/***********table_action*************/
+.table_action i{
   line-height: 30px;
   padding-left: 5px;
   padding-right: 4px;
@@ -225,7 +227,7 @@ div.index_as_table th:last-child
   cursor: pointer;
 
 }
-.action{
+.table_action{
   width: 30px;
   height: 30px;
   background-color: rgba(255, 255, 255, 0);
@@ -235,10 +237,10 @@ div.index_as_table th:last-child
   margin-left: 7px!important;
 
 }
-.action:hover{
+.table_action:hover{
   background-color: #AAAAAA;
 }
-.action:hover i {
+.table_action:hover i {
   color : #FFFFFF;
 }
 

@@ -4,19 +4,23 @@
 //= require jquery.fileDownload.js
 //= require jquery.ui.datepicker-fr.js
 
+/*jquery-ui-bootstrap file-input */
+//= require enhance.min.js
+//= require fileinput.jquery.js
+
 //= require just_datetime_picker/nested_form_workaround
 
 $(document).ready(function(){
 
-  $(".member_link.view_link").wrap('<div class="action" title="'+$(".member_link.view_link").first().text()+'">').text('')
+  $(".member_link.view_link").wrap('<div class="table_action" title="'+$(".member_link.view_link").first().text()+'">').text('')
   $(".member_link.view_link").prepend('<i class="icon-eye">')
-  $(".member_link.edit_link").wrap('<div class="action" title="'+$(".member_link.edit_link").first().text()+'">').text('')
+  $(".member_link.edit_link").wrap('<div class="table_action" title="'+$(".member_link.edit_link").first().text()+'">').text('')
   $(".member_link.edit_link").prepend('<i class="icon-pencil">')
-  $(".member_link.delete_link").wrap('<div class="action" title="'+$(".member_link.delete_link").first().text()+'">').text('')
+  $(".member_link.delete_link").wrap('<div class="table_action" title="'+$(".member_link.delete_link").first().text()+'">').text('')
   $(".member_link.delete_link").prepend('<i class="icon-trash">')
-  $(".member_link.generatePDF").wrap('<div class="action" title="'+$(".member_link.generatePDF").first().text()+'">').text('')
+  $(".member_link.generatePDF").wrap('<div class="table_action" title="'+$(".member_link.generatePDF").first().text()+'">').text('')
   $(".member_link.generatePDF").prepend('<i class="icon-doc-text-inv">')
-  $(".member_link.send_newsletter").wrap('<div class="action" title="'+$(".member_link.send_newsletter").first().text()+'">').text('')
+  $(".member_link.send_newsletter").wrap('<div class="table_action" title="'+$(".member_link.send_newsletter").first().text()+'">').text('')
   $(".member_link.send_newsletter").prepend('<i class="icon-mail-alt">')
 
   $("th a").closest("th").each(function( index ) {
@@ -39,6 +43,14 @@ $(document).ready(function(){
         }
     }
     });
+
+  $('input:file').customFileInput({
+    button_position : 'right',
+    feedback_text   : '',
+    button_text     : 'Parcourir...',
+    button_change_text  : 'Changer'
+  });
+
   $(".chzn-select").chosen();
   $(".chzn-select-domaine").chosen({
       create_option: function(domaine) {
