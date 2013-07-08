@@ -14,6 +14,8 @@
 @import "just_datetime_picker/base";
 @import "jquery-ui-1.10.3.custom.min.css";
 @import "numeric_range";
+@import "fontello.css";
+@import "animation.css";
 @import "bouteilles";
 
 // Overriding any non-variable SASS must be done after the fact.
@@ -47,41 +49,38 @@ background-color: rgb(209, 0, 0);
 }
 
 span.status_tag.whisky{
-background-color: rgb(238, 123, 33);
+  background-color: rgb(238, 123, 33);
 }
 span.status_tag.rose{
-background-color: rgb(224, 187, 214)
+  background-color: rgb(224, 187, 214)
 }
 span.status_tag.blanc{
-background-color: rgb(228, 233, 193)
+  background-color: rgb(228, 233, 193)
 }
 span.status_tag.aperitif{
-background-color: rgb(62, 138, 33)
+  background-color: rgb(62, 138, 33)
 }
 span.status_tag.effervescent{
-background-color: rgb(71, 152, 255)
+  background-color: rgb(71, 152, 255)
+}
+span.status_tag.new{
+  background-color: #f89406;
 }
 
-a.member_link.delete_link{
-    text-indent:-9999px!important;
-    display: inline-block!important;
-    background-image:url('/assets/trash.png');
-    height:32px;
-    width:32px;
-}
-a.member_link.view_link{
-    text-indent:-9999px!important;
-    display: inline-block!important;
-    background-image:url('/assets/view.png');
-    height:32px;
-    width:32px;
-}
-a.member_link.edit_link{
-    text-indent:-9999px!important;
-    display: inline-block!important;
-    background-image:url('/assets/edit.png');
-    height:32px;
-    width:32px;
+span.status_tag{
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999999;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 th.prix{
@@ -92,7 +91,7 @@ th.prix{
 
 div.index_as_table th:last-child
 {
-	width: 120px;
+	width: 110px;
 }
 
 #collection_selection th a, #main_content th a{
@@ -121,16 +120,7 @@ div.index_as_table th:last-child
 #collection_selection .type, #main_content table .type {
   width: 110px;
 }
-#collection_selection .nouveau, #main_content table .nouveau {
-  padding: 0px;
-}
 
-#main_content .nouveau  img{
-  height: 22px;
-}
-#collection_selection .nouveau img{
-  height: 30px;
-}
 
 .inline-hints img {max-height: 238px; max-width: auto;}
 .inline-hints img {max-height: auto; max-width: 238px;}
@@ -209,4 +199,45 @@ div.index_as_table th:last-child
   //margin-left: 1ex!important;
 }
 
+.ui-spinner a.ui-spinner-button {
+  border: 1px rgb(199, 199, 199) solid;
+}
 
+#site_title_image{
+  top: -5px!important;
+  height: 30px;
+  width: 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+#site_title{
+  padding-top: 0px!important;
+}
+
+
+
+
+
+.action i{
+  line-height: 30px;
+  padding-left: 5px;
+  padding-right: 4px;
+  font-size: 14px;
+  cursor: pointer;
+
+}
+.action{
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  float : left;
+  margin-top: -2px!important;
+  margin-left: 7px!important;
+
+}
+.action:hover{
+  background-color: #AAAAAA;
+}
+.action:hover i {
+  color : #FFFFFF;
+}

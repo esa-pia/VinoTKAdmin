@@ -7,9 +7,20 @@
 //= require just_datetime_picker/nested_form_workaround
 
 $(document).ready(function(){
-  $(".chzn-select").chosen({no_results_text: "Pas de resultat correspondant à "});
+
+$(".member_link.view_link").wrap('<div class="action" title="'+$(".member_link.view_link").first().text()+'">').text('')
+$(".member_link.view_link").prepend('<i class="icon-eye">')
+$(".member_link.edit_link").wrap('<div class="action" title="'+$(".member_link.edit_link").first().text()+'">').text('')
+$(".member_link.edit_link").prepend('<i class="icon-pencil">')
+$(".member_link.delete_link").wrap('<div class="action" title="'+$(".member_link.delete_link").first().text()+'">').text('')
+$(".member_link.delete_link").prepend('<i class="icon-trash">')
+$(".member_link.generatePDF").wrap('<div class="action" title="'+$(".member_link.generatePDF").first().text()+'">').text('')
+$(".member_link.generatePDF").prepend('<i class="icon-doc-text-inv">')
+$(".member_link.send_newsletter").wrap('<div class="action" title="'+$(".member_link.send_newsletter").first().text()+'">').text('')
+$(".member_link.send_newsletter").prepend('<i class="icon-mail-alt">')
+
+  $(".chzn-select").chosen();
   $(".chzn-select-domaine").chosen({
-      no_results_text: "Pas de resultat correspondant à ",
       create_option: function(domaine) {
           launchSpinner();
           var choosen = this;
@@ -29,10 +40,9 @@ $(document).ready(function(){
           });
       },
       persistent_create_option: true,
-      create_option_text: 'Créer le nouveau domaine '
+      create_option_text: 'Créer'
    });
   $(".chzn-select-cuvee").chosen({
-      no_results_text: "Pas de resultat correspondant à ",
       create_option: function(cuvee) {
           launchSpinner();
           var choosen = this;
@@ -51,11 +61,9 @@ $(document).ready(function(){
               }
           });
       },
-      persistent_create_option: true,
-      create_option_text: 'Créer la nouvelle cuvée '
+      persistent_create_option: true
    });
   $(".chzn-select-region").chosen({
-      no_results_text: "Pas de resultat correspondant à ",
       create_option: function(region) {
           launchSpinner();
           var choosen = this;
@@ -74,11 +82,9 @@ $(document).ready(function(){
               }
           });
       },
-      persistent_create_option: true,
-      create_option_text: 'Créer la nouvelle région viticole '
+      persistent_create_option: true
    });
   $(".chzn-select-type").chosen({
-      no_results_text: "Pas de resultat correspondant à ",
       create_option: function(type) {
           launchSpinner();
           var choosen = this;
@@ -97,11 +103,9 @@ $(document).ready(function(){
               }
           });
       },
-      persistent_create_option: true,
-      create_option_text: 'Créer le nouveau type de vin '
+      persistent_create_option: true
    });
     $(".chzn-select-format").chosen({
-      no_results_text: "Pas de resultat correspondant à ",
       create_option: function(format) {
           launchSpinner();
           var choosen = this;
@@ -120,11 +124,9 @@ $(document).ready(function(){
               }
           });
       },
-      persistent_create_option: true,
-      create_option_text: 'Créer le nouveau format '
+      persistent_create_option: true
    });
   $(".chzn-select-millesime").chosen({
-      no_results_text: "Pas de resultat correspondant à ",
       create_option: function(millesime) {
           launchSpinner();
           var choosen = this;
@@ -143,16 +145,15 @@ $(document).ready(function(){
               }
           });
       },
-      persistent_create_option: true,
-      create_option_text: 'Créer le nouveau millésime '
+      persistent_create_option: true
    });
 
   $('.chzn-single').css('min-width','230px');
   $('.chzn-drop').css('min-width','240px');
   $('.chzn-search input').css('min-width','210px');
 
-  $(".chzn-select[multiple]").before('<span class="selectAll selectAction"><%= I18n.translate! 'actions.select_all' %></span>');
-  $(".chzn-select[multiple]").before('<span class="deselectAll selectAction"><%= I18n.translate! 'actions.unselect_all' %></span>');
+  $(".chzn-select[multiple]").before("<span class='selectAll selectAction'><%= I18n.translate! 'actions.select_all' %></span>");
+  $(".chzn-select[multiple]").before("<span class='deselectAll selectAction'><%= I18n.translate! 'actions.unselect_all' %></span>");
 
   $('head').append("<link rel='shortcut icon' href='/assets/favicon.ico'>");
   

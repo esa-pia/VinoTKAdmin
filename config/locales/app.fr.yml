@@ -1,5 +1,5 @@
 fr:
-  no_results_text: "Pas de resultat correspondant a"
+  no_results_text: "Pas de resultat correspondant à"
   catalogue:
     generate:
       pdf: "Générer PDF"
@@ -104,7 +104,9 @@ fr:
     whisky: "Whisky" 
     bouteilles: "Bouteilles"
     choose:
-      bouteilles: "Veuillez choisir les bouteilles associées à ce type" 
+      bouteilles: "Veuillez choisir les bouteilles associées à ce type"
+    create:
+      new: "Créer un nouveau type de vin "
   bouteilles:
     new: "Les nouvelles bouteilles"
     section_title: "Détails bouteille"
@@ -133,6 +135,8 @@ fr:
     bouteilles: "Bouteilles"
     choose:
       bouteilles: "Veuillez choisir les bouteilles associées à cette cuvée"
+    create:
+      new: "Créer une nouvelle cuvée "
   regions:
     section_title: "Détails région"
     id: "Id"
@@ -140,6 +144,8 @@ fr:
     bouteilles: "Bouteilles"
     choose:
       bouteilles: "Veuillez choisir les bouteilles associées à cette région"
+    create:
+      new: "Créer une nouvelle région "
   domaines:
     section_title: "Détails domaine"
     id: "Id"
@@ -147,6 +153,8 @@ fr:
     bouteilles: "Bouteilles"
     choose:
       bouteilles: "Veuillez choisir les bouteilles associées à ce domaine"
+    create:
+      new: "Créer un nouveau domaine "
   formats:
     section_title: "Détails format"
     id: "Id"
@@ -154,6 +162,8 @@ fr:
     bouteilles: "Bouteilles"
     choose:
       bouteilles: "Veuillez choisir les bouteilles associées à ce format"
+    create:
+      new: "Créer un nouveau format "
   newsletters:
     section_title: "Détails newsletter"
     id: "Id"
@@ -161,6 +171,7 @@ fr:
     date_debut: "Date de début"
     date_fin: "Date de fin"
     info: "Le saviez vous ?"
+    send: "Envoyer"
   millesimes:
     section_title: "Détails millésime"
     id: "Id"
@@ -168,6 +179,8 @@ fr:
     bouteilles: "Bouteilles"
     choose:
       bouteilles: "Veuillez choisir les bouteilles associées à ce millésime"
+    create:
+      new: "Créer un nouveau millésime "
   catalogues:
     last: "Dernier catalogue"
     section_title: "Détails catalogue"

@@ -17,7 +17,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Recommended image height is 21px to properly fit in the header
   #
-  config.site_title_image = "/assets/logo21x21.png"
+  config.site_title_image = "/assets/logo30x30.png"
 
   # == Default Namespace
   #

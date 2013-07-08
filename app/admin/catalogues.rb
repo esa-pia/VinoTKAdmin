@@ -4,7 +4,7 @@ ActiveAdmin.register Catalogue do
 
    # Filterable attributes on the index screen
   filter :titre, :label => I18n.t('catalogues.titre')
-  filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+  filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' ,   "data-no_results_text" => I18n.t('no_results_text') }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
   
   index do |catalogue|
     selectable_column
@@ -31,9 +31,7 @@ ActiveAdmin.register Catalogue do
       image_tag(catalogue.image6(:thumb)) if catalogue.image6
     end
     column do |catalogue|
-      a :href => '#', :pdf => generate_pdf_admin_catalogue_path(catalogue), :class => 'generatePDF' do
-        image_tag('/assets/pdf.png')
-      end
+      link_to I18n.translate("catalogue.generate.pdf"), '#', :class => 'member_link generatePDF', :pdf => generate_pdf_admin_catalogue_path(catalogue)
     end
     default_actions
     
@@ -62,7 +60,7 @@ ActiveAdmin.register Catalogue do
       table_for catalogue.bouteilles.joins(:type).order('types.libelle ASC, appellation ASC, domaine_id ASC, cuvee_id ASC')  do |t|
         t.column I18n.t('bouteilles.nouveau'), :nouveau do  |bouteille|
           if(bouteille.nouveau)
-            image_tag('/assets/new_flag.png')
+            status_tag("new")
           end
         end
         t.column I18n.t('bouteilles.type'), :type do  |bouteille|
@@ -138,9 +136,9 @@ ActiveAdmin.register Catalogue do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs I18n.t('catalogues.section_title') do
       f.input :titre, :label => I18n.t('catalogues.titre')#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles') }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
       
-      #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
+      #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' ,   "data-no_results_text" => I18n.t('no_results_text') }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
       
       f.input :image1, :label => I18n.t('catalogues.image1'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image1.url()) if f.object.image1)
       f.input :image2, :label => I18n.t('catalogues.image2'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.image2.url()) if f.object.image2)
@@ -207,7 +205,7 @@ ActiveAdmin.register Catalogue do
 end
 def image_nouveau(nouveau)
   if(nouveau)
-    {:image => "#{Rails.root}/app/assets/images/new_flag.png", :image_height => 22, :image_width => 22}
+    {:image => "#{Rails.root}/app/assets/images/new.png", :image_height => 22, :image_width => 22}
   else
     ""
   end

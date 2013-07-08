@@ -4,7 +4,7 @@ ActiveAdmin.register Newsletter do
   filter :titre,      :label => I18n.t('newsletters.titre')
   filter :date_debut, :label => I18n.t('newsletters.date_debut')
   filter :date_fin,   :label => I18n.t('newsletters.date_fin')
-  #filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+  #filter :bouteilles, :label => I18n.t('catalogues.bouteilles'), :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' ,   "data-no_results_text" => I18n.t('no_results_text') }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
   
   index do |newsletter|
     selectable_column
@@ -18,9 +18,7 @@ ActiveAdmin.register Newsletter do
     #  image_tag(catalogue.image1(:thumb)) if catalogue.image1
     #end
     column do |newsletter|
-      a :href => '#', :url => send_newsletter_admin_newsletter_path(newsletter), :class => 'sendPDF' do
-        image_tag('/assets/send.png')
-      end
+      link_to I18n.t('newsletters.send'), '#', :class => 'member_link send_newsletter', :pdf => send_newsletter_admin_newsletter_path(newsletter)
     end
     default_actions
     
@@ -56,7 +54,7 @@ ActiveAdmin.register Newsletter do
   # Email sending
   
   action_item :only => :show do
-    link_to "Envoyer", send_newsletter_admin_newsletter_path(resource), :class => 'send_newsletter'
+    link_to I18n.t('newsletters.send'), send_newsletter_admin_newsletter_path(resource), :class => 'send_newsletter'
   end
   
   member_action :send_newsletter do
