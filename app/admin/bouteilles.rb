@@ -76,7 +76,7 @@ ActiveAdmin.register Bouteille do
       f.input :volume,      :label => I18n.t('bouteilles.format'),      :input_html => { :class => 'chzn-select-format',    :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') ,    "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("formats.create.new") }, :collection => (Volume.order.all)#.map{|o| [o.valeur, o.id]}
       f.input :millesime,   :label => I18n.t('bouteilles.millesime'),   :input_html => { :class => 'chzn-select-millesime', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime'),  "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("millesimes.create.new") }, :collection => (Millesime.order.all)#.map{|o| [o.valeur, o.id]}
       f.input :description, :label => I18n.t('bouteilles.description'), :input_html => { :rows => 4 }
-      f.input :prix,        :label => I18n.t('bouteilles.prix'),        :input_html => { :style => "width: 50px"} 
+      f.input :prix,        :label => I18n.t('bouteilles.prix'),        :input_html => { :style => "width: 50px"} ,        :hint =>I18n.t('number.currency.format.unit')
       f.input :nouveau,     :label => I18n.t('bouteilles.nouveau')
     end
     f.buttons

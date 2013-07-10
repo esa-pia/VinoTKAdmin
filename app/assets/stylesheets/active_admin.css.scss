@@ -216,6 +216,12 @@ div.index_as_table th:last-child
 #site_title{
   padding-top: 0px!important;
 }
+
+/**** affichage de l'euro en hint **/
+#bouteille_prix_input p.inline-hints {
+  margin: -2em 0 0 26%;
+}
+
 /*******HAS MANY*****/
 .has_many.newsletters_bouteilles
 {
@@ -223,6 +229,12 @@ div.index_as_table th:last-child
   {
     padding: 0px 0;
     margin-bottom: 5px;
+    > ol > li p.inline-hints {
+      font-size: 0.95em;
+      font-style: italic;
+      color: #666;
+      margin: -2em 0 0 104%;
+    }
     li
     {
       float: left;
@@ -250,6 +262,7 @@ div.index_as_table th:last-child
             font-family: Helvetica, Arial, sans-serif;
             line-height: 12px;
             margin-right: 3px;
+            margin-left: 10px;
             padding: 7px 16px 6px;
             text-decoration: none;
             -webkit-font-smoothing: antialiased;
@@ -280,7 +293,14 @@ div.index_as_table th:last-child
   }
 }
 
+/***********datepicker*************/
 
+body.active_admin .ui-datepicker .ui-datepicker-header a {
+  margin-top: 8px;
+}
+body.active_admin .ui-datepicker .ui-datepicker-header a:active {
+  margin-top: 8px;
+}
 /***********table_action*************/
 .table_action i{
   line-height: 30px;

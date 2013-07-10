@@ -177,7 +177,8 @@ fr:
     info: "Le saviez vous ?"
     send: "Envoyer"
     info_section_title: "Le saviez vous ..."
-    bouteille_section_title: "Le detail des promotions"
+    bouteille_section_title: "Le détail des promotions"
+    rabais: "rabais"
   millesimes:
     section_title: "Détails millésime"
     id: "Id"

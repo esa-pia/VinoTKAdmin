@@ -225,43 +225,47 @@ $(document).ready(function(){
   });
   
   
-  /** DATE INPUT **/
-$('input.datepicker:not(.hasDatepicker)').datepicker({ dateFormat: 'dd-mm-yy' });
+    /** DATE INPUT **/
+    $('input.datepicker:not(.hasDatepicker)').datepicker({ dateFormat: 'dd-mm-yy' });
 
-  /** SPINNER **/
-$('.spinner, #prix_gte_numeric, #prix_lte_numeric, #bouteille_prix').spinner({
+    /** SPINNER **/
+    $('.spinner_percent').spinner({
+      min: 0,
+      max: 100,
+      step: 0.05,
+      start: 100
+    });
+    $('.spinner_, #prix_gte_numeric, #prix_lte_numeric, #bouteille_prix').spinner({
       min: 0,
       max: 1000,
       step: 0.05,
       start: 1000
     });
-$('.just-datetime-picker-time-hour').spinner({
+    $('.just-datetime-picker-time-hour').spinner({
       min: 0,
       max: 23,
       step: 1,
       start: 0
     });
-$('.just-datetime-picker-time-minute').spinner({
+    $('.just-datetime-picker-time-minute').spinner({
       min: 0,
       max: 59,
       step: 1,
       start: 0
     });
-$(".has_many_remove.button").on("click", function( event ) {
-  $(this).closest('.has_many_fields').hide();
-  return true;
-});
-$('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
-    $(".chzn-select").chosen();
-    $('.spinner').spinner({
-      min: 0,
-      max: 1000,
-      step: 0.05,
-      start: 1000
+    $(".has_many_remove.button").on("click", function( event ) {
+      $(this).closest('.has_many_fields').hide();
+      return true;
     });
-
-
-  });
+    $('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
+      $(".chzn-select").chosen();
+      $('.spinner_percent').spinner({
+        min: 0,
+        max: 1000,
+        step: 0.05,
+        start: 1000
+      });
+    });
 
 
 })
