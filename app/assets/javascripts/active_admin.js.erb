@@ -23,10 +23,12 @@ $(document).ready(function(){
   $(".member_link.send_newsletter").wrap('<div class="table_action" title="'+$(".member_link.send_newsletter").first().text()+'">').text('')
   $(".member_link.send_newsletter").prepend('<i class="icon-mail-alt">')
 
+  /** TOOLTIPS**/
   $("th a").closest("th").each(function( index ) {
-    $(this).attr("title", $(this).find('a').first().text());
+    $(this).attr("title", $.trim($(this).find('a').first().text()));
   });
-  $("th:not(:has(>a))").each(function( index ) {
+  $("th:not(:has(>a, div))").each(function( index ) {
+
     $(this).attr("title", $(this).text());
   });
   $( document ).tooltip({
@@ -43,15 +45,24 @@ $(document).ready(function(){
         }
     }
     });
-
+   /** INPUT FILE**/
   $('input:file').customFileInput({
     button_position : 'right',
     feedback_text   : '',
     button_text     : 'Parcourir...',
     button_change_text  : 'Changer'
   });
-
+  /** AUTOCOMPLETE AUTO SUGGEST**/
   $(".chzn-select").chosen();
+  $(".selectAll").on("click", function( event ) {
+    $(".chzn-select option ").prop("selected", true);
+    $(".chzn-select").trigger("liszt:updated");
+  });
+  $(".deselectAll").on("click", function( event ) {
+    $(".chzn-select option ").prop("selected", false);
+    $('.search-choice').remove()
+    $(".chzn-select").trigger("liszt:updated");
+  });
   $(".chzn-select-domaine").chosen({
       create_option: function(domaine) {
           launchSpinner();
@@ -187,8 +198,10 @@ $(document).ready(function(){
   $(".chzn-select[multiple]").before("<span class='selectAll selectAction'><%= I18n.translate! 'actions.select_all' %></span>");
   $(".chzn-select[multiple]").before("<span class='deselectAll selectAction'><%= I18n.translate! 'actions.unselect_all' %></span>");
 
+  /** FAV ICON**/
   $('head').append("<link rel='shortcut icon' href='/assets/favicon.ico'>");
   
+   /** FEED BACK **/
   $("form").submit(function() {
     launchSpinner();
     return true;
@@ -211,18 +224,12 @@ $(document).ready(function(){
     return false;
   });
   
-  $(".selectAll").on("click", function( event ) {
-    $(".chzn-select option ").prop("selected", true);
-    $(".chzn-select").trigger("liszt:updated");
-  });
-$(".deselectAll").on("click", function( event ) {
-    $(".chzn-select option ").prop("selected", false);
-    $('.search-choice').remove()
-    $(".chzn-select").trigger("liszt:updated");
-  });
-
+  
+  /** DATE INPUT **/
 $('input.datepicker:not(.hasDatepicker)').datepicker({ dateFormat: 'dd-mm-yy' });
-$('#prix_gte_numeric, #prix_lte_numeric, #bouteille_prix').spinner({
+
+  /** SPINNER **/
+$('.spinner, #prix_gte_numeric, #prix_lte_numeric, #bouteille_prix').spinner({
       min: 0,
       max: 1000,
       step: 0.05,
@@ -240,8 +247,26 @@ $('.just-datetime-picker-time-minute').spinner({
       step: 1,
       start: 0
     });
+$(".has_many_remove.button").on("click", function( event ) {
+  $(this).closest('.has_many_fields').hide();
+  return true;
+});
+$('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
+    $(".chzn-select").chosen();
+    $('.spinner').spinner({
+      min: 0,
+      max: 1000,
+      step: 0.05,
+      start: 1000
+    });
+
+
+  });
+
 
 })
+
+
 
 function launchSpinner(){
   var spinner = new Spinner().spin();

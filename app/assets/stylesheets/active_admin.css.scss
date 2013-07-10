@@ -102,6 +102,8 @@ div.index_as_table th:last-child
 
 #collection_selection th.prix_unité_€_ttc, #main_content th.prix_unité_€_ttc{
   max-width: 50px!important;
+  min-width: 50px;
+  text-align: right;
 }
 #collection_selection th.région_viticole, #main_content th.région_viticole{
   max-width: 65px!important;
@@ -214,8 +216,69 @@ div.index_as_table th:last-child
 #site_title{
   padding-top: 0px!important;
 }
-
-
+/*******HAS MANY*****/
+.has_many.newsletters_bouteilles
+{
+  .inputs.has_many_fields
+  {
+    padding: 0px 0;
+    margin-bottom: 5px;
+    li
+    {
+      float: left;
+      label
+      {
+        width:60px;
+        line-height: 30px;
+      }
+        &.has_many_remove.button.boolean.input
+        {
+          label
+          {
+            background: #8b9297;
+            background: -webkit-linear-gradient(-90deg, #8b9297, #484d51);
+            background: -moz-linear-gradient(-90deg, #8b9297, #484d51);
+            background: linear, -90deg, #8b9297, #484d51;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8B9297', endColorstr='#FF484D51');
+            -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8B9297', endColorstr='#FF484D51');
+            -webkit-border-radius: 200px;
+            -moz-border-radius: 200px;
+            border-radius: 200px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.0em;
+            font-family: Helvetica, Arial, sans-serif;
+            line-height: 12px;
+            margin-right: 3px;
+            padding: 7px 16px 6px;
+            text-decoration: none;
+            -webkit-font-smoothing: antialiased;
+            background: #838a90;
+            background: -webkit-linear-gradient(-90deg, #838a90, #414549);
+            background: -moz-linear-gradient(-90deg, #838a90, #414549);
+            background: linear, -90deg, #838a90, #414549;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF838A90', endColorstr='#FF414549');
+            -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF838A90', endColorstr='#FF414549');
+            text-shadow: black 0 1px 0;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0px rgba(255, 255, 255, 0.2) inset;
+            border: solid 1px #484e53;
+            border-color: #484e53;
+            border-top-color: #616a71;
+            border-right-color: #484e53;
+            border-bottom-color: #363b3f;
+            border-left-color: #484e53;
+            color: #efefef;
+            cursor: pointer;
+            input
+            {
+              display: none;
+            }
+          }
+        }
+      
+    }
+  }
+}
 
 
 /***********table_action*************/
@@ -254,6 +317,7 @@ div.index_as_table th:last-child
     visibility: visible;
     z-index: 1024;
     max-width: 200px;
+    min-width: 50px;
 }
 
 .ui-tooltip {

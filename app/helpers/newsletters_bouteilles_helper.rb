@@ -1,0 +1,2 @@
+module NewslettersBouteillesHelper
+end

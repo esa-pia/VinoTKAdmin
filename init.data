@@ -24,3 +24,6 @@ rails generate scaffold Catalogues_Bouteilles    bouteille:references catalogue:
 rails generate scaffold Client   nom:string nom:string email:string
 
 rails generate scaffold Newsletter   titre:string date_debut:datetime date_fin:datetime info:string
+
+
+rails generate scaffold Newsletters_Bouteilles   newsletter:references bouteille:references rabais:decimal

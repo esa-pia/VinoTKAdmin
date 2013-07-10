@@ -15,6 +15,9 @@ fr:
     millesime: "Millésime"
   activerecord:
     models:
+      newsletters_bouteille: 
+        one: "Promotion"
+        other: "Promotions"
       region: 
         one: "Région viticole"
         other: "Régions viticoles"
@@ -165,13 +168,16 @@ fr:
     create:
       new: "Créer un nouveau format "
   newsletters:
-    section_title: "Détails newsletter"
+    evenement_section_title: "Détails de l'événement"
     id: "Id"
     titre: "Titre"
     date_debut: "Date de début"
     date_fin: "Date de fin"
+    description: "Description"
     info: "Le saviez vous ?"
     send: "Envoyer"
+    info_section_title: "Le saviez vous ..."
+    bouteille_section_title: "Le detail des promotions"
   millesimes:
     section_title: "Détails millésime"
     id: "Id"

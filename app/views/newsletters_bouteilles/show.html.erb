@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Newsletter:</b>
+  <%= @newsletters_bouteille.newsletter %>
+</p>
+
+<p>
+  <b>Bouteille:</b>
+  <%= @newsletters_bouteille.bouteille %>
+</p>
+
+<p>
+  <b>Rabais:</b>
+  <%= @newsletters_bouteille.rabais %>
+</p>
+
+
+<%= link_to 'Edit', edit_newsletters_bouteille_path(@newsletters_bouteille) %> |
+<%= link_to 'Back', newsletters_bouteilles_path %>

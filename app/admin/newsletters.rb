@@ -37,12 +37,29 @@ ActiveAdmin.register Newsletter do
   end
 
   form do |f|                         
-    f.inputs I18n.t('newsletters.section_title') do       
+    f.inputs I18n.t('newsletters.evenement_section_title') do       
       f.input :titre, :label => I18n.t('newsletters.titre')   
       f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
-      f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker       
+      f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
+      f.input :description, :label => I18n.t('newsletters.description'), :input_html => { :rows => 4 }          
+    end
+    f.inputs I18n.t('newsletters.bouteille_section_title') do  
+      f.has_many :newsletters_bouteilles ,  :header => "Display this as the H3" , :label => "Display this as the H4"do |ff|
+        #ff.inputs
+        ff.input :bouteille, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' ,   "data-no_results_text" => I18n.t('no_results_text') }, :collection => (Bouteille.order.all).map{|o| ["#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+        ff.input :rabais,        :input_html => { :style => "width: 50px", :class => "spinner"} 
+        if ff.object.new_record?
+          ff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
+                 :wrapper_html => {:style => "display: none;"}
+        else
+          ff.input :_destroy, :as => :boolean, :wrapper_html => {:class => "has_many_remove button"}, 
+          :label => I18n.t('active_admin.has_many_delete')
+        end
+      end    
+    end
+    f.inputs I18n.t('newsletters.info_section_title') do       
       f.input :info, :label => I18n.t('newsletters.info')     
-    end                               
+    end                           
     f.actions                         
   end
 

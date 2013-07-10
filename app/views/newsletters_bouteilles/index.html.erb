@@ -1,0 +1,27 @@
+<h1>Listing newsletters_bouteilles</h1>
+
+<table>
+  <tr>
+    <th>Newsletter</th>
+    <th>Bouteille</th>
+    <th>Rabais</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @newsletters_bouteilles.each do |newsletters_bouteille| %>
+  <tr>
+    <td><%= newsletters_bouteille.newsletter %></td>
+    <td><%= newsletters_bouteille.bouteille %></td>
+    <td><%= newsletters_bouteille.rabais %></td>
+    <td><%= link_to 'Show', newsletters_bouteille %></td>
+    <td><%= link_to 'Edit', edit_newsletters_bouteille_path(newsletters_bouteille) %></td>
+    <td><%= link_to 'Destroy', newsletters_bouteille, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Newsletters bouteille', new_newsletters_bouteille_path %>
