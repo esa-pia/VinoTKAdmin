@@ -229,7 +229,10 @@ div.index_as_table th:last-child
 #bouteille_prix_input p.inline-hints {
   margin: -2em 0 0 26%;
 }
-
+#batch_actions_selector li
+{
+  max-width: 150px;
+}
 /*******HAS MANY*****/
 #newsletters_bouteilles_section 
 {
