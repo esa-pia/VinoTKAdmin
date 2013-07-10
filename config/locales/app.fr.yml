@@ -178,7 +178,9 @@ fr:
     send: "Envoyer"
     info_section_title: "Le saviez vous ..."
     bouteille_section_title: "Le détail des promotions"
-    rabais: "rabais"
+    rabais: "Rabais"
+    choose:
+      bouteilles: "Veuillez choisir les bouteilles constituant vos promotions"
   millesimes:
     section_title: "Détails millésime"
     id: "Id"

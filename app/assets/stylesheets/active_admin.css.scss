@@ -105,6 +105,11 @@ div.index_as_table th:last-child
   min-width: 50px;
   text-align: right;
 }
+#collection_selection th.rabais, #main_content th.rabais{
+  max-width: 50px!important;
+  min-width: 50px;
+  text-align: right;
+}
 #collection_selection th.région_viticole, #main_content th.région_viticole{
   max-width: 65px!important;
 }
@@ -113,6 +118,9 @@ div.index_as_table th:last-child
 }
 
 #collection_selection .prix, #main_content table .prix{
+  text-align: right;
+}
+#collection_selection .rabais, #main_content table .rabais{
   text-align: right;
 }
 #collection_selection .format, #main_content table .format{
@@ -223,26 +231,32 @@ div.index_as_table th:last-child
 }
 
 /*******HAS MANY*****/
-.has_many.newsletters_bouteilles
+#newsletters_bouteilles_section 
 {
-  .inputs.has_many_fields
+
+  div.has_many.newsletters_bouteilles
   {
-    padding: 0px 0;
-    margin-bottom: 5px;
-    > ol > li p.inline-hints {
-      font-size: 0.95em;
-      font-style: italic;
-      color: #666;
-      margin: -2em 0 0 104%;
-    }
-    li
+    .inputs.has_many_fields
     {
-      float: left;
-      label
-      {
-        width:60px;
-        line-height: 30px;
+      padding: 0px 0;
+      margin-bottom: 5px;
+      > ol > li {
+        p.inline-hints {
+          font-size: 0.95em;
+          font-style: italic;
+          color: #666;
+          margin: -2em 0 0 104%;
+        }
       }
+      li
+      {
+        float: left;
+        label
+        {
+          width:60px;
+          line-height: 30px;
+        }
+        
         &.has_many_remove.button.boolean.input
         {
           label
@@ -262,7 +276,6 @@ div.index_as_table th:last-child
             font-family: Helvetica, Arial, sans-serif;
             line-height: 12px;
             margin-right: 3px;
-            margin-left: 10px;
             padding: 7px 16px 6px;
             text-decoration: none;
             -webkit-font-smoothing: antialiased;
@@ -288,7 +301,7 @@ div.index_as_table th:last-child
             }
           }
         }
-      
+      }
     }
   }
 }

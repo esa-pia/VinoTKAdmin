@@ -33,36 +33,43 @@ ActiveAdmin.register Newsletter do
         row (I18n.t('newsletters.description')) {newsletter.description}
       end
     end
-    panel I18n.t('newsletters.bouteille_section_title') do
-      table_for newsletter.newsletters_bouteilles  do |t|
-        t.column I18n.t('bouteilles.type'), :bouteille do  |newsletters_bouteille|
-          status_tag(newsletters_bouteille.bouteille.type.libelle.parameterize)
-        end
-        t.column I18n.t('bouteilles.appellation'), :bouteille do  |newsletters_bouteille|
-          newsletters_bouteille.bouteille.appellation
-        end
-        t.column I18n.t('bouteilles.domaine'), :bouteille do  |newsletters_bouteille|
-          newsletters_bouteille.bouteille.domaine.libelle
-        end
-        t.column I18n.t('bouteilles.cuvee'), :bouteille do  |newsletters_bouteille|
-          newsletters_bouteille.bouteille.cuvee.libelle
-        end
-        t.column I18n.t('bouteilles.region'), :bouteille do  |newsletters_bouteille|
-          newsletters_bouteille.bouteille.region.libelle
-        end
-        t.column I18n.t('bouteilles.format'), :bouteille do  |newsletters_bouteille|
-          newsletters_bouteille.bouteille.volume.valeur
-        end
-        t.column I18n.t('bouteilles.millesime'), :bouteille do  |newsletters_bouteille|
-          newsletters_bouteille.bouteille.millesime.valeur
-        end
-        t.column I18n.t('bouteilles.prix'), :bouteille do |newsletters_bouteille|
-          div :class => "prix" do
-            number_to_currency newsletters_bouteille.bouteille.prix
+    if(newsletter.newsletters_bouteilles.count>0)
+      panel I18n.t('newsletters.bouteille_section_title') do
+
+        table_for newsletter.newsletters_bouteilles  do |t|
+          t.column I18n.t('bouteilles.type'), :bouteille do  |newsletters_bouteille|
+            status_tag(newsletters_bouteille.bouteille.type.libelle.parameterize)
           end
+          t.column I18n.t('bouteilles.appellation'), :bouteille do  |newsletters_bouteille|
+            newsletters_bouteille.bouteille.appellation
+          end
+          t.column I18n.t('bouteilles.domaine'), :bouteille do  |newsletters_bouteille|
+            newsletters_bouteille.bouteille.domaine.libelle if newsletters_bouteille.bouteille.domaine_id?
+          end
+          t.column I18n.t('bouteilles.cuvee'), :bouteille do  |newsletters_bouteille|
+            newsletters_bouteille.bouteille.cuvee.libelle if newsletters_bouteille.bouteille.cuvee_id?
+          end
+          t.column I18n.t('bouteilles.region'), :bouteille do  |newsletters_bouteille|
+            newsletters_bouteille.bouteille.region.libelle if newsletters_bouteille.bouteille.region_id?
+          end
+          t.column I18n.t('bouteilles.format'), :bouteille do  |newsletters_bouteille|
+            newsletters_bouteille.bouteille.volume.valeur if newsletters_bouteille.bouteille.volume_id?
+          end
+          t.column I18n.t('bouteilles.millesime'), :bouteille do  |newsletters_bouteille|
+            newsletters_bouteille.bouteille.millesime.valeur if newsletters_bouteille.bouteille.millesime_id?
+          end
+          t.column I18n.t('bouteilles.prix'), :bouteille do |newsletters_bouteille|
+            div :class => "prix" do
+              number_to_currency newsletters_bouteille.bouteille.prix
+            end
+          end
+          t.column I18n.t('newsletters.rabais'), :rabais do |newsletters_bouteille|
+            div :class => "rabais" do
+              "#{newsletters_bouteille.rabais} %"
+            end
+          end
+          
         end
-        t.column I18n.t('newsletters.rabais'), :rabais 
-        
       end
     end
     panel I18n.t('newsletters.info_section_title') do
@@ -80,10 +87,10 @@ ActiveAdmin.register Newsletter do
       f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
       f.input :description, :label => I18n.t('newsletters.description'), :input_html => { :rows => 4 }          
     end
-    f.inputs I18n.t('newsletters.bouteille_section_title') do  
+    f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
       f.has_many :newsletters_bouteilles do |ff|
         #ff.inputs
-        ff.input :bouteille, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+        ff.input :bouteille, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
         ff.input :rabais,        :hint => "%" , :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
         if ff.object.new_record?
           ff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
