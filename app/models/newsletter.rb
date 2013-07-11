@@ -5,8 +5,8 @@ class Newsletter < ActiveRecord::Base
   has_many :newsletters_bouteilles, :dependent => :destroy
   accepts_nested_attributes_for :newsletters_bouteilles, :allow_destroy => true
 
-  attr_accessible :info, :titre, :description, :newsletters_bouteilles_attributes
-
+  attr_accessible :info, :titre, :titre_evenement, :description, :newsletters_bouteilles_attributes
+ 
   validates :titre, :presence => true
   def display_name
     titre

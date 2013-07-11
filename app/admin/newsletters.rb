@@ -24,10 +24,15 @@ ActiveAdmin.register Newsletter do
     
   end
   show do |newsletter|
-    panel I18n.t('newsletters.evenement_section_title') do
+    panel I18n.t('newsletters.section_title') do
       attributes_table_for newsletter do
         row (I18n.t('newsletters.id')) {newsletter.id}
         row (I18n.t('newsletters.titre')) {newsletter.titre}
+      end
+    end
+    panel I18n.t('newsletters.evenement_section_title') do
+      attributes_table_for newsletter do
+        row (I18n.t('newsletters.titre_evenement')) {newsletter.titre_evenement}
         row (I18n.t('newsletters.date_debut')) {newsletter.date_debut}
         row (I18n.t('newsletters.date_fin')) {newsletter.date_fin}
         row (I18n.t('newsletters.description')) {newsletter.description}
@@ -80,9 +85,12 @@ ActiveAdmin.register Newsletter do
     active_admin_comments
   end
 
-  form do |f|                         
+  form do |f|   
+    f.inputs I18n.t('newsletters.section_title') do       
+      f.input :titre, :label => I18n.t('newsletters.titre')       
+    end                      
     f.inputs I18n.t('newsletters.evenement_section_title') do       
-      f.input :titre, :label => I18n.t('newsletters.titre')   
+      f.input :titre_evenement, :label => I18n.t('newsletters.titre_evenement')   
       f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
       f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
       f.input :description, :label => I18n.t('newsletters.description'), :input_html => { :rows => 4 }          

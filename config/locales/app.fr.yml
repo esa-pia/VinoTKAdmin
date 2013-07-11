@@ -168,9 +168,11 @@ fr:
     create:
       new: "Créer un nouveau format "
   newsletters:
+    section_title: "Détails de la newsletter"
     evenement_section_title: "Détails de l'événement"
     id: "Id"
     titre: "Titre"
+    titre_evenement: "Titre"
     date_debut: "Date de début"
     date_fin: "Date de fin"
     description: "Description"
