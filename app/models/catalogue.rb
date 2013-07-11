@@ -18,7 +18,7 @@ class Catalogue < ActiveRecord::Base
   has_attached_file :image6, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
   validates :titre, :presence => true
-  validates :bouteilles, :presence => true
+  #validates :bouteilles, :presence => true
 
 
   def display_name
