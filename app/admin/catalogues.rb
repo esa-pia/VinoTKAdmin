@@ -140,7 +140,9 @@ ActiveAdmin.register Catalogue do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs I18n.t('catalogues.section_title') do
       f.input :titre, :label => I18n.t('catalogues.titre')#, :as => :select, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+      f.input :bouteilles, :label => I18n.t('catalogues.bouteilles'), :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+     # :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('catalogues.choose.bouteilles'),   
+     #   "data-no_results_text" => I18n.t('no_results_text')  }, 
       
       #f.input :bouteilles, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click' ,   "data-no_results_text" => I18n.t('no_results_text') }, :collection => option_groups_from_collection_for_select(Type.order.all, :bouteilles, :libelle, :id, :appellation, nil)
       
