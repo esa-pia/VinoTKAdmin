@@ -55,15 +55,7 @@ $(document).ready(function(){
   });
   /** AUTOCOMPLETE AUTO SUGGEST**/
   $(".chzn-select").chosen();
-  $(".selectAll").on("click", function( event ) {
-    $(".chzn-select option ").prop("selected", true);
-    $(".chzn-select").trigger("liszt:updated");
-  });
-  $(".deselectAll").on("click", function( event ) {
-    $(".chzn-select option ").prop("selected", false);
-    $('.search-choice').remove()
-    $(".chzn-select").trigger("liszt:updated");
-  });
+  
   $(".chzn-select-domaine").chosen({
       create_option: function(domaine) {
           launchSpinner();
@@ -198,7 +190,15 @@ $(document).ready(function(){
 
   $(".chzn-select[multiple]").before("<span class='selectAll selectAction'><%= I18n.translate! 'actions.select_all' %></span>");
   $(".chzn-select[multiple]").before("<span class='deselectAll selectAction'><%= I18n.translate! 'actions.unselect_all' %></span>");
-
+  $(".selectAll").on("click", function( event ) {
+    $(".chzn-select option ").prop("selected", true);
+    $(".chzn-select").trigger("liszt:updated");
+  });
+  $(".deselectAll").on("click", function( event ) {
+    $(".chzn-select option ").prop("selected", false);
+    $('.search-choice').remove()
+    $(".chzn-select").trigger("liszt:updated");
+  });
   /** FAV ICON**/
   $('head').append("<link rel='shortcut icon' href='/assets/favicon.ico'>");
   
