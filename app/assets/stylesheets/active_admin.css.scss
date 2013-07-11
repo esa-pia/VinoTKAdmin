@@ -20,6 +20,8 @@
 /*jquery-ui-bootstrap file-input */
 @import "enhanced.css";
 
+@import "sortable_forms";
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
@@ -239,6 +241,18 @@ div.index_as_table th:last-child
 
   div.has_many.newsletters_bouteilles
   {
+    &.sortable
+    {
+      .inputs.has_many_fields
+      {
+        ol{
+          li.number.input.optional.numeric.stringish:first-child
+          {
+            display: none;
+          }
+        }
+      }
+    }
     .inputs.has_many_fields
     {
       padding: 0px 0;

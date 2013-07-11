@@ -27,3 +27,6 @@ rails generate scaffold Newsletter   titre:string date_debut:datetime date_fin:d
 
 
 rails generate scaffold Newsletters_Bouteilles   newsletter:references bouteille:references rabais:decimal
+
+
+rails generate migration AddDescriptionToNewsletters description:text

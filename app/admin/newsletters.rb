@@ -41,7 +41,9 @@ ActiveAdmin.register Newsletter do
     if(newsletter.newsletters_bouteilles.count>0)
       panel I18n.t('newsletters.bouteille_section_title') do
 
-        table_for newsletter.newsletters_bouteilles  do |t|
+        table_for newsletter.newsletters_bouteilles.order(:position)  do |t|
+          #t.column :id
+          #t.column :position
           t.column I18n.t('bouteilles.type'), :bouteille do  |newsletters_bouteille|
             status_tag(newsletters_bouteille.bouteille.type.libelle.parameterize)
           end
@@ -90,14 +92,15 @@ ActiveAdmin.register Newsletter do
       f.input :titre, :label => I18n.t('newsletters.titre')       
     end                      
     f.inputs I18n.t('newsletters.evenement_section_title') do       
-      f.input :titre_evenement, :label => I18n.t('newsletters.titre_evenement')   
+      f.input :titre_evenement  , :label => I18n.t('newsletters.titre_evenement')   
       f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
       f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
       f.input :description, :label => I18n.t('newsletters.description'), :input_html => { :rows => 4 }          
     end
     f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
-      f.has_many :newsletters_bouteilles do |ff|
+      f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
+        ff.input :position
         ff.input :bouteille, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
         ff.input :rabais,        :hint => "%" , :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
         if ff.object.new_record?

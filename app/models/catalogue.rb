@@ -1,10 +1,16 @@
 #require 'file_attacher'
 
 class Catalogue < ActiveRecord::Base
-  attr_accessible :titre, :bouteille_ids, :image1, :image2, :image3, :image4, :image5, :image6
+  attr_accessible :titre, :image1, :image2, :image3, :image4, :image5, :image6
+  
   has_many :catalogues_bouteilles
   has_many :bouteilles , :through => :catalogues_bouteilles
-
+  attr_accessible :bouteille_ids
+  
+  #has_many :catalogues_bouteilles, :dependent => :destroy
+  #accepts_nested_attributes_for :catalogues_bouteilles, :allow_destroy => true
+  #attr_accessible :catalogues_bouteille_ids
+  
   has_attached_file :image1, :styles => {:medium => "238x238>", :thumb => "60x60>"}
 
   has_attached_file :image2, :styles => {:medium => "238x238>", :thumb => "60x60>"}
