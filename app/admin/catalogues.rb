@@ -41,7 +41,11 @@ ActiveAdmin.register Catalogue do
     resource_selection_cell catalogue
     div do
       a :href => admin_catalogue_path(catalogue) do
-        image_tag(catalogue.image1(:medium))
+        if(!"#{catalogue.image1}".eql?("/assets/missing.png"))
+          image_tag(catalogue.image1(:medium))
+        else
+           image_tag("/assets/logo.jpg", :style => "height: 159px;")
+        end
       end
     end
     a truncate(catalogue.titre), :href => admin_catalogue_path(catalogue)

@@ -19,7 +19,6 @@ class Catalogue < ActiveRecord::Base
 
   validates :titre, :presence => true
   validates :bouteilles, :presence => true
-  validates :image1, :presence => true
 
 
   def display_name

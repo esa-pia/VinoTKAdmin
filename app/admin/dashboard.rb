@@ -6,7 +6,11 @@ ActiveAdmin.register_page "Dashboard" do
     Catalogue.order('created_at desc').first(1).map do |last_catalogue|
       div do
         a :href => admin_catalogue_path(last_catalogue) do
-          image_tag(last_catalogue.image1(:medium))
+          if(!"#{last_catalogue.image1}".eql?("/assets/missing.png"))
+            image_tag(last_catalogue.image1(:medium))
+          else
+            image_tag("/assets/logo.jpg", :style => "height: 159px;")
+          end
         end
       end
       a truncate(last_catalogue.titre), :href => admin_catalogue_path(last_catalogue)
