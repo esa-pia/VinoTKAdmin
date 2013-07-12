@@ -6,7 +6,7 @@ class Bouteille < ActiveRecord::Base
   belongs_to :volume
   belongs_to :millesime
   attr_accessible :type_id, :domaine_id, :cuvee_id, :region_id, :volume_id, :millesime_id, :appellation, :description, :nouveau, :prix
-
+  has_and_belongs_to_many  :catalogues
 
   validates :appellation, :presence => true
   validates :type, :presence => true

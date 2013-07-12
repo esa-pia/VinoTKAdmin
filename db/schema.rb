@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711205647) do
+ActiveRecord::Schema.define(:version => 20130712121820) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(:version => 20130711205647) do
   add_index "bouteilles", ["type_id"], :name => "index_bouteilles_on_type_id"
   add_index "bouteilles", ["volume_id"], :name => "index_bouteilles_on_volume_id"
 
+  create_table "bouteilles_catalogues", :force => true do |t|
+    t.integer "bouteille_id"
+    t.integer "catalogue_id"
+  end
+
+  add_index "bouteilles_catalogues", ["bouteille_id"], :name => "index_bouteilles_catalogues_on_bouteille_id"
+  add_index "bouteilles_catalogues", ["catalogue_id"], :name => "index_bouteilles_catalogues_on_catalogue_id"
+
   create_table "catalogues", :force => true do |t|
     t.string   "titre"
     t.datetime "created_at",          :null => false
@@ -97,16 +105,6 @@ ActiveRecord::Schema.define(:version => 20130711205647) do
     t.integer  "image6_file_size"
     t.datetime "image6_updated_at"
   end
-
-  create_table "catalogues_bouteilles", :force => true do |t|
-    t.integer  "bouteille_id"
-    t.integer  "catalogue_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "catalogues_bouteilles", ["bouteille_id"], :name => "index_catalogues_bouteilles_on_bouteille_id"
-  add_index "catalogues_bouteilles", ["catalogue_id"], :name => "index_catalogues_bouteilles_on_catalogue_id"
 
   create_table "clients", :force => true do |t|
     t.string   "nom"

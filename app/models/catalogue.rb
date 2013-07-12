@@ -3,8 +3,10 @@
 class Catalogue < ActiveRecord::Base
   attr_accessible :titre, :image1, :image2, :image3, :image4, :image5, :image6
   
-  has_many :catalogues_bouteilles
-  has_many :bouteilles , :through => :catalogues_bouteilles
+  #has_many :catalogues_bouteilles
+  #has_many :bouteilles , :through => :catalogues_bouteilles
+  has_and_belongs_to_many  :bouteilles
+
   attr_accessible :bouteille_ids
   
   #has_many :catalogues_bouteilles, :dependent => :destroy
