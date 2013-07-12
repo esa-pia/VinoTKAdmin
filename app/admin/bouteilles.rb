@@ -86,6 +86,15 @@ ActiveAdmin.register Bouteille do
     link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_label), new_resource_path)
   end
   
+  batch_action :creer_catalogue do |selection|
+      @catalogue = Catalogue.new
+      @catalogue.titre = "titre"
+      Bouteille.find(selection).each do |bouteille|
+        @catalogue.bouteilles << bouteille
+      end
+      @catalogue.save
+      redirect_to edit_admin_catalogue_path(@catalogue) , :notice => I18n.t('catalogues.creer')
+    end
   
   # -----------------------------------------------------------------------------------
   # CSV

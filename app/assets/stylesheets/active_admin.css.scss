@@ -248,9 +248,22 @@ div.index_as_table th:last-child
         ol{
           li.number.input.optional.numeric.stringish:first-child
           {
-            display: none;
+            label, input{
+              display: none;
+            }
+            height: 30px;
+            padding-left: 0px;
+            margin: 0px;
           }
+
         }
+        &:hover 
+          {
+            li.number.input.optional.numeric.stringish:first-child
+            {
+              background: url('/assets/grippy_large.png') no-repeat 1px 50%!important;
+            }
+          }
       }
     }
     .inputs.has_many_fields

@@ -40,6 +40,9 @@ fr:
       region: 
         libelle: "Libellé"
   active_admin:
+    batch_actions:
+      labels:
+        creer_catalogue: Créér un catalogue avec
     axlsx:
       cuvees:
         libelle: "Cuvée"
@@ -193,6 +196,7 @@ fr:
     create:
       new: "Créer un nouveau millésime "
   catalogues:
+    creer: "Catalogue Créé"
     last: "Dernier catalogue"
     section_title: "Détails catalogue"
     id: "Id"
