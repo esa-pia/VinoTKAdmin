@@ -11,15 +11,15 @@ ActiveAdmin.register Bouteille do
   scope (I18n.t('types.whisky')), :whisky 
 
   # Filterable attributes on the index screen
-  filter :appellation, :label => I18n.t('bouteilles.appellation')
-  filter :type,        :label => I18n.t('bouteilles.type'),      :as => :check_boxes, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-  filter :domaine,     :label => I18n.t('bouteilles.domaine'),   :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine'), "data-no_results_text" => I18n.t("no_results_text") }, :collection => (Domaine.order.all)
-  filter :cuvee,       :label => I18n.t('bouteilles.cuvee'),     :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee'), "data-no_results_text" => I18n.t("no_results_text") },   :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
-  filter :region,      :label => I18n.t('bouteilles.region'),    :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region'), "data-no_results_text" => I18n.t('no_results_text') },  :collection => (Region.order.all)#.map{|o| [o.libelle, o.id]}
-  filter :volume,      :label => I18n.t('bouteilles.format'),    :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format'), "data-no_results_text" => I18n.t('no_results_text') }
-  filter :millesime,   :label => I18n.t('bouteilles.millesime'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime'), "data-no_results_text" => I18n.t('no_results_text') }
-  filter :prix,        :label => I18n.t('bouteilles.prix'),      :as => :numeric_range
-  filter :nouveau,     :label => I18n.t('bouteilles.nouveau')
+  filter :appellation,    :label => I18n.t('bouteilles.appellation')
+  filter :type,           :label => I18n.t('bouteilles.type'),      :as => :check_boxes, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
+  filter :domaine_in,     :label => I18n.t('bouteilles.domaine'),   :as => :select, :input_html => { :class => 'filter-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine'), "data-no_results_text" => I18n.t("no_results_text")   , "multiple" => "multiple" },  :collection => (Domaine.order("lower(libelle) ASC").all)
+  filter :cuvee_in,       :label => I18n.t('bouteilles.cuvee'),     :as => :select, :input_html => { :class => 'filter-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee'), "data-no_results_text" => I18n.t("no_results_text")     , "multiple" => "multiple" },  :collection => (Cuvee.order("lower(libelle) ASC").all)#.map{|o| [o.libelle, o.id]}
+  filter :region_in,      :label => I18n.t('bouteilles.region'),    :as => :select, :input_html => { :class => 'filter-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region'), "data-no_results_text" => I18n.t('no_results_text')    , "multiple" => "multiple" },  :collection => (Region.order("lower(libelle) ASC").all)#.map{|o| [o.libelle, o.id]}
+  filter :volume_in,      :label => I18n.t('bouteilles.format'),    :as => :select, :input_html => { :class => 'filter-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format'), "data-no_results_text" => I18n.t('no_results_text')    , "multiple" => "multiple" },  :collection => (Volume.order("lower(valeur) ASC").all)
+  filter :millesime_in,   :label => I18n.t('bouteilles.millesime'), :as => :select, :input_html => { :class => 'filter-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime'), "data-no_results_text" => I18n.t('no_results_text') , "multiple" => "multiple" },  :collection => (Millesime.order("lower(valeur) ASC").all)
+  filter :prix,           :label => I18n.t('bouteilles.prix'),      :as => :numeric_range
+  filter :nouveau,        :label => I18n.t('bouteilles.nouveau')
   
   #column I18n.t('clients.nom'), :nom
   index do |bouteille|
@@ -69,12 +69,12 @@ ActiveAdmin.register Bouteille do
   form do |f|
     f.inputs I18n.t('bouteilles.section_title')do
       f.input :appellation, :label => I18n.t('bouteilles.appellation')
-      f.input :type,        :label => I18n.t('bouteilles.type'),        :input_html => { :class => 'chzn-select-type',      :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.type') ,      "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("types.create.new")}, :collection => (Type.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :domaine,     :label => I18n.t('bouteilles.domaine'),     :input_html => { :class => 'chzn-select-domaine',   :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine') ,   "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("domaines.create.new") }, :collection => (Domaine.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :cuvee,       :label => I18n.t('bouteilles.cuvee'),       :input_html => { :class => 'chzn-select-cuvee',     :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee'),      "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("cuvees.create.new") }, :collection => (Cuvee.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :region,      :label => I18n.t('bouteilles.region'),      :input_html => { :class => 'chzn-select-region',    :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region'),     "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("regions.create.new") }, :collection => (Region.order.all)#.map{|o| [o.libelle, o.id]}
-      f.input :volume,      :label => I18n.t('bouteilles.format'),      :input_html => { :class => 'chzn-select-format',    :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') ,    "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("formats.create.new") }, :collection => (Volume.order.all)#.map{|o| [o.valeur, o.id]}
-      f.input :millesime,   :label => I18n.t('bouteilles.millesime'),   :input_html => { :class => 'chzn-select-millesime', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime'),  "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("millesimes.create.new") }, :collection => (Millesime.order.all)#.map{|o| [o.valeur, o.id]}
+      f.input :type,        :label => I18n.t('bouteilles.type'),        :input_html => { :class => 'chzn-select-type',      :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.type') ,      "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("types.create.new")}, :collection => (Type.order("lower(libelle) ASC").all)#.map{|o| [o.libelle, o.id]}
+      f.input :domaine,     :label => I18n.t('bouteilles.domaine'),     :input_html => { :class => 'chzn-select-domaine',   :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.domaine') ,   "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("domaines.create.new") }, :collection => (Domaine.order("lower(libelle) ASC").all)#.map{|o| [o.libelle, o.id]}
+      f.input :cuvee,       :label => I18n.t('bouteilles.cuvee'),       :input_html => { :class => 'chzn-select-cuvee',     :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.cuvee'),      "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("cuvees.create.new") }, :collection => (Cuvee.order("lower(libelle) ASC").all)#.map{|o| [o.libelle, o.id]}
+      f.input :region,      :label => I18n.t('bouteilles.region'),      :input_html => { :class => 'chzn-select-region',    :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.region'),     "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("regions.create.new") }, :collection => (Region.order("lower(libelle) ASC").all)#.map{|o| [o.libelle, o.id]}
+      f.input :volume,      :label => I18n.t('bouteilles.format'),      :input_html => { :class => 'chzn-select-format',    :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.format') ,    "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("formats.create.new") }, :collection => (Volume.order("lower(valeur) ASC").all)#.map{|o| [o.valeur, o.id]}
+      f.input :millesime,   :label => I18n.t('bouteilles.millesime'),   :input_html => { :class => 'chzn-select-millesime', :width => 'auto', "data-placeholder" => I18n.t('bouteilles.choose.millesime'),  "data-no_results_text" => I18n.t('no_results_text'), "data-create_option_text" => I18n.t("millesimes.create.new") }, :collection => (Millesime.order("lower(valeur) ASC").all)#.map{|o| [o.valeur, o.id]}
       f.input :description, :label => I18n.t('bouteilles.description'), :input_html => { :rows => 4 }
       f.input :prix,        :label => I18n.t('bouteilles.prix'),        :input_html => { :style => "width: 50px"} ,        :hint =>I18n.t('number.currency.format.unit')
       f.input :nouveau,     :label => I18n.t('bouteilles.nouveau')
@@ -87,15 +87,26 @@ ActiveAdmin.register Bouteille do
   end
   
   batch_action :creer_catalogue do |selection|
-      @catalogue = Catalogue.new
-      @catalogue.titre = "titre"
-      Bouteille.find(selection).each do |bouteille|
-        @catalogue.bouteilles << bouteille
-      end
-      @catalogue.save
-      redirect_to edit_admin_catalogue_path(@catalogue) , :notice => I18n.t('catalogues.creer')
+    @catalogue = Catalogue.new
+    @catalogue.titre = "titre"
+    Bouteille.find(selection).each do |bouteille|
+      @catalogue.bouteilles << bouteille
     end
-  
+    @catalogue.save
+    redirect_to edit_admin_catalogue_path(@catalogue) , :notice => I18n.t('catalogues.creer')
+  end
+  batch_action :creer_newsletter do |selection|
+    @newsletter = Newsletter.new
+    @newsletter.titre = "titre"
+    Bouteille.find(selection).each do |bouteille|
+      @newslettersBouteille = NewslettersBouteille.new
+      @newslettersBouteille.bouteille = bouteille
+      @newsletter.newsletters_bouteilles << @newslettersBouteille
+      @newslettersBouteille.save
+    end
+    @newsletter.save
+    redirect_to edit_admin_newsletter_path(@newsletter) , :notice => I18n.t('newsletters.creer')
+  end
   # -----------------------------------------------------------------------------------
   # CSV
   csv do

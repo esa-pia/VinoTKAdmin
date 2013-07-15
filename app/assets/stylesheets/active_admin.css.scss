@@ -43,8 +43,8 @@
   min-width:240px;
 }
 
-#edit_bouteille select[class*='chzn-select-']{
-  min-width:282px;
+#edit_bouteille select[class*='chzn-select-'],  #new_bouteille select[class*='chzn-select-']{
+  min-width:290px;
 }
 
 
@@ -259,6 +259,7 @@ div.index_as_table th:last-child
         }
         &:hover 
           {
+            background: rgb(230, 230, 230);
             li.number.input.optional.numeric.stringish:first-child
             {
               background: url('/assets/grippy_large.png') no-repeat 1px 50%!important;
@@ -694,4 +695,56 @@ body .ui-tooltip {
   border-left-color: #484e53;
   color: #efefef;
   float: left;
+}
+
+#main_content {
+//  margin-right: 0px!important;
+}
+
+#filters_sidebar_section
+{
+/* Firefox */
+//    -moz-transition: all 0.5s ease;
+    /* WebKit */
+//    -webkit-transition: all 0.5s ease;
+    /* Opera */
+//    -o-transition: all 0.5s ease;
+    /* Standard */
+//    transition: all 0.5s ease;
+  
+//  max-height: 28px;
+//  overflow: hidden;
+//  width: 60px;
+//  -webkit-transform: translate(210px, 0px);
+//  cursor: pointer;
+  
+  .panel_contents
+  {
+//    width: 270px;
+//    height: 0px;
+//    overflow: hidden;
+//    opacity: 0;
+  }
+  &:hover
+  {
+
+    /* Firefox */
+//    -moz-transition: all 0.5s ease;
+    /* WebKit */
+//    -webkit-transition: all 0.5s ease;
+    /* Opera */
+//    -o-transition: all 0.5s ease;
+    /* Standard */
+//    transition: all 0.5s ease;
+
+//    max-height: 100%;
+//    overflow: hidden;
+//    width: 270px;
+//    -webkit-transform: translate(0px, 0px);
+    .panel_contents
+    {
+//      opacity: 1;
+//      height: 100%;
+    }
+  }
 }

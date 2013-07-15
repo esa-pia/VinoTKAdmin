@@ -42,7 +42,8 @@ fr:
   active_admin:
     batch_actions:
       labels:
-        creer_catalogue: Créér un catalogue avec
+        creer_catalogue: "Créér un catalogue avec"
+        creer_newsletter: "Créér une newsletter avec"
     axlsx:
       cuvees:
         libelle: "Cuvée"
@@ -129,7 +130,7 @@ fr:
     nouveau: "Nouveau"
     choose:
       type: "Veuillez choisir un type de vin"
-      domaine: "Veuillez choisir un Domaine"
+      domaine: "Veuillez choisir un domaine"
       cuvee: "Veuillez choisir une cuvée"
       region: "Veuillez choisir une région"
       format: "Veuillez choisir un format"
@@ -184,6 +185,7 @@ fr:
     info_section_title: "Le saviez vous ..."
     bouteille_section_title: "Le détail des promotions"
     rabais: "Rabais"
+    creer: "Newsletter Créée"
     choose:
       bouteilles: "Veuillez choisir les bouteilles constituant vos promotions"
   millesimes:

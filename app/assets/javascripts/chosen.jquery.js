@@ -1008,6 +1008,19 @@
       var option, terms;
       option = $('<option />', options).attr('selected', 'selected');
       this.form_field_jq.append(option);
+      var selectOptions = $(this.form_field_jq).find("option");
+
+      selectOptions.sort(function(a, b) {
+        if (a.innerHTML == 'NA') {
+          return 1;   
+        }
+        else if (b.innerHTML == 'NA') {
+          return -1;   
+        }       
+        return (a.innerHTML.toLowerCase() > b.innerHTML.toLowerCase()) ? 1 : -1;
+      });
+      $(this.form_field_jq).empty().append(selectOptions);
+
       terms = this.search_field.val();
       this.form_field_jq.trigger("liszt:updated");
       this.form_field_jq.trigger("change");

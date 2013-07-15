@@ -57,7 +57,9 @@ $(document).ready(function(){
   });
   /** AUTOCOMPLETE AUTO SUGGEST**/
   $(".chzn-select").chosen();
-  
+  $('#filters_sidebar_section select[multiple] option[value=""]').remove()
+  $(".filter-chzn-select").chosen();
+
   $(".chzn-select-domaine").chosen({
       create_option: function(domaine) {
           launchSpinner();

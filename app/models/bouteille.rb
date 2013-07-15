@@ -46,4 +46,26 @@ class Bouteille < ActiveRecord::Base
       :include => { type: { only: [:libelle] },domaine: { only: [:libelle] },cuvee: { only: [:libelle] },region: { only: [:libelle] },volume: { only: [:valeur] },millesime: { only: [:valeur] }}
     )
   end
+
+  search_methods :domaine_in_eq
+  search_methods :cuvee_in_eq
+  search_methods :volume_in_eq
+  search_methods :millesime_in_eq
+  search_methods :region_in_eq
+  
+  scope :domaine_in_eq, lambda { |domaine_ids|
+    Bouteille.where("domaine_id in (?)", domaine_ids)
+  }
+  scope :cuvee_in_eq, lambda { |cuvee_ids|
+    Bouteille.where("cuvee_id in (?)", cuvee_ids)
+  }
+  scope :volume_in_eq, lambda { |volume_ids|
+    Bouteille.where("volume_id in (?)", volume_ids)
+  }
+  scope :millesime_in_eq, lambda { |millesime_ids|
+    Bouteille.where("millesime_id in (?)", millesime_ids)
+  }
+  scope :region_in_eq, lambda { |region_ids|
+    Bouteille.where("region_id in (?)", region_ids)
+  }
 end
