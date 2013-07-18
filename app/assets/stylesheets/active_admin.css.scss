@@ -253,13 +253,14 @@ div.index_as_table th:last-child
             }
             height: 30px;
             padding-left: 0px;
-            margin: 0px;
+            margin: 0px 0px 0px 3px;
           }
 
         }
         &:hover 
           {
-            background: rgb(230, 230, 230);
+            background: rgb(250, 250, 250);
+            -webkit-box-shadow: inset 0 1px 4px #888888;
             li.number.input.optional.numeric.stringish:first-child
             {
               background: url('/assets/grippy_large.png') no-repeat 1px 50%!important;
@@ -698,53 +699,107 @@ body .ui-tooltip {
 }
 
 #main_content {
-//  margin-right: 0px!important;
+  &.close
+  {
+    -moz-transition: all 0.7s ease;
+    -webkit-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    margin-right: 0px!important;
+    .indexes {
+      -moz-transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+      padding-right: 80px;
+    }
+  }
+  &.open
+  {
+  
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    margin-right: 300px!important;
+    .indexes {
+      -moz-transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+      padding-right: 0px;
+    }
+  }
 }
 
-#filters_sidebar_section
+.sidebar_section.panel.open
 {
-/* Firefox */
-//    -moz-transition: all 0.5s ease;
-    /* WebKit */
-//    -webkit-transition: all 0.5s ease;
-    /* Opera */
-//    -o-transition: all 0.5s ease;
-    /* Standard */
-//    transition: all 0.5s ease;
-  
-//  max-height: 28px;
-//  overflow: hidden;
-//  width: 60px;
-//  -webkit-transform: translate(210px, 0px);
-//  cursor: pointer;
-  
+  max-height: 100%;
+}
+.sidebar_section.panel.close
+{
+  max-height: 28px;
+}
+#filters_sidebar_section
+{ 
+  cursor: pointer;
   .panel_contents
   {
-//    width: 270px;
-//    height: 0px;
-//    overflow: hidden;
-//    opacity: 0;
+      width: 270px;
+      overflow: hidden;
   }
-  &:hover
+  .arrow
   {
-
-    /* Firefox */
-//    -moz-transition: all 0.5s ease;
-    /* WebKit */
-//    -webkit-transition: all 0.5s ease;
-    /* Opera */
-//    -o-transition: all 0.5s ease;
-    /* Standard */
-//    transition: all 0.5s ease;
-
-//    max-height: 100%;
-//    overflow: hidden;
-//    width: 270px;
-//    -webkit-transform: translate(0px, 0px);
+    padding: 6px 0px 0px 6px;
+  }
+  h3
+  {
+    padding-left: 20px;
+  }
+  &.close
+  {
+    
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  
+    
+    overflow: hidden;
+    width: 75px;
+    -webkit-transform: translate(195px, 0px);
+    
+  
     .panel_contents
     {
-//      opacity: 1;
-//      height: 100%;
+      -moz-transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+      padding: 0px;
+      height: 0px;
+      opacity: 0;
+    }
+  }
+  &.open
+  {
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    overflow: hidden;
+    width: 270px;
+    -webkit-transform: translate(0px, 0px);
+    .panel_contents
+    {
+      -moz-transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+      padding: 3px 15px 15px 15px;
+      opacity: 1;
+      height: 100%;
     }
   }
 }

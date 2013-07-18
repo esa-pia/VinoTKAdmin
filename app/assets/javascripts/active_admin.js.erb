@@ -25,7 +25,31 @@ $(document).ready(function(){
   $(".member_link.generatePDF").prepend('<i class="icon-doc-text-inv">')
   $(".member_link.send_newsletter").wrap('<div class="table_action" title="'+$(".member_link.send_newsletter").first().text()+'">').text('')
   $(".member_link.send_newsletter").prepend('<i class="icon-mail-alt">')
+  if($("#filters_sidebar_section").length != 0)
+  {
+    $("#filters_sidebar_section").addClass('close');
+    $("#main_content").addClass('close');
+    $("#filters_sidebar_section").prepend("<span class='arrow'>▼</span>");
+  }
+  $("#filters_sidebar_section").on("click", function( event ) {
+    if($(this).hasClass('open'))
+    {
+      $(this).removeClass('open');
+      $("#main_content").removeClass('open');
+      $(this).addClass('close');
+      $("#main_content").addClass('close');
+      $(this).find('.arrow').text("▼");
+    }
+    else
+    {
+      $(this).removeClass('close');
+      $("#main_content").removeClass('close');
+      $(this).addClass('open');
+      $("#main_content").addClass('open');
+      $(this).find('.arrow').text("▲");
+    } 
 
+  });
   /** TOOLTIPS**/
   $("th a").closest("th").each(function( index ) {
     $(this).attr("title", $.trim($(this).find('a').first().text()));
