@@ -64,7 +64,7 @@ module VinoTKAdmin
     config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    config.assets.enabled = true
+    config.assets.enabled = false
     # Add the fonts path
     #config.assets.paths << "#{Rails.root}/public/font"
     
