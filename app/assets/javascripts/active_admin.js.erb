@@ -25,6 +25,12 @@ $(document).ready(function(){
   $(".member_link.generatePDF").prepend('<i class="icon-doc-text-inv">')
   $(".member_link.send_newsletter").wrap('<div class="table_action" title="'+$(".member_link.send_newsletter").first().text()+'">').text('')
   $(".member_link.send_newsletter").prepend('<i class="icon-mail-alt">')
+  
+  $("li#logout").attr('title',$("li#logout").first().text())
+  $("li#logout").text('     ')
+  $("li#logout").prepend('<i class="icon-power">')
+  
+
   if($("#filters_sidebar_section").length != 0)
   {
     $("#filters_sidebar_section").addClass('close');
