@@ -70,6 +70,7 @@ module VinoTKAdmin
     
     # Precompile additional assets
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+    config.assets.precompile += ['active_admin.css', 'active_admin.js', 'active_admin/print.css']
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
