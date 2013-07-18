@@ -372,7 +372,33 @@ body.active_admin .ui-datepicker .ui-datepicker-header a:active {
   color : #FFFFFF;
 }
 
+/***********logout*************/
+#logout i{
+  line-height: 17px;
+  padding: 0px;
+  font-size: 14px;
+  cursor: pointer;
 
+}
+#logout{
+  display: inline-block!important;
+  width: 21px;
+  height: 17px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  margin: 0px!important;
+  padding: 4px;
+
+}
+#logout:hover{
+  background-color: #AAAAAA;
+}
+#logout:hover i {
+  color : #FFFFFF;
+}
+#utility_nav {
+  top: -3px!important;
+}
 /***********TOOLTIP*************/
   .ui-tooltip {
     display: block;
