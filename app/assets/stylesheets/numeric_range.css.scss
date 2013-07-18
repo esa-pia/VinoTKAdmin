@@ -1,3 +1,4 @@
+//filter_numeric_range
 body.active_admin {
   #sidebar {
     .filter_numeric_range {
@@ -8,6 +9,22 @@ body.active_admin {
         display: inline-block;
         text-align: center;
         width: 12px;
+      }
+    }
+  }
+}
+//just_datetime_picker
+body.active_admin {
+  #main_content {
+    .just_datetime_picker
+    {
+
+      .separator {
+        padding-left: 6px!important;
+        padding-right: 7px!important;
+      }
+      .ui-spinner:last-child{
+        margin-left: -4px;
       }
     }
   }

@@ -282,6 +282,7 @@ $(document).ready(function(){
       step: 1,
       start: 0
     });
+    $(".just-datetime-picker-time-hour").closest(".ui-spinner").after("<span class='separator'>:</span>")
     $(".has_many_remove.button").on("click", function( event ) {
       $(this).closest('.has_many_fields').hide();
       return true;
