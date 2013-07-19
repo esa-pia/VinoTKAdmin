@@ -9,8 +9,15 @@ ActiveAdmin.register Newsletter do
   index do |newsletter|
     selectable_column
     column I18n.t('newsletters.titre'), :titre
-    column I18n.t('newsletters.date_debut'), :date_debut
-    column I18n.t('newsletters.date_fin'), :date_fin
+    column  I18n.t('newsletters.nb_promotion') do |newsletter|
+      newsletter.newsletters_bouteilles.count
+    end
+    column I18n.t('newsletters.date_debut')do |newsletter| 
+      I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?
+    end
+    column I18n.t('newsletters.date_fin')do |newsletter| 
+      I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?
+    end
     #column  I18n.t('newsletters.nb_bouteille') do |catalogue|
     #  newsletter.bouteilles.count
     #end
@@ -27,20 +34,16 @@ ActiveAdmin.register Newsletter do
     panel I18n.t('newsletters.section_title') do
       attributes_table_for newsletter do
         row (I18n.t('newsletters.id')) {newsletter.id}
+        row (I18n.t('newsletters.statut')) {status_tag(newsletter.statut)}
         row (I18n.t('newsletters.titre')) {newsletter.titre}
       end
     end
-    panel I18n.t('newsletters.evenement_section_title') do
-      attributes_table_for newsletter do
-        row (I18n.t('newsletters.titre_evenement')) {newsletter.titre_evenement}
-        row (I18n.t('newsletters.date_debut')) {newsletter.date_debut}
-        row (I18n.t('newsletters.date_fin')) {newsletter.date_fin}
-        row (I18n.t('newsletters.description')) {newsletter.description}
-      end
-    end
+    
     if(newsletter.newsletters_bouteilles.count>0)
       panel I18n.t('newsletters.bouteille_section_title') do
-
+        attributes_table_for newsletter do
+          row (I18n.t('newsletters.promotions_titre')) {newsletter.promotions_titre}
+        end
         table_for newsletter.newsletters_bouteilles.order(:position)  do |t|
           #t.column :id
           #t.column :position
@@ -75,13 +78,29 @@ ActiveAdmin.register Newsletter do
               "#{newsletters_bouteille.rabais} %"
             end
           end
-          
+          t.column I18n.t('newsletters.nouveau_prix'), :bouteille do |newsletters_bouteille|
+            div :class => "prix" do
+              nouveau_prix = newsletters_bouteille.bouteille.prix
+              nouveau_prix = nouveau_prix * (1 - (newsletters_bouteille.rabais/100)) if newsletters_bouteille.rabais?
+              number_to_currency (nouveau_prix)
+            end
+          end
         end
+      end
+    end
+    panel I18n.t('newsletters.evenement_section_title') do
+      attributes_table_for newsletter do
+        row (I18n.t('newsletters.titre_evenement')) {newsletter.titre_evenement}
+        row (I18n.t('newsletters.evenement_image')) {image_tag(newsletter.evenement_image(:thumb)) if newsletter.evenement_image}
+        row (I18n.t('newsletters.date_debut')) {I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?}
+        row (I18n.t('newsletters.date_fin')) {I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?}
+        row (I18n.t('newsletters.description')) {newsletter.description}
       end
     end
     panel I18n.t('newsletters.info_section_title') do
       attributes_table_for newsletter do
         row (I18n.t('newsletters.info')) {newsletter.info}
+        row (I18n.t('newsletters.info_description')) {newsletter.info_description}
       end
     end
     active_admin_comments
@@ -91,13 +110,9 @@ ActiveAdmin.register Newsletter do
     f.inputs I18n.t('newsletters.section_title') do       
       f.input :titre, :label => I18n.t('newsletters.titre')       
     end                      
-    f.inputs I18n.t('newsletters.evenement_section_title') do       
-      f.input :titre_evenement  , :label => I18n.t('newsletters.titre_evenement')   
-      f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
-      f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
-      f.input :description, :label => I18n.t('newsletters.description'), :input_html => { :rows => 4 }          
-    end
+    
     f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
+      f.input :promotions_titre  , :label => I18n.t('newsletters.promotions_titre')
       f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
         ff.input :position
@@ -112,8 +127,16 @@ ActiveAdmin.register Newsletter do
         end
       end    
     end
+    f.inputs I18n.t('newsletters.evenement_section_title') do       
+      f.input :titre_evenement  , :label => I18n.t('newsletters.titre_evenement')
+      f.input :evenement_image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.evenement_image.url()) if f.object.evenement_image)
+      f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
+      f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
+      f.input :description, :label => I18n.t('newsletters.description'), :input_html => { :rows => 4 }          
+    end
     f.inputs I18n.t('newsletters.info_section_title') do       
-      f.input :info, :label => I18n.t('newsletters.info')     
+      f.input :info, :label => I18n.t('newsletters.info') 
+      f.input :info_description, :label => I18n.t('newsletters.info_description')  , :input_html => { :rows => 4 }     
     end                           
     f.actions                         
   end

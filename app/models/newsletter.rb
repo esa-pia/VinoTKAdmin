@@ -1,3 +1,4 @@
+#require 'file_attacher'
 class Newsletter < ActiveRecord::Base
   just_define_datetime_picker :date_debut, :add_to_attr_accessible => true
   just_define_datetime_picker :date_fin, :add_to_attr_accessible => true
@@ -7,6 +8,14 @@ class Newsletter < ActiveRecord::Base
 
   attr_accessible :info, :titre, :titre_evenement, :description, :newsletters_bouteilles_attributes
  
+  has_attached_file :evenement_image, :styles => {:medium => "238x238>", :thumb => "60x60>"}
+
+  attr_accessible :evenement_image
+  attr_accessible :promotions_titre
+  attr_accessible :info_description
+  attr_accessible :statut
+
+
   validates :titre, :presence => true
   def display_name
     titre
