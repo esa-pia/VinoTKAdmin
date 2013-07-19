@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712125838) do
+ActiveRecord::Schema.define(:version => 20130719121727) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -137,10 +137,17 @@ ActiveRecord::Schema.define(:version => 20130712125838) do
     t.datetime "date_debut"
     t.datetime "date_fin"
     t.string   "info"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.text     "description"
     t.string   "titre_evenement"
+    t.string   "evenement_image_file_name"
+    t.string   "evenement_image_content_type"
+    t.integer  "evenement_image_file_size"
+    t.datetime "evenement_image_updated_at"
+    t.string   "promotions_titre"
+    t.text     "info_description"
+    t.string   "statut"
   end
 
   create_table "newsletters_bouteilles", :force => true do |t|

@@ -14,7 +14,7 @@
 //= require sortable_forms.js.coffee
 
 $(document).ready(function(){
-
+  launchSpinner();
   $(".member_link.view_link").wrap('<div class="table_action" title="'+$(".member_link.view_link").first().text()+'">').text('')
   $(".member_link.view_link").prepend('<i class="icon-eye">')
   $(".member_link.edit_link").wrap('<div class="table_action" title="'+$(".member_link.edit_link").first().text()+'">').text('')
@@ -35,7 +35,7 @@ $(document).ready(function(){
   {
     $("#filters_sidebar_section").addClass('close');
     $("#main_content").addClass('close');
-    $("#filters_sidebar_section").prepend("<span class='arrow'>▼</span>");
+    $("#filters_sidebar_section").prepend("<i class='icon-down-dir'>");
   }
   $("#filters_sidebar_section").on("click", function( event ) {
     if($(this).hasClass('open'))
@@ -44,7 +44,7 @@ $(document).ready(function(){
       $("#main_content").removeClass('open');
       $(this).addClass('close');
       $("#main_content").addClass('close');
-      $(this).find('.arrow').text("▼");
+      $(this).find('i').removeClass('icon-up-dir').addClass('icon-down-dir');
     }
     else
     {
@@ -52,7 +52,7 @@ $(document).ready(function(){
       $("#main_content").removeClass('close');
       $(this).addClass('open');
       $("#main_content").addClass('open');
-      $(this).find('.arrow').text("▲");
+      $(this).find('i').removeClass('icon-down-dir').addClass('icon-up-dir');
     } 
 
   });
@@ -302,7 +302,7 @@ $(document).ready(function(){
         start: 1000
       });
     });
-
+  stopSpinner();
 
 })
 

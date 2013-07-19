@@ -485,7 +485,7 @@ body .ui-tooltip {
 }
 
 .arrow.top:after {
-    border-top:6px solid transparent;
+    border-top:7px solid transparent;
     border-right:6px solid transparent;
     border-bottom:6px solid #000000;
     border-left:6px solid transparent;
@@ -774,9 +774,11 @@ body .ui-tooltip {
       width: 270px;
       overflow: hidden;
   }
-  .arrow
+  i
   {
-    padding: 6px 0px 0px 6px;
+    float: left;
+    padding-top: 6px;
+    padding-left: 4px;
   }
   h3
   {
@@ -826,6 +828,23 @@ body .ui-tooltip {
       padding: 3px 15px 15px 15px;
       opacity: 1;
       height: 100%;
+    }
+  }
+}
+body.admin_bouteilles.active_admin{
+  #batch_actions_selector {
+    .dropdown_menu_list_wrapper{
+      margin-left: 70px;  
+    }
+    .dropdown_menu_nipple{
+      left: 77.5px!important;
+    }
+    li {
+      max-width: 310px!important;
+      a
+      {
+        text-align: left;
+      }
     }
   }
 }
