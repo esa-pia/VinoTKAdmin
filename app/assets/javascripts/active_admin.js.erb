@@ -56,28 +56,7 @@ $(document).ready(function(){
     } 
 
   });
-  /** TOOLTIPS**/
-  $("th a").closest("th").each(function( index ) {
-    $(this).attr("title", $.trim($(this).find('a').first().text()));
-  });
-  $("th:not(:has(>a, div))").each(function( index ) {
-
-    $(this).attr("title", $(this).text());
-  });
-  $( document ).tooltip({
-      position: {
-        my: "center bottom-15",
-        at: "center top",
-        using: function( position, feedback ) {
-            $( this ).css( position );
-            $( "<div>" )
-            .addClass( "arrow bottom" )
-            .addClass( feedback.vertical )
-            .addClass( feedback.horizontal )
-            .appendTo( this );
-        }
-    }
-    });
+  
    /** INPUT FILE**/
   $('input:file').customFileInput({
     button_position : 'right',
@@ -301,11 +280,46 @@ $(document).ready(function(){
         step: 0.05,
         start: 1000
       });
+      $(".has_many_fields li:last-child").last().addClass("has_many_remove button boolean input optional")
+
+      removeButtonManagement();
+      tooltipManagement()
+
     });
+    removeButtonManagement();
+    /** TOOLTIPS**/
+    tooltipManagement();
   stopSpinner();
 
 })
+function removeButtonManagement(){
+  $(".has_many_remove").wrap('<div class="table_action" title="'+$(".has_many_remove").first().text()+'">').text('')
+  $(".has_many_remove").prepend('<i class="icon-trash">')
+  $(".has_many_remove").removeClass('has_many_remove')
+}
+function tooltipManagement(){
+  $("th a").closest("th").each(function( index ) {
+    $(this).attr("title", $.trim($(this).find('a').first().text()));
+  });
+  $("th:not(:has(>a, div))").each(function( index ) {
 
+    $(this).attr("title", $(this).text());
+  });
+  $( document ).tooltip({
+      position: {
+        my: "center bottom-15",
+        at: "center top",
+        using: function( position, feedback ) {
+            $( this ).css( position );
+            $( "<div>" )
+            .addClass( "arrow bottom" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+    }
+    });
+}
 
 
 function launchSpinner(){

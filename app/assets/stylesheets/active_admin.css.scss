@@ -289,8 +289,12 @@ div.index_as_table th:last-child
           line-height: 30px;
         }
         
+
         &.has_many_remove.button.boolean.input
         {
+          margin-bottom: 17px;
+          margin-top: 1px;
+          float: right;
           label
           {
             background: #8b9297;
@@ -334,6 +338,11 @@ div.index_as_table th:last-child
           }
         }
       }
+      .table_action {
+          float: right;
+          margin-top: 10px !important;
+          margin-right: 10px !important;
+        }
     }
   }
 }
