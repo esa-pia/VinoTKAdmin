@@ -49,7 +49,7 @@ ActiveAdmin.register Newsletter do
           #t.column :id
           #t.column :position
           t.column I18n.t('bouteilles.type'), :bouteille do  |newsletters_bouteille|
-            status_tag(newsletters_bouteille.bouteille.type.libelle.parameterize)
+            status_tag(newsletters_bouteille.bouteille.type.libelle.parameterize, :style => 'background-color:' + newsletters_bouteille.bouteille.type.couleur + ';')
           end
           t.column I18n.t('bouteilles.appellation'), :bouteille do  |newsletters_bouteille|
             newsletters_bouteille.bouteille.appellation
@@ -170,7 +170,7 @@ ActiveAdmin.register Newsletter do
     #@invoice.status = Invoice::STATUS_SENT
     #@invoice.save
     
-    redirect_to admin_newsletter_path(@newsletter), :notice => "newsletter sent succesfully"
+    redirect_to admin_newsletter_path(@newsletter), :notice => I18n.t("newsletters.envoi_ok")
   end
 
 end

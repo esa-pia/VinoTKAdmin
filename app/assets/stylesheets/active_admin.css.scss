@@ -47,26 +47,6 @@
   min-width:290px;
 }
 
-
-span.status_tag.rouge{
-background-color: rgb(209, 0, 0);
-}
-
-span.status_tag.whisky{
-  background-color: rgb(238, 123, 33);
-}
-span.status_tag.rose{
-  background-color: rgb(224, 187, 214)
-}
-span.status_tag.blanc{
-  background-color: rgb(228, 233, 193)
-}
-span.status_tag.aperitif{
-  background-color: rgb(62, 138, 33)
-}
-span.status_tag.effervescent{
-  background-color: rgb(71, 152, 255)
-}
 span.status_tag.new{
   background-color: #f89406;
 }
@@ -282,6 +262,7 @@ div.index_as_table th:last-child
       }
       li
       {
+
         float: left;
         label
         {

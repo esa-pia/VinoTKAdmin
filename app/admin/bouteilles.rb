@@ -30,7 +30,7 @@ ActiveAdmin.register Bouteille do
       end
     end
     column I18n.t('bouteilles.type'), :type, :sortable => 'types.libelle' do  |bouteille|
-        status_tag(bouteille.type.libelle.parameterize)
+        status_tag(bouteille.type.libelle.parameterize, :style => 'background-color:' + bouteille.type.couleur + ';')
     end
     column I18n.t('bouteilles.appellation'), :appellation
     column I18n.t('bouteilles.domaine'), :domaine, :sortable => 'domaines.libelle'
@@ -52,7 +52,7 @@ ActiveAdmin.register Bouteille do
       attributes_table_for bouteille do
         row (I18n.t('bouteilles.id')) {bouteille.id}
         row (I18n.t('bouteilles.appellation')) {bouteille.appellation}
-        row (I18n.t('bouteilles.type')) {status_tag(bouteille.type.libelle)}
+        row (I18n.t('bouteilles.type')) {status_tag(bouteille.type.libelle.parameterize, :style => 'background-color:' + bouteille.type.couleur + ';')}
         row (I18n.t('bouteilles.description')) {bouteille.description}
         row (I18n.t('bouteilles.domaine')) {bouteille.domaine}
         row (I18n.t('bouteilles.cuvee')) {bouteille.cuvee}

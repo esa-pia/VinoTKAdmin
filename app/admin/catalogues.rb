@@ -68,7 +68,7 @@ ActiveAdmin.register Catalogue do
           end
         end
         t.column I18n.t('bouteilles.type'), :type do  |bouteille|
-          status_tag(bouteille.type.libelle.parameterize)
+          status_tag(bouteille.type.libelle.parameterize, :style => 'background-color:' + bouteille.type.couleur + ';')
         end
         t.column I18n.t('bouteilles.appellation'), :appellation
         t.column I18n.t('bouteilles.domaine'), :domaine
@@ -89,7 +89,7 @@ ActiveAdmin.register Catalogue do
 #        if (bouteilleList.count>0)
 #          table_for bouteilleList  do |t|
 #            t.column :type do  |bouteille|
-#              status_tag(bouteille.type.libelle.parameterize)
+#              status_tag(bouteille.type.libelle.parameterize, :style => 'background-color:' + bouteille.type.couleur + ';')
 #            end
 #            t.column :appellation
 #            t.column :domaine

@@ -37,7 +37,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel I18n.t('bouteilles.new') do
           table_for Bouteille.order('created_at desc').where(:nouveau => true).joins(:type).order('types.libelle ASC, appellation ASC, domaine_id ASC, cuvee_id ASC')  do |t|
             t.column I18n.t('bouteilles.type'), :type do  |bouteille|
-              status_tag(bouteille.type.libelle.parameterize)
+              status_tag(bouteille.type.libelle.parameterize, :style => 'background-color:' + bouteille.type.couleur + ';')
             end
             t.column I18n.t('bouteilles.appellation'), :appellation do  |bouteille|
               link_to bouteille.appellation, admin_bouteille_path(bouteille)
