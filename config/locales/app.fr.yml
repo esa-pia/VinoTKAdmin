@@ -176,6 +176,7 @@ fr:
     section_title: "Détails de la newsletter"
     evenement_section_title: "Détails de l'événement"
     id: "Id"
+    envoi_ok: "Newsletter envoyée"
     evenement_description: "Description"
     titre: "Titre"
     nb_promotion: "Nbre de Promotions"

@@ -223,6 +223,13 @@ $(document).ready(function(){
   
   $("a.send_newsletter").on("click", function( event ) {
     launchSpinner();
+    $.ajax({
+              url: $(this).attr('pdf'),
+              type: 'GET',
+              success: function(data) {
+                stopSpinner();
+              }
+          });
   });
   $("a.generatePDF").on("click", function( event ) {
     launchSpinner();

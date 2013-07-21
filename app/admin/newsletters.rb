@@ -163,7 +163,7 @@ ActiveAdmin.register Newsletter do
     
     # Send all emails
     Client.all.each do |client|
-      NewsletterMailer.send_newsletter(@newsletter.id, client).deliver
+      NewsletterMailer.send_newsletter(@newsletter, client).deliver
     end
     
     # Change invoice status to sent
