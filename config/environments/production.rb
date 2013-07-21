@@ -49,7 +49,20 @@ VinoTKAdmin::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+   config.action_mailer.default_url_options = { :host => 'vinotkadmin.herokuapp.com' }
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.perform_deliveries = true
+   config.action_mailer.raise_delivery_errors = false
+   config.action_mailer.default :charset => "utf-8"
+   config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => '587',
+    :user_name => ENV["MANDRILL_USERNAME"],
+    :password  => ENV["MANDRILL_API_KEY"],
+    :domain =>         'heroku.com',
+    :authentication => :plain
+  }
+
 
   # Enable threaded mode
   # config.threadsafe!

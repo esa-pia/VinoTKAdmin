@@ -56,4 +56,5 @@ end
 group :production, :staging do
   gem 'pg'
   gem 'thin'
+  gem 'mandrill-api' , '~> 1.0.37'
 end
