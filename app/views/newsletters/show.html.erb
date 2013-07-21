@@ -1,25 +1,414 @@
-<p id="notice"><%= notice %></p>
+<html><head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;">
+      <tbody>
+        <tr>
+          <td rowspan="2" style="
+            width: 120px;
+            height: 60px;
+            "><img src="<%= asset_path("logo120x120.png") %>" width="120" height="120"></td>
+          <td style="
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+            color: #333;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 20px;
+            padding-top: 10px;
+            "><%= @newsletter.titre %></td>
+        </tr>
+        <tr>
+          <td style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #888888; 
+            font-size: 14px;  text-align: left; padding-left: 20px; top: 20px;
+            line-height: 17px;
+            "><%= @newsletter.description %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;">
+      <tbody>
+        <tr>
+          <td rowspan="5" style="
+            width: 120px;
+            height: 60px;
+            "><img src="promo.jpg" width="400" height="250"></td>
+          <td colspan="3" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 20px;
+            padding-top: 10px;
+            ">Cros de la Mûre</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #333333; 
+            font-size: 16px;  text-align: left; padding-left: 20px;
+            line-height: 23px;
+            padding-left: 20px;
+            display: inline-block;
+            ">
+            <span style="
+              display: inline-block;
+              background-color: red;
+              margin-top: 5px;
+              padding: 0px 0px 5px 5px;
+              height: 5px;     
+              width: 5px;          -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     border-radius: 5px;
+              float: left;
+              "></span> <span style="
+              padding-left: 5px;
+              ">2008</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #333333; 
+            font-size: 10px;  text-align: left; padding-left: 20px; top: 20px;
+            line-height: 17px;
+            ">chateauneuf du pape</td>
+        </tr>
+        <tr height="130">
+          <td height="130" colspan="3" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #555555; 
+            vertical-align:top; 
+            font-size: 13px;  text-align: left; padding-left: 20px; padding-top: 25px;
+            line-height: 15px;
+            ">Vous trouverez ci-joint les photos des vins qu’Eric et moi même voulons en échange de nos bons et loyaux services.</td>
+        </tr>
+        <tr>
+          <td style="
+            position: relative;
+            ">
+            <p style="
+              background-color: #e10013;
+              margin: 0px 0px 0px 20px;
+              padding: 0px;
+              height: 50px;
+              width: 60px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              opacity: 0.4;
+              ">
+              <span style="
+                font-size: 18px;
+                line-height: 49px;
+                ">53</span> <span style=" 
+                bottom: 1px; 
+                font-size: 0.7em;  
+                vertical-align:super; 
+                ">€</span>
+              <span style="
+                position: absolute;          
+                left: 43px;          
+                top: 0px;          
+                z-index: 99;          
+                border-width: 0 0 2px 0;          
+                border-color: rgb(255, 255, 255);          border-style: solid;          
+                width: 30px;          
+                height: 14px;
+                transform-origin:top left;          -ms-transform-origin:top left;          -moz-transform-origin:top left;          -webkit-transform-origin:top left;
+                margin-top: 2px;          transform:rotate(8deg);          -ms-transform:rotate(8deg);          -moz-transform:rotate(8deg);          
+                -webkit-transform: rotate(38deg);
+                "></span>
+            </p>
+          </td>
+          <td>
+            <p style="
+              background-color: #e10013;
+              margin: 0px 0px 0px 1px;
+              padding: 0px;
+              height: 50px;
+              width: 60px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              ">
+              <span style="
+                font-size: 18px;
+                line-height: 49px;
+                ">38</span> <span style=" 
+                bottom: 1px; 
+                font-size: 0.7em;  
+                vertical-align:super; 
+                ">€</span>
+            </p>
+          </td>
+          <td width="60">
+            &nbsp; 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;margin-top: 10px;">
+      <tbody>
 
-<p>
-  <b>Titre:</b>
-  <%= @newsletter.titre %>
-</p>
+<% @newsletter.newsletters_bouteilles.each do |promotion| %>
+        <tr style="
+          background-color: <%= cycle('#ffffff;', '#fbf4f4;') %>
+          ">
+          <td width="420" height="50" style="
+            border-top: 1px solid white;
+            ">
+            <p style="
+              margin-bottom: -16px;
+              margin-top: -16px;"><span style="
+              font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+              color: #333;
+              font-size: 16px;
+              font-weight: bold;
+              text-align: left;
+              padding-left: 10px;
+              "><%= promotion.bouteille.cuvee.libelle %>
+              </span><span colspan="3" style="
+                text-transform: uppercase;
+                font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+                color: #333333; 
+                font-size: 10px;  text-align: left; 
+                padding-left: 10px; top: 20px;
+                line-height: 17px;
+                "><%= promotion.bouteille.appellation %></span>
+            </p>
+            <p style="
+              padding-left: 10px;
+              margin-bottom: -15px;
+              "> <span style="
+              font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;      color: #333333;      
+              font-size: 16px;  
+              text-align: left;      
+              padding-left: 10px;      
+              "><%= promotion.bouteille.millesime.valeur %></span>
+              <span style="
+                display: inline-block;
+                background-color: <%= promotion.bouteille.type.couleur %>;
+                margin-top: 5px;
+                padding: 0px 0px 5px 5px;
+                height: 5px;     
+                width: 5px;          -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     border-radius: 5px;
+                float: left;
+                "></span>
+            </p>
+          </td>
+          <td style="
+            position: relative;
+            border-top: 1px solid white;
+            ">
+            <p style="
+              background-color: #e10013;
+              margin: 0px 0px 0px 0px;
+              padding: 0px;
+              height: 50px;
+              width: 80px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              opacity: 0.4;
+              ">
+              <span style="
+                font-size: 18px;
+                line-height: 49px;
+                "><%= number_to_currency(promotion.bouteille.prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span> <span style=" 
+                bottom: 1px; 
+                font-size: 0.7em;  
+                vertical-align:super; 
+                ">€</span>
+              <span style="
+                position: absolute;          
+                left: 12px;          
+                top: 0px;          
+                z-index: 99;          
+                border-width: 0 0 2px 0;          
+                border-color: rgb(255, 255, 255);          border-style: solid;          
+                width: 60px;          
+                height: 10px;
+                transform-origin:top left;          -ms-transform-origin:top left;          -moz-transform-origin:top left;          -webkit-transform-origin:top left;
+                margin-top: 2px;          
+                transform: rotate(23deg);          
+                -ms-transform: rotate(23deg);          
+                -moz-transform: rotate(23deg);          
+                -webkit-transform: rotate(23deg);
+                "></span>
+            </p>
+          </td>
+          <td style="
+            border-top: 1px solid white;
+            ">
+            <p style="
+              background-color: #e10013;
+              margin: 0px 0px 0px 1px;
+              padding: 0px;
+              height: 50px;
+              width: 80px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              ">
+              <span style="
+                font-size: 18px;
+                line-height: 49px;
+                "><%= number_to_currency(promotion.nouveau_prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span> <span style=" 
+                bottom: 1px; 
+                font-size: 0.7em;  
+                vertical-align:super; 
+                ">€</span>
+            </p>
+          </td>
+          <td width="19" style="
+            border-top: 1px solid white;
+            ">
+            &nbsp; 
+          </td>
+        </tr>
+<% end %>
 
-<p>
-  <b>Date debut:</b>
-  <%= @newsletter.date_debut %>
-</p>
+       
+      </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;">
+      <tbody>
+        <tr>
+          <td width="200" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 10px;
+            padding-top: 0px;
+            "><%= @newsletter.titre_evenement %></td>
+          <td rowspan="5" style="
+            width: 120px;
+            height: 60px;
+            "><img src="<%= @newsletter.evenement_image.url(:medium) %>" width="400" height="250"></td>
+        </tr>
+        <tr>
+          <td style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #333333; 
+            font-size: 14px;  text-align: left; 
+            line-height: 23px;
+            padding-top: 25px;
+            padding-left: 10px;
+            display: inline-block;
+            ">
+            <p style=" 
+              margin-top: -10px;
+              "><span>Le <span style="
+              color: #e30014;
+              font-weight: bold;
+              "><%= I18n.l(@newsletter.date_debut,  format: :date_short) %></span></span></p>
+            
+<% if  I18n.l(@newsletter.date_debut,  format: :date_short) ==  I18n.l(@newsletter.date_fin,  format: :date_short) %>
+               <p style=" margin-top: -16px;
+              "><span style="
+              color: #333333;
+              ">De <span style="
+              color: #e30014; font-weight: bold;
+              "><%= I18n.l(@newsletter.date_debut,  format: :time_short) %></span> à <span style="
+              color: #e30014; font-weight: bold;
+              "><%= I18n.l(@newsletter.date_fin,  format: :time_short) %></span></span>
+              </p>
 
-<p>
-  <b>Date fin:</b>
-  <%= @newsletter.date_fin %>
-</p>
-
-<p>
-  <b>Info:</b>
-  <%= @newsletter.info %>
-</p>
-
-
-<%= link_to 'Edit', edit_newsletter_path(@newsletter) %> |
-<%= link_to 'Back', newsletters_path %>
+<% else %>
+              <p style=" margin-top: -16px;
+              "><span style="
+              color: #333333;
+              ">De <span style="
+              color: #e30014; font-weight: bold;
+              "><%= I18n.l(@newsletter.date_debut,  format: :time_short) %></span></span>
+              </p>
+              <p style=" margin-top: -16px;
+              ">Au <span style="
+              color: #e30014;
+              font-weight: bold;
+              "><%= I18n.l(@newsletter.date_fin,  format: :date_short) %></span></p> <p style=" margin-top: -16px;
+              ">A <span style="
+              color: #e30014; font-weight: bold;
+              "><%= I18n.l(@newsletter.date_fin,  format: :time_short) %></span>
+<% end %>
+          </td>
+        </tr>
+        <tr>
+          <td style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #555555; 
+            vertical-align:top; 
+            font-size: 13px;  text-align: left; 
+            padding-left: 10px; 
+            padding-top: 10px;
+            padding-right: 32px;
+            line-height: 15px;
+            "><%= @newsletter.evenement_description %></td>
+        </tr>
+        <tr>
+          <td width="60" style="
+            text-transform: uppercase; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; color: #333; 
+            font-size: 13px;  text-align: left; 
+            padding-left: 10px; 
+            padding-top: 36px;
+            "><span style="
+            background-color: #e30014; 
+            font-size: 12px;
+            margin: 0px 0px 0px 0px; 
+            padding: 8px 16px;   text-align: center; vertical-align: middle; color: white;
+            "><a href="http://www.vinotk-paris.fr" style="
+                color: white;
+                text-decoration: none;
+                background-color: #e30014;">en savoir plus</a></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;">
+      <tbody>
+        <tr>
+          <td style="
+            text-transform: uppercase; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #333; 
+            font-size: 30px; font-weight: bold; text-align: left; 
+            padding-left: 10px;
+            padding-right: 10px;
+            "><%= @newsletter.info %>
+          </td>
+        </tr>
+        <tr>
+          <td style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #888; 
+            font-size: 14px;  text-align: left; padding-left: 10px; padding-top: 10px;
+            padding-right: 10px;
+            line-height: 20px;
+            "><%= @newsletter.info_description %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
+      <tbody>
+        <tr>
+          <td width="530" height="70" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;  text-decoration: underline;  padding-left: 10px;">
+            <p style="line-height: 5px;"><a href="http://www.vinotk-paris.fr/" style="color: #e30014;background-color: #ffffff;">Facebook</a></p>
+            <p style="line-height: 5px;"><a href="https://twitter.com/VinoTK_Paris" style="color: #e30014;background-color: #ffffff;">Twitter</a></p>
+            <p style="line-height: 5px;"><a href="http://www.vinotk-paris.fr/" style="color: #e30014;background-color: #ffffff;">Notre site</a></p>
+          </td>
+          <td style="
+            width: 70px;
+            height: 70px;
+            "><img src="<%= asset_path("logo70x70.png") %>" width="70" height="70"></td>
+        </tr>
+      </tbody>
+    </table>
+  
+</body></html>

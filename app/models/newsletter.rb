@@ -8,9 +8,10 @@ class Newsletter < ActiveRecord::Base
 
   attr_accessible :info, :titre, :titre_evenement, :description, :newsletters_bouteilles_attributes
  
-  has_attached_file :evenement_image, :styles => {:medium => "238x238>", :thumb => "60x60>"}
+  has_attached_file :evenement_image, :styles => {:medium => "400x250>", :thumb => "60x38>"}
 
   attr_accessible :evenement_image
+  attr_accessible :evenement_description
   attr_accessible :promotions_titre
   attr_accessible :info_description
   attr_accessible :statut

@@ -6,6 +6,9 @@ ActiveAdmin.register Type do
   index do
     selectable_column
     column I18n.t('types.libelle'),:libelle
+    column I18n.t('types.couleur'), :couleur do |type|
+      div style: "background-color:#{type.couleur};width:20px;height:20px;border-style:solid;border-width:1px;"
+    end
     default_actions
   end
 
@@ -14,6 +17,9 @@ ActiveAdmin.register Type do
       attributes_table_for type do
         row (I18n.t('types.id')) {type.id}
         row (I18n.t('types.libelle')) {type.libelle}
+        row I18n.t('types.couleur'), :couleur do
+          div style: "background-color:#{type.couleur};width:20px;height:20px;border-style:solid;border-width:1px;"
+        end
       end
     end
     active_admin_comments
@@ -22,6 +28,7 @@ ActiveAdmin.register Type do
   form do |f|                         
     f.inputs I18n.t('types.section_title') do       
       f.input :libelle , :label => I18n.t('types.libelle')
+      f.input :couleur, input_html: { class: 'color {hash:true}' }
       f.input :bouteilles, :label => I18n.t('types.bouteilles'), :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('types.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
     end                               
     f.actions                         

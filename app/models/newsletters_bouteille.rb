@@ -9,4 +9,9 @@ class NewslettersBouteille < ActiveRecord::Base
   validates :bouteille, :presence => true
 
   #validates_uniqueness_of :bouteille_id, :scope => :newsletter_id
+
+  def nouveau_prix
+    nouveau_prix = bouteille.prix
+    nouveau_prix = nouveau_prix * (1 - (rabais/100)) if rabais?
+  end
 end
