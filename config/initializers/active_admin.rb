@@ -211,4 +211,5 @@ ActiveAdmin.setup do |config|
 
     # Want PDF added to default download links
     config.download_links = [:xlsx]#:csv, :json]
+
 end

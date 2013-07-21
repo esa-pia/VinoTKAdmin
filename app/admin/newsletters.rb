@@ -113,6 +113,7 @@ ActiveAdmin.register Newsletter do
     
     f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
       f.input :promotions_titre  , :label => I18n.t('newsletters.promotions_titre')
+
       f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
         ff.input :position

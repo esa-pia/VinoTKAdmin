@@ -13,5 +13,6 @@ class NewslettersBouteille < ActiveRecord::Base
   def nouveau_prix
     nouveau_prix = bouteille.prix
     nouveau_prix = nouveau_prix * (1 - (rabais/100)) if rabais?
+    nouveau_prix
   end
 end
