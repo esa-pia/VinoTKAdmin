@@ -57,8 +57,8 @@ VinoTKAdmin::Application.configure do
     :address   => "smtp.mandrillapp.com",
     :port      => 587,
     :enable_starttls_auto => true,
-    :user_name => ENV["MANDRILL_USERNAME"],
-    :password  => ENV["MANDRILL_API_KEY"],
+    :user_name => 'app16352328@heroku.com',
+    :password  => 'j26akZ8kxOh6dHrZpxoU5g',
     :domain =>         'vinotkadmin.herokuapp.com',
     :authentication => 'login'
   }
