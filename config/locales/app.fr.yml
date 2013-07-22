@@ -185,6 +185,7 @@ fr:
     date_debut: "Date de début"
     date_fin: "Date de fin"
     description: "Description"
+    voir: "Visualiser la Newsletter"
     info: "Titre"
     statut: "Etat"
     info_description: "Description"

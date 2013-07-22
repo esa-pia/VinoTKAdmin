@@ -30,6 +30,7 @@ ActiveAdmin.register Newsletter do
     default_actions
     
   end
+
   show do |newsletter|
     panel I18n.t('newsletters.section_title') do
       attributes_table_for newsletter do
@@ -145,7 +146,9 @@ ActiveAdmin.register Newsletter do
   action_item :only => [:show] do
     link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_label), new_resource_path)
   end
-  
+  action_item :only => [:show] do
+    link_to I18n.t('newsletters.voir'), newsletter_path(resource), target: "_blank"
+  end
 # -----------------------------------------------------------------------------------
   # Email sending
   

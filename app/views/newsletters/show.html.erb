@@ -34,8 +34,22 @@
     </table>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;margin-top: 10px;">
       <tbody>
-
+<% if !@newsletter.promotions_titre.blank? %>
+        <tr>
+          <td colspan="4" width="600" height="50" style="
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 10px;
+            padding-top: 10px;
+            "><%= @newsletter.promotions_titre %></td> 
+        </tr>
+<% end %>
 <% @newsletter.newsletters_bouteilles.each do |promotion| %>
+  <% if !promotion.bouteille.nil? %>
         <tr style="
           background-color: <%= cycle('#ffffff;', '#fbf4f4;') %>
           ">
@@ -63,21 +77,26 @@
             <p style="
               padding-left: 10px;
               line-height: 10px;
-              "> <span style="
+              ">
+              <span style="
+                background-color: <%= promotion.bouteille.type.couleur %>;
+                margin: -3px 0px 0px 0px;
+                padding: 1px 10px 2px 10px;
+                height: 14px;  
+                -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     
+                border-radius: 9px; 
+                line-height: 10px;
+                color: white;
+                "><%= promotion.bouteille.type.libelle %></span>
+<% if promotion.bouteille.millesime.valeur.length > 2 %>
+              <span style="
               font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;      color: #333333;      
               font-size: 16px;  
               text-align: left;      
               padding-left: 5px;      
               "><%= promotion.bouteille.millesime.valeur %></span>
-              <span style="
-                display: inline-block;
-                background-color: <%= promotion.bouteille.type.couleur %>;
-                margin: 0px 0px 0px 0px;
-                padding: 5px 5px 0px 0px;
-                height: 5px;     
-                width: 5px;          -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     border-radius: 5px;
-                float: left;
-                "></span>
+<% end %>
+
             </p>
           </td>
           <td style="
@@ -134,11 +153,14 @@
             &nbsp; 
           </td>
         </tr>
+  <% end %>
 <% end %>
 
        
       </tbody>
     </table>
+<% if !( @newsletter.date_debut.blank? && @newsletter.date_fin.blank? && @newsletter.titre_evenement.blank? && @newsletter.evenement_description.blank?) %>
+
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;">
       <tbody>
         <tr>
@@ -166,14 +188,16 @@
             padding-left: 10px;
             display: inline-block;
             ">
+<% if !( @newsletter.date_debut.blank?)%>
             <p style=" 
               line-height:0px;
               "><span>Le <span style="
               color: #e30014;
               font-weight: bold;
+              padding-left: 4px;
               "><%= I18n.l(@newsletter.date_debut,  format: :date_short) %></span></span></p>
-            
-<% if  I18n.l(@newsletter.date_debut,  format: :date_short) ==  I18n.l(@newsletter.date_fin,  format: :date_short) %>
+         
+  <% if  !( @newsletter.date_fin.blank?) && I18n.l(@newsletter.date_debut,  format: :date_short) ==  I18n.l(@newsletter.date_fin,  format: :date_short) %>
                <p style="line-height:0px;
               "><span style="
               color: #333333;
@@ -184,7 +208,7 @@
               "><%= I18n.l(@newsletter.date_fin,  format: :time_short) %></span></span>
               </p>
 
-<% else %>
+  <% else %>
               <p style=" line-height:0px;
               "><span style="
               color: #333333;
@@ -192,14 +216,17 @@
               color: #e30014; font-weight: bold;
               "><%= I18n.l(@newsletter.date_debut,  format: :time_short) %></span></span>
               </p>
+    <% if  !( @newsletter.date_fin.blank?) %>
               <p style="line-height:0px;
               ">Au <span style="
               color: #e30014;
               font-weight: bold;
               "><%= I18n.l(@newsletter.date_fin,  format: :date_short) %></span></p> <p style=" line-height:0px;
               ">A <span style="
-              color: #e30014; font-weight: bold;
+              color: #e30014; font-weight: bold;padding-left: 8px;
               "><%= I18n.l(@newsletter.date_fin,  format: :time_short) %></span>
+    <% end %>
+  <% end %>
 <% end %>
           </td>
         </tr>
@@ -233,6 +260,8 @@
         </tr>
       </tbody>
     </table>
+<% end %>
+<% if  @newsletter.info.blank? && @newsletter.info_description.blank? %>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;">
       <tbody>
         <tr>
@@ -257,6 +286,7 @@
         </tr>
       </tbody>
     </table>
+<% end %>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
       <tbody>
         <tr>

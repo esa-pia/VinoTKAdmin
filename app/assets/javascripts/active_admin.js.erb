@@ -33,23 +33,24 @@ $(document).ready(function(){
 
   if($("#filters_sidebar_section").length != 0)
   {
-    $("#filters_sidebar_section").addClass('close');
-    $("#main_content").addClass('close');
+    $("#filters_sidebar_section").addClass('init');
+    $("#main_content").addClass('init');
     $("#filters_sidebar_section").prepend("<i class='icon-down-dir'>");
   }
+
   $("#filters_sidebar_section h3, #filters_sidebar_section i").on("click", function( event ) {
     if($("#filters_sidebar_section").hasClass('open'))
     {
-      $("#filters_sidebar_section").removeClass('open');
-      $("#main_content").removeClass('open');
+      $("#filters_sidebar_section").removeClass('open init');
+      $("#main_content").removeClass('open init');
       $("#filters_sidebar_section").addClass('close');
       $("#main_content").addClass('close');
       $("#filters_sidebar_section").find('i').removeClass('icon-up-dir').addClass('icon-down-dir');
     }
     else
     {
-      $("#filters_sidebar_section").removeClass('close');
-      $("#main_content").removeClass('close');
+      $("#filters_sidebar_section").removeClass('close init');
+      $("#main_content").removeClass('close init');
       $("#filters_sidebar_section").addClass('open');
       $("#main_content").addClass('open');
       $("#filters_sidebar_section").find('i').removeClass('icon-down-dir').addClass('icon-up-dir');
@@ -220,7 +221,7 @@ $(document).ready(function(){
     launchSpinner();
     return true;
   });
-  $(".action_item a").on("click", function( event ) {
+  $(".action_item a[target!='_blank']").on("click", function( event ) {
     launchSpinner();
   });
   $("a.send_newsletter").on("click", function( event ) {
@@ -282,6 +283,7 @@ $(document).ready(function(){
       return true;
     });
     $('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
+      $(".has_many_fields input[id*='rabais']").last().attr('value', 0);
       $(".chzn-select").chosen();
       $('.spinner_percent').spinner({
         min: 0,
@@ -306,6 +308,7 @@ function removeButtonManagement(){
   $(".has_many_remove").wrap('<div class="table_action" title="'+$(".has_many_remove").first().text()+'">').text('')
   $(".has_many_remove").prepend('<i class="icon-trash">')
   $(".has_many_remove").removeClass('has_many_remove')
+
 }
 function tooltipManagement(){
   $("th a").closest("th").each(function( index ) {

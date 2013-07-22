@@ -7,7 +7,7 @@ ActiveAdmin.register Type do
     selectable_column
     column I18n.t('types.libelle'),:libelle
     column I18n.t('types.couleur'), :couleur do |type|
-      div style: "background-color:#{type.couleur};width:20px;height:20px;border-style:solid;border-width:1px;"
+      div style: "background-color:#{type.couleur}", :class => "tag"
     end
     default_actions
   end
@@ -18,7 +18,7 @@ ActiveAdmin.register Type do
         row (I18n.t('types.id')) {type.id}
         row (I18n.t('types.libelle')) {type.libelle}
         row I18n.t('types.couleur'), :couleur do
-          div style: "background-color:#{type.couleur};width:20px;height:20px;border-style:solid;border-width:1px;"
+          div style: "background-color:#{type.couleur}", :class => "tag"
         end
       end
     end

@@ -715,6 +715,13 @@ body .ui-tooltip {
 }
 
 #main_content {
+  &.init
+  {
+    margin-right: 0px!important;
+    .indexes {
+      padding-right: 80px;
+    }
+  }
   &.close
   {
     -moz-transition: all 0.7s ease;
@@ -774,6 +781,19 @@ body .ui-tooltip {
   {
     padding-left: 20px;
   }
+  &.init
+  {
+    overflow: hidden;
+    width: 75px;
+    -webkit-transform: translate(195px, 0px);
+    height: 28px;
+    .panel_contents
+    {
+      padding: 0px;
+      height: 0px;
+      opacity: 0;
+    }
+  }
   &.close
   {
     
@@ -786,14 +806,11 @@ body .ui-tooltip {
     overflow: hidden;
     width: 75px;
     -webkit-transform: translate(195px, 0px);
-    
+    height: 28px;
   
     .panel_contents
     {
-      -moz-transition: all 0.5s ease;
-      -webkit-transition: all 0.5s ease;
-      -o-transition: all 0.5s ease;
-      transition: all 0.5s ease;
+
       padding: 0px;
       height: 0px;
       opacity: 0;
@@ -808,6 +825,7 @@ body .ui-tooltip {
 
     overflow: hidden;
     width: 270px;
+    height: 100%;
     -webkit-transform: translate(0px, 0px);
     .panel_contents
     {
@@ -837,4 +855,22 @@ body.admin_bouteilles.active_admin{
       }
     }
   }
+}
+
+.tag{
+  width: 20px;
+  height: 20px;
+  box-shadow: 1px 1psolid;
+  -moz-box-shadow: 2px 2px 5px 0px #656565;
+  -webkit-box-shadow: 2px 2px 5px 0px #656565;
+  -o-box-shadow: 2px 2px 5px 0px #656565;
+  box-shadow: 2px 2px 5px 0px #656565;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=5);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+input.color
+{
+  width: 50px!important;
 }

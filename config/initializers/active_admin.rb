@@ -1,3 +1,4 @@
+require 'footer'
 ActiveAdmin.setup do |config|
 
   # == Site Title
@@ -212,4 +213,5 @@ ActiveAdmin.setup do |config|
     # Want PDF added to default download links
     config.download_links = [:xlsx]#:csv, :json]
 
+    config.view_factory.footer = Footer
 end
