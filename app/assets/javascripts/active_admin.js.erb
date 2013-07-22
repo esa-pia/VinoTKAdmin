@@ -27,8 +27,8 @@ $(document).ready(function(){
   $(".member_link.send_newsletter").prepend('<i class="icon-mail-alt">')
   
   $("li#logout").attr('title',$("li#logout").first().text())
-  $("li#logout").text('     ')
-  $("li#logout").prepend('<i class="icon-power">')
+  $("li#logout a").text('');
+  $("li#logout a").prepend('<i class="icon-power">')
   
 
   if($("#filters_sidebar_section").length != 0)
