@@ -118,8 +118,10 @@ ActiveAdmin.register Newsletter do
       f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
         ff.input :position
-        ff.input :bouteille, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
-        ff.input :rabais,        :hint => "%" , :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
+        ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+        ff.input :prix,         :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;background-color: rgba(255, 0, 0, 0);border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
+        ff.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
+        ff.input :nouveau_prix, :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;background-color: rgba(255, 0, 0, 0);border-style: none;font-size: 16px;width: 50px;"}
         if ff.object.new_record?
           ff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
                  :wrapper_html => {:style => "display: none;"}

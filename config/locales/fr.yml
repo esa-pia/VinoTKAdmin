@@ -67,7 +67,7 @@ fr:
       short: "%d %b %H:%M"
       long: "%A %d %B %Y %H:%M"
       time: "%a %d %b %Y - %H:%M"
-      date_short: "%A %d %B"
+      date_short: "%A %d %b"
       time_short: "%H:%M"
       
     am: 'am'

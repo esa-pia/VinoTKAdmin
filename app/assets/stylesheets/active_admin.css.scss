@@ -363,6 +363,10 @@ body.active_admin .ui-datepicker .ui-datepicker-header a:active {
 }
 
 /***********logout*************/
+#utility_nav
+{
+  margin-top: -4px!important;
+}
 #logout i{
   line-height: 17px;
   padding: 0px;
@@ -777,7 +781,6 @@ body .ui-tooltip {
   .panel_contents
   {
       width: 270px;
-      overflow: hidden;
   }
   i
   {
@@ -791,7 +794,6 @@ body .ui-tooltip {
   }
   &.init
   {
-    overflow: hidden;
     width: 75px;
     -webkit-transform: translate(195px, 0px);
     height: 28px;
@@ -800,6 +802,10 @@ body .ui-tooltip {
       padding: 0px;
       height: 0px;
       opacity: 0;
+      .filter_form
+      {
+        display: none;
+      }
     }
   }
   &.close
@@ -811,7 +817,6 @@ body .ui-tooltip {
     transition: all 0.5s ease;
   
     
-    overflow: hidden;
     width: 75px;
     -webkit-transform: translate(195px, 0px);
     height: 28px;
@@ -822,6 +827,10 @@ body .ui-tooltip {
       padding: 0px;
       height: 0px;
       opacity: 0;
+      .filter_form
+      {
+        display: none;
+      }
     }
   }
   &.open
@@ -831,7 +840,6 @@ body .ui-tooltip {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 
-    overflow: hidden;
     width: 270px;
     height: 100%;
     -webkit-transform: translate(0px, 0px);
@@ -844,6 +852,10 @@ body .ui-tooltip {
       padding: 3px 15px 15px 15px;
       opacity: 1;
       height: 100%;
+      .filter_form
+      {
+        display: block;
+      }
     }
   }
 }
@@ -914,4 +926,25 @@ body.logged_out {
     
   }
   
+}
+body.active_admin
+{
+  #wrapper
+  {
+    #footer 
+    {
+      @include shadow(0, -1px, 20px, #666);
+      border-top: 1px solid darken(#6A7176, 5%);
+      @include gradient(#6A7176, #4D5256);
+      width:100%;
+      padding:3px 0px;
+      font-size: 1.0em;
+      p
+      {
+        color: white;
+        padding-left: 13px;
+        padding-top: 16px;
+      }
+    }
+  } 
 }

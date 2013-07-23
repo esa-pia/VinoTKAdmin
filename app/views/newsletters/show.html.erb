@@ -1,11 +1,11 @@
 <html><head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   </head>
   <body>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;">
       <tbody>
         <tr>
-          <td rowspan="2" style="
+          <td rowspan="2" style="a
             width: 120px;
             height: 60px;
             "><a href="http://www.vinotk-paris.fr/" style="background-color: white;"><img src="<%= asset_path("logo120x120.png") %>" width="120" height="120"></a></td>
@@ -50,7 +50,7 @@
 <% end %>
 <% @newsletter.newsletters_bouteilles.each do |promotion| %>
   <% if !promotion.bouteille.nil? %>
-        <tr style="
+          <tr style="
           background-color: <%= cycle('#ffffff;', '#fbf4f4;') %>
           ">
           <td width="420" height="50" style="
@@ -78,16 +78,6 @@
               padding-left: 10px;
               line-height: 10px;
               ">
-              <span style="
-                background-color: <%= promotion.bouteille.type.couleur %>;
-                margin: -3px 0px 0px 0px;
-                padding: 1px 10px 2px 10px;
-                height: 14px;  
-                -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     
-                border-radius: 9px; 
-                line-height: 10px;
-                color: white;
-                "><%= promotion.bouteille.type.libelle %></span>
 <% if promotion.bouteille.millesime.valeur.length > 2 %>
               <span style="
               font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;      color: #333333;      
@@ -96,7 +86,15 @@
               padding-left: 5px;      
               "><%= promotion.bouteille.millesime.valeur %></span>
 <% end %>
-
+              <span style="
+                display: inline-block;
+                background-color: <%= promotion.bouteille.type.couleur %>;
+                margin: 0px 0px 0px 0px;
+                padding: 5px 5px 0px 0px;
+                height: 5px;     
+                width: 5px;          -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     border-radius: 5px;
+                float: left;
+                "></span>
             </p>
           </td>
           <td style="
@@ -117,11 +115,11 @@
               <span style="
                 font-size: 18px;
                 line-height: 49px;
-                "><%= number_to_currency(promotion.bouteille.prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span> <span style=" 
+                "><%= number_to_currency(promotion.bouteille.prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span><span style=" 
                 bottom: 1px; 
                 font-size: 0.7em;  
                 vertical-align:super; 
-                ">€</span>
+                "> €</span>
             </p>
           </td>
           <td style="
@@ -140,11 +138,11 @@
               <span style="
                 font-size: 18px;
                 line-height: 49px;
-                "><%= number_to_currency(promotion.nouveau_prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span> <span style=" 
+                "><%= number_to_currency(promotion.nouveau_prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span><span style=" 
                 bottom: 1px; 
                 font-size: 0.7em;  
                 vertical-align:super; 
-                ">€</span>
+                "> €</span>
             </p>
           </td>
           <td width="19" style="
@@ -155,7 +153,6 @@
         </tr>
   <% end %>
 <% end %>
-
        
       </tbody>
     </table>

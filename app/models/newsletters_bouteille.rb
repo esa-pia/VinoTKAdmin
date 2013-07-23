@@ -11,8 +11,18 @@ class NewslettersBouteille < ActiveRecord::Base
   #validates_uniqueness_of :bouteille_id, :scope => :newsletter_id
 
   def nouveau_prix
-    nouveau_prix = bouteille.prix
-    nouveau_prix = nouveau_prix * (1 - (rabais/100)) if rabais?
-    nouveau_prix
+    nouveau_prix = 0
+    if(!bouteille.nil?)
+      nouveau_prix = bouteille.prix
+      nouveau_prix = nouveau_prix * (1 - (rabais/100)) if rabais?
+    end
+    ActionController::Base.helpers.number_to_currency(nouveau_prix, unit: "", separator: ".", delimiter: "", format: "%n")
+  end
+  def prix
+    prix = 0
+    if(!bouteille.nil?)
+      prix = bouteille.prix
+    end
+    ActionController::Base.helpers.number_to_currency(prix, unit: "", separator: ".", delimiter: "", format: "%n")
   end
 end

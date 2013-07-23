@@ -232,3 +232,4 @@ fr:
   actions:
     select_all: "Tout sélectionner"
     unselect_all: "Tout désélectionner"
+  copyright: "Copyright © %{year} Eric Sampaio, Tous droits réservés."

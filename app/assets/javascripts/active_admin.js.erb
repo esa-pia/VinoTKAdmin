@@ -197,6 +197,23 @@ $(document).ready(function(){
       },
       persistent_create_option: true
    });
+  $(".bouteille-chzn-select").chosen().change(function() {
+          launchSpinner();
+          var choosen = this;
+          $.ajax({
+              url: '/admin/bouteilles/'+$(this).val()+'.json',
+              type: 'GET',
+              success: function(data) {
+                var prix = data.prix;
+                $(choosen).closest('.has_many_fields').find("input[id*='prix']").attr('value', prix);
+                var rabais =  $(choosen).closest('.has_many_fields').find("input[id*='rabais']").val();
+                var nouveau_prix = prix * (1 - (rabais/100))
+                $(choosen).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+                stopSpinner();
+              }
+          });
+      
+       });
 
   $('.chzn-single').css('min-width','230px');
   $('.chzn-drop').css('min-width','240px');
@@ -251,14 +268,28 @@ $(document).ready(function(){
   
     /** DATE INPUT **/
     $('input.datepicker:not(.hasDatepicker)').datepicker({ dateFormat: 'dd-mm-yy' });
-
+    $(".has_many_fields input[id*='prix']").attr('name', '').attr("disabled", "disabled");
+    $(".has_many_fields input[id*='prix']").closest("li").find("label").remove();
     /** SPINNER **/
     $('.spinner_percent').spinner({
       min: 0,
       max: 100,
       step: 0.05,
-      start: 100
+      start: 100, 
+      spin: function( event, ui ) {
+          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
+          var rabais = ui.value
+          var nouveau_prix = prix * (1 - (rabais/100))
+          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+      },
+      change: function( event, ui ) {
+          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
+          var rabais = event.currentTarget.value
+          var nouveau_prix = prix * (1 - (rabais/100))
+          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+      }
     });
+    
     $('.spinner_, #prix_gte_numeric, #prix_lte_numeric, #bouteille_prix').spinner({
       min: 0,
       max: 1000,
@@ -283,13 +314,44 @@ $(document).ready(function(){
       return true;
     });
     $('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
+      $(".has_many_fields input[id*='prix']").last().attr('name', '').attr("disabled", "disabled");
+      $(".has_many_fields input[id*='prix']").closest("li").find("label").remove();
       $(".has_many_fields input[id*='rabais']").last().attr('value', 0);
-      $(".chzn-select").chosen();
+      $(".bouteille-chzn-select").last().chosen().change(function() {
+          launchSpinner();
+          var choosen = this;
+          $.ajax({
+              url: '/admin/bouteilles/'+$(this).val()+'.json',
+              type: 'GET',
+              success: function(data) {
+                var prix = data.prix;
+                $(choosen).closest('.has_many_fields').find("input[id*='prix']").attr('value', prix);
+                var rabais =  $(choosen).closest('.has_many_fields').find("input[id*='rabais']").val();
+                var nouveau_prix = prix * (1 - (rabais/100))
+                $(choosen).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+                stopSpinner();
+              }
+          });
+      
+       });
+
       $('.spinner_percent').spinner({
         min: 0,
         max: 1000,
         step: 0.05,
-        start: 1000
+        start: 1000,
+        spin: function( event, ui ) {
+          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
+          var rabais = ui.value
+          var nouveau_prix = prix * (1 - (rabais/100))
+          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+        },
+        change: function( event, ui ) {
+          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
+          var rabais = event.currentTarget.value
+          var nouveau_prix = prix * (1 - (rabais/100))
+          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+      }
       });
       $(".has_many_fields li:last-child").last().addClass("has_many_remove button boolean input optional")
       $(".has_many_fields input[id*='position']").each(function( index ) {
