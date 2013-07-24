@@ -2,13 +2,12 @@ ActiveAdmin.register Bouteille do
 
   # Create sections on the index screen
   scope (I18n.t('types.all')), :all, :default => true
-  scope (I18n.t('types.rouge')), :rouge
-  scope (I18n.t('types.blanc')), :blanc 
-  scope (I18n.t('types.rose')), :rose 
-  scope (I18n.t('types.effervescent')), :effervescent
-  scope (I18n.t('types.alcool_digestif')), :alcool_digestif
-  scope (I18n.t('types.aperitif')), :aperitif
-  scope (I18n.t('types.whisky')), :whisky 
+  Type.all.each do |type|
+    scope type.libelle do |items|
+      items.where(:type_id => type.id)
+    end
+  end
+ 
 
   # Filterable attributes on the index screen
   filter :appellation,    :label => I18n.t('bouteilles.appellation')

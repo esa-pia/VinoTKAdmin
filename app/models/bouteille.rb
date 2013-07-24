@@ -16,16 +16,6 @@ class Bouteille < ActiveRecord::Base
   validates :volume, :presence => true
   validates :millesime, :presence => true
   validates :prix, :presence => true
-
-
-
-  scope :rouge, where(:type_id => Type.where(:libelle => 'Rouge'))
-  scope :blanc, where(:type_id => Type.where(:libelle => 'Blanc'))
-  scope :rose, where(:type_id => Type.where("libelle like ?",'%Ros%'))
-  scope :effervescent, where(:type_id => Type.where(:libelle => 'Effervescent'))
-  scope :alcool_digestif, where(:type_id => Type.where("libelle like ? or libelle like ? ",'%Alcool%', '%Digestif%'))
-  scope :aperitif, where(:type_id => Type.where("libelle like ?",'%Ap%'))
-  scope :whisky, where(:type_id => Type.where(:libelle => 'Whisky'))
   
   
   def display_name
