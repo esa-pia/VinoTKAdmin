@@ -15,6 +15,12 @@
 //= require jscolor
 $(document).ready(function(){
   launchSpinner();
+  //$(".action_items .action_item a").each(function( index ) {
+  //  $(this).wrap('<div class="table_action" title="'+$(this).text()+'">').text('')
+  //  $(this).prepend('<i class="icon-eye">')
+  //});
+
+  
   $(".member_link.view_link").wrap('<div class="table_action" title="'+$(".member_link.view_link").first().text()+'">').text('')
   $(".member_link.view_link").prepend('<i class="icon-eye">')
   $(".member_link.edit_link").wrap('<div class="table_action" title="'+$(".member_link.edit_link").first().text()+'">').text('')
@@ -46,6 +52,7 @@ $(document).ready(function(){
       $("#filters_sidebar_section").addClass('close');
       $("#main_content").addClass('close');
       $("#filters_sidebar_section").find('i').removeClass('icon-up-dir').addClass('icon-down-dir');
+      $(".filter-chzn-select").closest("div").find('.chzn-container').css("width", "240px");
     }
     else
     {
@@ -270,6 +277,12 @@ $(document).ready(function(){
     $('input.datepicker:not(.hasDatepicker)').datepicker({ dateFormat: 'dd-mm-yy' });
     $(".has_many_fields input[id*='prix']").attr('name', '').attr("disabled", "disabled");
     $(".has_many_fields input[id*='prix']").closest("li").find("label").remove();
+
+    $(".has_many_fields input[id*='prix']").each(function( index ) {
+        $(this).closest("li").find(".inline-hints").css("color", "white");
+        $(this).closest("li").find(".inline-hints").css("line-height", "8px");
+    });
+
     /** SPINNER **/
     $('.spinner_percent').spinner({
       min: 0,
@@ -314,6 +327,10 @@ $(document).ready(function(){
       return true;
     });
     $('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
+      $(".has_many_fields input[id*='prix']").each(function( index ) {
+        $(this).closest("li").find(".inline-hints").css("color", "white");
+        $(this).closest("li").find(".inline-hints").css("line-height", "8px");
+    });
       $(".has_many_fields input[id*='prix']").last().attr('name', '').attr("disabled", "disabled");
       $(".has_many_fields input[id*='prix']").closest("li").find("label").remove();
       $(".has_many_fields input[id*='rabais']").last().attr('value', 0);
@@ -364,8 +381,22 @@ $(document).ready(function(){
     removeButtonManagement();
     /** TOOLTIPS**/
     tooltipManagement();
-    setTimeout(function(){stopSpinner();},1500);
+
+    setTimeout(function()
+      {
+        $('#wrapper').animate({
+          opacity: 1
+          }, 1000, function() 
+          {
+            $(".filter-chzn-select").closest("div").find('.chzn-container').css("width", "240px");
+            setTimeout(function()
+            {
+              stopSpinner();
+            },500);
+          });
+    });
 })
+
 function removeButtonManagement(){
   $(".has_many_remove").wrap('<div class="table_action" title="'+$(".has_many_remove").first().text()+'">').text('')
   $(".has_many_remove").prepend('<i class="icon-trash">')
@@ -401,7 +432,7 @@ function launchSpinner(){
   var spinner = new Spinner().spin();
   spinnerContainer=document.createElement('div');
   
-  $("#wrapper").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
+  $("body").append($(spinnerContainer).attr('id', 'spinnerContainer').append(spinner.el));
   var docHeight = $(document).height();
   $("body").append("<div id='overlay'></div>");
   $("#overlay").height(docHeight);

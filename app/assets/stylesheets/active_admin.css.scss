@@ -927,10 +927,29 @@ body.logged_out {
   }
   
 }
+.chzn-choices
+{
+  border-radius: 3px;
+}
+
+
 body.active_admin
 {
+ 
   #wrapper
   {
+    #title_bar
+    { 
+      .action_items
+      {
+        a
+        {
+          padding: 7px 7px 7px 7px;
+        }
+      }
+    }
+
+    opacity:0;
     #footer 
     {
       @include shadow(0, -1px, 20px, #666);
@@ -945,6 +964,13 @@ body.active_admin
         padding-left: 13px;
         padding-top: 16px;
       }
+    }
+  }
+  &.logged_out
+  {
+    #footer 
+    {
+      padding: 26px 0px!important;
     }
   } 
 }

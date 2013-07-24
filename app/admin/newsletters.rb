@@ -119,9 +119,9 @@ ActiveAdmin.register Newsletter do
         #ff.inputs
         ff.input :position
         ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
-        ff.input :prix,         :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(248, 44, 101, 0.49);margin-right: -12px;border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
+        ff.input :prix,         :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
         ff.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
-        ff.input :nouveau_prix, :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;background-color: rgba(255, 0, 0, 0);border-style: none;font-size: 16px;width: 50px;"}
+        ff.input :nouveau_prix, :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 16px;width: 50px;"}
         if ff.object.new_record?
           ff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
                  :wrapper_html => {:style => "display: none;"}
@@ -157,7 +157,13 @@ ActiveAdmin.register Newsletter do
   action_item :only => :show do
     link_to I18n.t('newsletters.send'), send_newsletter_admin_newsletter_path(resource), :class => 'send_newsletter'
   end
+  action_item :only => :show do
+    link_to I18n.t('newsletters.send_me'), send_me_newsletter_admin_newsletter_path(resource), :class => 'send_newsletter'
+  end
   
+  
+
+
   member_action :send_newsletter do
     @newsletter = Newsletter.find(params[:id])
     
@@ -178,5 +184,9 @@ ActiveAdmin.register Newsletter do
     
     redirect_to admin_newsletter_path(@newsletter), :notice => I18n.t("newsletters.envoi_ok")
   end
-
+  member_action :send_me_newsletter do
+    @newsletter = Newsletter.find(params[:id])
+    NewsletterMailer.send_newsletter(@newsletter, current_admin_user).deliver
+    redirect_to admin_newsletter_path(@newsletter), :notice => I18n.t("newsletters.envoi_ok")
+  end
 end
