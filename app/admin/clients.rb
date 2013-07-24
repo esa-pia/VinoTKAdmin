@@ -4,12 +4,14 @@ ActiveAdmin.register Client do
   filter :nom, :label => I18n.t('clients.nom')
   filter :prenom, :label => I18n.t('clients.prenom')
   filter :email, :label => I18n.t('clients.email')
+  filter :inactif, :label => I18n.t('clients.inactif')
 
   index do
     selectable_column
     column I18n.t('clients.nom'), :nom
     column I18n.t('clients.prenom'), :prenom
     column I18n.t('clients.email'), :email
+    column I18n.t('clients.inactif'), :inactif
     default_actions
   end
 
@@ -20,6 +22,7 @@ ActiveAdmin.register Client do
         row (I18n.t('clients.nom')) {client.nom}
         row (I18n.t('clients.prenom')) {client.prenom}
         row (I18n.t('clients.email')) {client.email}
+        row (I18n.t('clients.inactif')) {client.inactif}
       end
     end
     active_admin_comments
@@ -30,6 +33,7 @@ ActiveAdmin.register Client do
       f.input :nom , :label => I18n.t('clients.nom')                 
       f.input :prenom , :label => I18n.t('clients.prenom')               
       f.input :email, :label => I18n.t('clients.email')   
+      f.input :inactif, :label => I18n.t('clients.inactif')  
     end                               
     f.actions                         
   end
@@ -48,6 +52,7 @@ ActiveAdmin.register Client do
 
     column (:nom ) { |client| "#{client.nom} #{client.prenom}" }
     column (:email)
+    column (:inactif)
   end
 
   # -----------------------------------------------------------------------------------

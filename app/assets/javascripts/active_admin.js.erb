@@ -14,7 +14,10 @@
 //= require sortable_forms.js.coffee
 //= require jscolor
 $(document).ready(function(){
-  launchSpinner();
+  if($('#wrapper').length>1)
+  {
+    launchSpinner();
+  }
   //$(".action_items .action_item a").each(function( index ) {
   //  $(this).wrap('<div class="table_action" title="'+$(this).text()+'">').text('')
   //  $(this).prepend('<i class="icon-eye">')

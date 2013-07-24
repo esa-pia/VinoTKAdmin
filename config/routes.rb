@@ -42,6 +42,8 @@ VinoTKAdmin::Application.routes.draw do
   root :to => 'admin/dashboard#index'
   ActiveAdmin.routes(self)
 
+  match '/clients/:id/unsubscribe' => 'clients#unsubscribe', as: 'unsubscribe'
+  match '/newsletters/:id/clients/:clientid' => 'newsletters#see', as: 'see'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

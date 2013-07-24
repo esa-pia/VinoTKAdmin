@@ -149,7 +149,7 @@ ActiveAdmin.register Newsletter do
     link_to(I18n.t('active_admin.new_model', :model => active_admin_config.resource_label), new_resource_path)
   end
   action_item :only => [:show] do
-    link_to I18n.t('newsletters.voir'), newsletter_path(resource), target: "_blank"
+    link_to I18n.t('newsletters.voir'), see_path(resource, Client.find(1)), target: "_blank"
   end
 # -----------------------------------------------------------------------------------
   # Email sending
@@ -174,7 +174,7 @@ ActiveAdmin.register Newsletter do
     #params[:recipients] += ", #{current_admin_user.email}" if params[:send_copy]
     
     # Send all emails
-    Client.all.each do |client|
+    Client.where( :inactif => false).all.each do |client|
       NewsletterMailer.send_newsletter(@newsletter, client).deliver
     end
     

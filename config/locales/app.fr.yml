@@ -67,6 +67,7 @@ fr:
       clients:
         nom: "Nom"
         email: "Email"
+        inactif: "Inactif"
       catalogues:
         titre: "Titre"
         nb: "Nombre de bouteilles"
@@ -97,6 +98,7 @@ fr:
     nom: "Nom"
     prenom: "Prénom"
     email: "Email"
+    inactif: "Inactif"
   types:
     section_title: "Détails type"
     id: "Id"
@@ -199,6 +201,11 @@ fr:
     evenement_image: "Image"
     choose:
       bouteilles: "Veuillez choisir les bouteilles constituant vos promotions"
+    see_to_navigator_0: "Vous recevez ce message car vous êtes inscrits à la newsletter Vino TK.</br>Si vous ne parvenez pas à lire cet e-mail, " 
+    see_to_navigator_1: "visionnez le dans votre navigateur"
+    unsubscribe_0: "Vous recevez ce message car vous êtes inscrits à la newsletter Vino TK.</br>Vous pouvez vous "
+    unsubscribe_1: "désabonner ici"
+    unsubscribe: "Vous êtes désabonné."
   millesimes:
     section_title: "Détails millésime"
     id: "Id"

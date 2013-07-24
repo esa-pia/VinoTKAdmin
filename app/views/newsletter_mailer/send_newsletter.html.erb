@@ -2,6 +2,16 @@
   <meta charset="UTF-8">
   </head>
   <body>
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
+      <tbody>
+        <tr>
+           <td style="TEXT-ALIGN:center;LINE-HEIGHT:12px" width="719" align="middle"><font style="FONT-FAMILY:Arial,Helvetica,sans-serif;COLOR:#333333;FONT-SIZE:10px">Vous 
+            recevez ce message car vous êtes inscrits à la newsletter Vino TK.<br>Si vous ne parvenez pas à lire cet e-mail, 
+            <%= link_to "visionnez le dans votre navigateur", see_url(@newsletter, @client), :target => "_blank", :style => "COLOR:#ee3897;background-color: white;TEXT-DECORATION:none" %>
+          </font></td>
+         </tr>
+      </tbody>
+    </table>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;">
       <tbody>
         <tr>
@@ -308,5 +318,18 @@
         </tr>
       </tbody>
     </table>
-  
+<% if ! @client.nil?%>
+   <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
+      <tbody>
+        <tr>
+           <td style="TEXT-ALIGN:center;FONT-FAMILY:Arial,Helvetica,sans-serif;COLOR:#000000;FONT-SIZE:12px"
+           <span style="FONT-SIZE:10px">Vous recevez ce 
+                  message car vous êtes inscrits à la newsletter Made In 
+                  Design.<br>Vous pouvez vous 
+                  <%= link_to "désabonner ici", unsubscribe_url(@client.id), :target => "_blank", :style => "background-color: white;COLOR:#e30014;TEXT-DECORATION:none" %></span>
+           </td>
+         </tr>
+      </tbody>
+    </table>
+<% end %>
 </body></html>
