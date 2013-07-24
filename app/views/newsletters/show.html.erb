@@ -174,7 +174,7 @@
           <td rowspan="5" style="
             width: 120px;
             height: 60px;
-            "><img src="<%= @newsletter.evenement_image.url(:medium) %>" width="400" height="250"></td>
+            "><img src="<%= @newsletter.evenement_image.url(:medium) %>" width="400"></td>
         </tr>
         <tr>
           <td style="
@@ -259,7 +259,7 @@
       </tbody>
     </table>
 <% end %>
-<% if  @newsletter.info.blank? && @newsletter.info_description.blank? %>
+<% if  !(@newsletter.info.blank? && @newsletter.info_description.blank?) %>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;">
       <tbody>
         <tr>
