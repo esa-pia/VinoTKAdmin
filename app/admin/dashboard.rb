@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Dashboard" do
           if(!"#{last_catalogue.image1}".eql?("/assets/missing.png"))
             image_tag(last_catalogue.image1(:medium))
           else
-            image_tag("/assets/logo.jpg", :style => "height: 159px;")
+            image_tag("/assets/logo.png", :style => "height: 159px;")
           end
         end
       end

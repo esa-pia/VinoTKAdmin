@@ -35,7 +35,7 @@
             color: #888888; 
             font-size: 14px;  text-align: left; padding-left: 20px; top: 20px;
             line-height: 17px;
-            "><%= @newsletter.description %></td>
+            "><%= raw(@newsletter.description) %></td>
         </tr>
       </tbody>
     </table>
@@ -246,7 +246,7 @@
             padding-top: 10px;
             padding-right: 32px;
             line-height: 15px;
-            "><%= @newsletter.evenement_description %></td>
+            "><%= raw(@newsletter.evenement_description) %></td>
         </tr>
         <tr>
           <td width="60" style="
@@ -287,7 +287,7 @@
             font-size: 14px;  text-align: left; padding-left: 10px; padding-top: 10px;
             padding-right: 10px;
             line-height: 20px;
-            "><%= @newsletter.info_description %>
+            "><%= raw(@newsletter.info_description) %>
           </td>
         </tr>
       </tbody>

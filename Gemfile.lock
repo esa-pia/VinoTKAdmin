@@ -58,6 +58,9 @@ GEM
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
+    ckeditor_rails (3.6.2.2)
+      railties (~> 3.0)
+      thor (~> 0.14)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -216,6 +219,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   activeadmin-axlsx
+  ckeditor_rails
   coffee-rails (~> 3.2.1)
   jquery-rails (= 2.3.0)
   just-datetime-picker

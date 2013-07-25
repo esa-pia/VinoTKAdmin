@@ -44,7 +44,7 @@ ActiveAdmin.register Catalogue do
         if(!"#{catalogue.image1}".eql?("/assets/missing.png"))
           image_tag(catalogue.image1(:medium))
         else
-           image_tag("/assets/logo.jpg", :style => "height: 159px;")
+           image_tag("/assets/logo.png", :style => "height: 159px;")
         end
       end
     end
@@ -220,7 +220,7 @@ def generate_catalogue(catalogue)
   Prawn::Document.generate @catalogue.catalogue_location,  :left_margin => 40, :right_margin => 40, :top_margin=> 50, :bottom_margin => 50 do |pdf|
     # Title
     pdf.move_down 30
-    pdf.image "#{Rails.root}/app/assets/images/logo.jpg", :width => 325
+    pdf.image "#{Rails.root}/app/assets/images/logo.png", :width => 325
    # pdf.text "Catalogue ##{catalogue.id}", :size => 25
     pdf.move_down 70
     pdf.text catalogue.titre, :size => 40

@@ -37,7 +37,7 @@ ActiveAdmin.register Newsletter do
         row (I18n.t('newsletters.id')) {newsletter.id}
         row (I18n.t('newsletters.statut')) {status_tag(newsletter.statut)}
         row (I18n.t('newsletters.titre')) {newsletter.titre}
-        row (I18n.t('newsletters.description')) {newsletter.description}
+        row (I18n.t('newsletters.description')) {raw(newsletter.description)}
       end
     end
     
@@ -94,13 +94,13 @@ ActiveAdmin.register Newsletter do
         row (I18n.t('newsletters.evenement_image')) {image_tag(newsletter.evenement_image(:thumb)) if newsletter.evenement_image}
         row (I18n.t('newsletters.date_debut')) {I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?}
         row (I18n.t('newsletters.date_fin')) {I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?}
-        row (I18n.t('newsletters.evenement_description')) {newsletter.evenement_description}
+        row (I18n.t('newsletters.evenement_description')) {raw(newsletter.evenement_description)}
       end
     end
     panel I18n.t('newsletters.info_section_title') do
       attributes_table_for newsletter do
         row (I18n.t('newsletters.info')) {newsletter.info}
-        row (I18n.t('newsletters.info_description')) {newsletter.info_description}
+        row (I18n.t('newsletters.info_description')) {raw(newsletter.info_description)}
       end
     end
     active_admin_comments
@@ -109,7 +109,7 @@ ActiveAdmin.register Newsletter do
   form do |f|   
     f.inputs I18n.t('newsletters.section_title') do       
       f.input :titre, :label => I18n.t('newsletters.titre')  
-      f.input :description, :label => I18n.t('newsletters.description') , :input_html => { :rows => 4 }      
+      f.input :description, :label => I18n.t('newsletters.description') , :input_html => { class: :ckeditor }, :wrapper_html => { :class => "cleared" }     
     end                      
     
     f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
@@ -119,9 +119,9 @@ ActiveAdmin.register Newsletter do
         #ff.inputs
         ff.input :position
         ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
-        ff.input :prix,         :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
+        ff.input :prix,         :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
         ff.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
-        ff.input :nouveau_prix, :disabled => "true", :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 16px;width: 50px;"}
+        ff.input :nouveau_prix, :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 16px;width: 50px;"}
         if ff.object.new_record?
           ff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
                  :wrapper_html => {:style => "display: none;"}
@@ -136,11 +136,11 @@ ActiveAdmin.register Newsletter do
       f.input :evenement_image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.evenement_image.url()) if f.object.evenement_image)
       f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
       f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
-      f.input :evenement_description, :label => I18n.t('newsletters.evenement_description'), :input_html => { :rows => 4 }          
+      f.input :evenement_description, :label => I18n.t('newsletters.evenement_description'), :input_html => { class: :ckeditor }, :wrapper_html => { :class => "cleared" }         
     end
     f.inputs I18n.t('newsletters.info_section_title') do       
       f.input :info, :label => I18n.t('newsletters.info') 
-      f.input :info_description, :label => I18n.t('newsletters.info_description')  , :input_html => { :rows => 4 }     
+      f.input :info_description, :label => I18n.t('newsletters.info_description')  , :input_html => { class: :ckeditor }, :wrapper_html => { :class => "cleared" }     
     end                           
     f.actions                         
   end
