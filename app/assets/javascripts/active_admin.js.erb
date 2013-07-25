@@ -1,3 +1,4 @@
+
 //= require active_admin/base
 //= require chosen.jquery.js
 //= require spin.min.js
@@ -13,8 +14,11 @@
 
 //= require sortable_forms.js.coffee
 //= require jscolor
+//= require ckeditor_fix
+//= require ckeditor-jquery
 
 $(document).ready(function(){
+
   if($('#wrapper').length>=1)
   {
     launchSpinner();
@@ -469,5 +473,5 @@ function readURL(evt){
     reader.readAsDataURL(f);
   }
 }
-  
+ 
  
