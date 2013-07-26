@@ -959,6 +959,8 @@ body.active_admin
       width:100%;
       padding:3px 0px;
       font-size: 1.0em;
+      position: fixed;
+      bottom: 0px;
       p
       {
         color: white;
@@ -974,4 +976,21 @@ body.active_admin
       padding: 26px 0px!important;
     }
   } 
+}
+.index_as_table{
+  margin-bottom: 100px!important;
+}
+#index_footer{
+  position: fixed;
+  bottom: 55px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  .pagination {
+    margin-right: 60px;
+  }
+  .pagination_information{
+    padding-right: 60px;
+  }
 }
