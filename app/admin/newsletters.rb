@@ -137,7 +137,14 @@ ActiveAdmin.register Newsletter do
       fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url()) if fff.object.image)
       fff.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
       fff.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
-      fff.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared" }         
+      fff.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared" } 
+      if fff.object.new_record?
+          fff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
+                 :wrapper_html => {:style => "display: none;"}
+        else
+          fff.input :_destroy, :as => :boolean, :wrapper_html => {:class => "has_many_remove button"}, 
+          :label => I18n.t('active_admin.has_many_delete')
+        end        
      end
     end
     f.inputs I18n.t('newsletters.info_section_title') do       
