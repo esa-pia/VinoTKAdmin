@@ -1,4 +1,7 @@
 VinoTKAdmin::Application.routes.draw do
+  resources :evenements
+
+
   resources :newsletters_bouteilles
 
 

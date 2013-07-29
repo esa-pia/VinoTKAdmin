@@ -19,6 +19,15 @@
 
 $(document).ready(function(){
 
+  if($('#newsletter_description').length>=1){
+   CKEDITOR.replace( 'newsletter_description', { customConfig : './description_config.js' } );
+  } 
+  if($('#newsletter_evenement_description').length>=1){
+    CKEDITOR.replace( 'newsletter_evenement_description', { customConfig : './evenement_description_config.js' } );
+  } 
+  if($('#newsletter_info_description').length>=1){
+    CKEDITOR.replace( 'newsletter_info_description', { customConfig : './info_description_config.js' } );
+  }
   if($('#wrapper').length>=1)
   {
     launchSpinner();

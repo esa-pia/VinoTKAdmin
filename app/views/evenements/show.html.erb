@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Titre:</b>
+  <%= @evenement.titre %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @evenement.description %>
+</p>
+
+<p>
+  <b>Image file name:</b>
+  <%= @evenement.image_file_name %>
+</p>
+
+<p>
+  <b>Image content type:</b>
+  <%= @evenement.image_content_type %>
+</p>
+
+<p>
+  <b>Image file size:</b>
+  <%= @evenement.image_file_size %>
+</p>
+
+<p>
+  <b>Image updated at:</b>
+  <%= @evenement.image_updated_at %>
+</p>
+
+<p>
+  <b>Date debut:</b>
+  <%= @evenement.date_debut %>
+</p>
+
+<p>
+  <b>Date fin:</b>
+  <%= @evenement.date_fin %>
+</p>
+
+<p>
+  <b>Newsletter:</b>
+  <%= @evenement.newsletter %>
+</p>
+
+
+<%= link_to 'Edit', edit_evenement_path(@evenement) %> |
+<%= link_to 'Back', evenements_path %>

@@ -8,6 +8,10 @@ class Newsletter < ActiveRecord::Base
 
   attr_accessible :info, :titre, :titre_evenement, :description, :newsletters_bouteilles_attributes
  
+  has_many :evenements, :dependent => :destroy
+  accepts_nested_attributes_for :evenements, :allow_destroy => true
+
+ 
   has_attached_file :evenement_image, :styles => {:medium => "400", :thumb => "60"}
 
   attr_accessible :evenement_image

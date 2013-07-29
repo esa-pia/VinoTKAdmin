@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  titre: MyString
+  description: MyString
+  image_file_name: MyString
+  image_content_type: MyString
+  image_file_size: 1
+  image_updated_at: 2013-07-29 13:18:19
+  date_debut: 2013-07-29 13:18:19
+  date_fin: 2013-07-29 13:18:19
+  newsletter: 
+
+two:
+  titre: MyString
+  description: MyString
+  image_file_name: MyString
+  image_content_type: MyString
+  image_file_size: 1
+  image_updated_at: 2013-07-29 13:18:19
+  date_debut: 2013-07-29 13:18:19
+  date_fin: 2013-07-29 13:18:19
+  newsletter: 

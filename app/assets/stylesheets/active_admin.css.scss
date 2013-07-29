@@ -978,14 +978,14 @@ body.active_admin
   } 
 }
 .index_as_table{
-  margin-bottom: 100px!important;
+  margin-bottom: 150px!important;
 }
 #index_footer{
   position: fixed;
   bottom: 55px;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px!important;
+  padding-bottom: 50px;
   background-color: white;
   .pagination {
     margin-right: 60px;
