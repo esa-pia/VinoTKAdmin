@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130729111819) do
+ActiveRecord::Schema.define(:version => 20130729151110) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20130729111819) do
 
   create_table "evenements", :force => true do |t|
     t.string   "titre"
-    t.string   "description"
+    t.text     "description",        :limit => 255
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -137,8 +137,8 @@ ActiveRecord::Schema.define(:version => 20130729111819) do
     t.datetime "date_debut"
     t.datetime "date_fin"
     t.integer  "newsletter_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   add_index "evenements", ["newsletter_id"], :name => "index_evenements_on_newsletter_id"

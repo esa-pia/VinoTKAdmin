@@ -20,13 +20,77 @@
 $(document).ready(function(){
 
   if($('#newsletter_description').length>=1){
-   CKEDITOR.replace( 'newsletter_description', { customConfig : './description_config.js' } );
+   CKEDITOR.replace( 'newsletter_description', { 
+
+  language: 'fr',
+  fontSize_defaultLabel: '12px',
+  font_defaultLabel: 'Arial',
+  toolbar: 'Easy',
+  uiColor: '#efefef',
+  autoParagraph: false,
+  enterMode: CKEDITOR.ENTER_BR,
+  shiftEnterMode: CKEDITOR.ENTER_P,
+  toolbar_Easy:
+    [
+        ['Source','-','Preview'],
+        ['Cut','Copy','Paste','PasteText','PasteFromWord',],
+        ['Undo','Redo','-','SelectAll','RemoveFormat'],
+        ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'], '/',
+        ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+        ['Link','Unlink'],
+        ['HorizontalRule','SpecialChar']
+    ]
+    } );
   } 
-  if($('#newsletter_evenement_description').length>=1){
-    CKEDITOR.replace( 'newsletter_evenement_description', { customConfig : './evenement_description_config.js' } );
-  } 
+  for (var i = 0; i < 10; i++) {
+    if($('#newsletter_evenements_attributes_'+i+'_description').length>=1){
+      CKEDITOR.replace( 'newsletter_evenements_attributes_'+i+'_description', { 
+        language: 'fr',
+        fontSize_defaultLabel: '12px',
+        font_defaultLabel: 'Arial',
+        toolbar: 'Easy',
+        uiColor: '#efefef',
+        autoParagraph: false,
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        toolbar_Easy:
+          [
+            ['Source','-','Preview'],
+            ['Cut','Copy','Paste','PasteText','PasteFromWord',],
+            ['Undo','Redo','-','SelectAll','RemoveFormat'],
+            ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'], '/',
+            ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            ['Link','Unlink'],
+            ['HorizontalRule','SpecialChar']
+          ] 
+      } );
+    } 
+  }
+  
   if($('#newsletter_info_description').length>=1){
-    CKEDITOR.replace( 'newsletter_info_description', { customConfig : './info_description_config.js' } );
+    CKEDITOR.replace( 'newsletter_info_description', { 
+        language: 'fr',
+        fontSize_defaultLabel: '12px',
+        font_defaultLabel: 'Arial',
+        toolbar: 'Easy',
+        uiColor: '#efefef',
+        autoParagraph: false,
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        toolbar_Easy:
+          [
+            ['Source','-','Preview'],
+            ['Cut','Copy','Paste','PasteText','PasteFromWord',],
+            ['Undo','Redo','-','SelectAll','RemoveFormat'],
+            ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'], '/',
+            ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            ['Link','Unlink'],
+            ['HorizontalRule','SpecialChar']
+          ] 
+      }  );
   }
   if($('#wrapper').length>=1)
   {
@@ -343,11 +407,60 @@ $(document).ready(function(){
       $(this).closest('.has_many_fields').hide();
       return true;
     });
+
+    $('.has_many.evenements a.button').on("click", function( event ) {
+      var id =$(".has_many.evenements .has_many_fields").last().find("input[id*='description']").attr('id');
+
+      if($('#'+ id +'').length>=1){
+          CKEDITOR.replace( id, { 
+            language: 'fr',
+            fontSize_defaultLabel: '12px',
+            font_defaultLabel: 'Arial',
+            toolbar: 'Easy',
+            uiColor: '#efefef',
+            autoParagraph: false,
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
+            toolbar_Easy:
+              [
+                ['Source','-','Preview'],
+                ['Cut','Copy','Paste','PasteText','PasteFromWord',],
+                ['Undo','Redo','-','SelectAll','RemoveFormat'],
+                ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'], '/',
+                ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+                ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                ['Link','Unlink'],
+                ['HorizontalRule','SpecialChar']
+              ] 
+          } );
+        } 
+
+        $(".has_many.evenements .has_many_fields").last().find('input:file').customFileInput({
+          button_position : 'right',
+          feedback_text   : '',
+          button_text     : 'Parcourir...',
+          button_change_text  : 'Changer'
+        });
+         $(".has_many.evenements .has_many_fields").last().find('.just-datetime-picker-time-hour').spinner({
+            min: 0,
+            max: 23,
+            step: 1,
+            start: 0
+          });
+           $(".has_many.evenements .has_many_fields").last().find('.just-datetime-picker-time-minute').spinner({
+            min: 0,
+            max: 59,
+            step: 1,
+            start: 0
+          });
+          $(".has_many.evenements .has_many_fields").last().find(".just-datetime-picker-time-hour").closest(".ui-spinner").after("<span class='separator'>:</span>")
+          $(".has_many.evenements .has_many_fields").last().find("li.file p.inline-hints").html("<img alt='Missing' src='/assets/missing.png'>")
+    });
     $('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
       $(".has_many_fields input[id*='prix']").each(function( index ) {
         $(this).closest("li").find(".inline-hints").css("color", "white");
         $(this).closest("li").find(".inline-hints").css("line-height", "8px");
-    });
+      });
       $(".has_many_fields input[id*='prix']").last().attr('name', '').attr("disabled", "disabled");
       $(".has_many_fields input[id*='prix']").closest("li").find("label").remove();
       $(".has_many_fields input[id*='rabais']").last().attr('value', 0);

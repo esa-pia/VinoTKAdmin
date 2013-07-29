@@ -994,3 +994,16 @@ body.active_admin
     padding-right: 60px;
   }
 }
+body.active_admin
+{
+
+  #main_content
+  {
+    margin-bottom: 70px;
+  }
+  span[class*='cke_editor_']
+  {
+    width: 78%;
+    margin-left: 20%!important;
+  }
+}

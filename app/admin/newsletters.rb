@@ -12,12 +12,12 @@ ActiveAdmin.register Newsletter do
     column  I18n.t('newsletters.nb_promotion') do |newsletter|
       newsletter.newsletters_bouteilles.count
     end
-    column I18n.t('newsletters.date_debut')do |newsletter| 
-      I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?
-    end
-    column I18n.t('newsletters.date_fin')do |newsletter| 
-      I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?
-    end
+    #column I18n.t('newsletters.date_debut')do |newsletter| 
+    #  I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?
+    #end
+    #column I18n.t('newsletters.date_fin')do |newsletter| 
+    #  I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?
+    #end
     #column  I18n.t('newsletters.nb_bouteille') do |catalogue|
     #  newsletter.bouteilles.count
     #end
@@ -89,13 +89,13 @@ ActiveAdmin.register Newsletter do
       end
     end
     panel I18n.t('newsletters.evenement_section_title') do
-      attributes_table_for newsletter do
-        row (I18n.t('newsletters.titre_evenement')) {newsletter.titre_evenement}
-        row (I18n.t('newsletters.evenement_image')) {image_tag(newsletter.evenement_image(:thumb)) if newsletter.evenement_image}
-        row (I18n.t('newsletters.date_debut')) {I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?}
-        row (I18n.t('newsletters.date_fin')) {I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?}
-        row (I18n.t('newsletters.evenement_description')) {raw(newsletter.evenement_description)}
-      end
+    #  attributes_table_for newsletter do
+    #    row (I18n.t('newsletters.titre_evenement')) {newsletter.titre_evenement}
+    #    row (I18n.t('newsletters.evenement_image')) {image_tag(newsletter.evenement_image(:thumb)) if newsletter.evenement_image}
+    #    row (I18n.t('newsletters.date_debut')) {I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?}
+    #    row (I18n.t('newsletters.date_fin')) {I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?}
+    #    row (I18n.t('newsletters.evenement_description')) {raw(newsletter.evenement_description)}
+    #  end
     end
     panel I18n.t('newsletters.info_section_title') do
       attributes_table_for newsletter do
@@ -109,7 +109,7 @@ ActiveAdmin.register Newsletter do
   form do |f|   
     f.inputs I18n.t('newsletters.section_title') do       
       f.input :titre, :label => I18n.t('newsletters.titre')  
-      f.input :description, :label => I18n.t('newsletters.description') , :input_html => { class: :ckeditor }, :wrapper_html => { :class => "cleared" }     
+      f.input :description, :label => I18n.t('newsletters.description') , :wrapper_html => { :class => "cleared" }     
     end                      
     
     f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
@@ -131,16 +131,18 @@ ActiveAdmin.register Newsletter do
         end
       end    
     end
-    f.inputs I18n.t('newsletters.evenement_section_title') do       
-      f.input :titre_evenement  , :label => I18n.t('newsletters.titre_evenement')
-      f.input :evenement_image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (f.template.image_tag(f.object.evenement_image.url()) if f.object.evenement_image)
-      f.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
-      f.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
-      f.input :evenement_description, :label => I18n.t('newsletters.evenement_description'), :input_html => { class: :ckeditor }, :wrapper_html => { :class => "cleared" }         
+    f.inputs I18n.t('newsletters.evenement_section_title') do   
+     f.has_many :evenements do |fff|
+      fff.input :titre  , :label => I18n.t('newsletters.titre_evenement')
+      fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url()) if fff.object.image)
+      fff.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
+      fff.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
+      fff.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared" }         
+     end
     end
     f.inputs I18n.t('newsletters.info_section_title') do       
       f.input :info, :label => I18n.t('newsletters.info') 
-      f.input :info_description, :label => I18n.t('newsletters.info_description')  , :input_html => { class: :ckeditor }, :wrapper_html => { :class => "cleared" }     
+      f.input :info_description, :label => I18n.t('newsletters.info_description') , :wrapper_html => { :class => "cleared" }     
     end                           
     f.actions                         
   end
