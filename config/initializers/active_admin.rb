@@ -211,7 +211,7 @@ ActiveAdmin.setup do |config|
     config.download_links = false
 
     # Want PDF added to default download links
-    config.download_links = [:xlsx]#:csv, :json]
+    #config.download_links = [:xlsx]#:csv, :json]
 
     config.view_factory.footer = Footer
 end

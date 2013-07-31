@@ -44,16 +44,16 @@ ActiveAdmin.register Client do
   
   # -----------------------------------------------------------------------------------
   # XLS
-  xlsx(:i18n_scope => [:active_admin, :axlsx, :clients],
-       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+  # xlsx(:i18n_scope => [:active_admin, :axlsx, :clients],
+  #      :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
-    # deleting columns from the report
-    delete_columns :id, :created_at, :updated_at , :nom, :prenom, :email
+  #   # deleting columns from the report
+  #   delete_columns :id, :created_at, :updated_at , :nom, :prenom, :email
 
-    column (:nom ) { |client| "#{client.nom} #{client.prenom}" }
-    column (:email)
-    column (:inactif)
-  end
+  #   column (:nom ) { |client| "#{client.nom} #{client.prenom}" }
+  #   column (:email)
+  #   column (:inactif)
+  # end
 
   # -----------------------------------------------------------------------------------
   # CONTROLLER

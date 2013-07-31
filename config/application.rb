@@ -72,7 +72,6 @@ module VinoTKAdmin
     # Precompile additional assets
     config.assets.precompile += %w( .svg .eot .woff .ttf )
     config.assets.precompile += %w( active_admin.css active_admin.js print.css active_admin/print.css )
-    #config.assets.precompile += ['ckeditor-jquery.js']
     
     #Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

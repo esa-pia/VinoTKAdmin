@@ -162,21 +162,21 @@ ActiveAdmin.register Catalogue do
 
   # -----------------------------------------------------------------------------------
   # XLS
-  xlsx(:i18n_scope => [:active_admin, :axlsx, :catalogues],
-       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+  # xlsx(:i18n_scope => [:active_admin, :axlsx, :catalogues],
+  #      :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
-    # deleting columns from the report
-    delete_columns :id, :created_at, :updated_at , :titre,  :bouteilles,
-                   :image1_file_name, :image1_content_type, :image1_file_size, :image1_updated_at,
-                   :image2_file_name, :image2_content_type, :image2_file_size, :image2_updated_at,
-                   :image3_file_name, :image3_content_type, :image3_file_size, :image3_updated_at,
-                   :image4_file_name, :image4_content_type, :image4_file_size, :image4_updated_at,
-                   :image5_file_name, :image5_content_type, :image5_file_size, :image5_updated_at,
-                   :image6_file_name, :image6_content_type, :image6_file_size, :image6_updated_at
+  #   # deleting columns from the report
+  #   delete_columns :id, :created_at, :updated_at , :titre,  :bouteilles,
+  #                  :image1_file_name, :image1_content_type, :image1_file_size, :image1_updated_at,
+  #                  :image2_file_name, :image2_content_type, :image2_file_size, :image2_updated_at,
+  #                  :image3_file_name, :image3_content_type, :image3_file_size, :image3_updated_at,
+  #                  :image4_file_name, :image4_content_type, :image4_file_size, :image4_updated_at,
+  #                  :image5_file_name, :image5_content_type, :image5_file_size, :image5_updated_at,
+  #                  :image6_file_name, :image6_content_type, :image6_file_size, :image6_updated_at
 
-    column (:titre)        { |catalogue| catalogue.titre }
-    column (:nb)           { |catalogue| catalogue.bouteilles.count }
-  end
+  #   column (:titre)        { |catalogue| catalogue.titre }
+  #   column (:nb)           { |catalogue| catalogue.bouteilles.count }
+  # end
   # -----------------------------------------------------------------------------------
   # PDF
   

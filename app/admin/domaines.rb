@@ -34,15 +34,15 @@ ActiveAdmin.register Domaine do
   
   # -----------------------------------------------------------------------------------
   # XLS
-  xlsx(:i18n_scope => [:active_admin, :axlsx, :domaines],
-       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+  # xlsx(:i18n_scope => [:active_admin, :axlsx, :domaines],
+  #      :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
-    # deleting columns from the report
-    delete_columns :id, :created_at, :updated_at
+  #   # deleting columns from the report
+  #   delete_columns :id, :created_at, :updated_at
 
-    # adding a column to the report
-    #column(:libelle)
-  end
+  #   # adding a column to the report
+  #   #column(:libelle)
+  # end
   # -----------------------------------------------------------------------------------
   # CONTROLLER
   controller do

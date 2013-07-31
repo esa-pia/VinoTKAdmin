@@ -37,14 +37,14 @@ ActiveAdmin.register AdminUser, :as => I18n.t('menu.user') do
   
   # -----------------------------------------------------------------------------------
   # XLS
-  xlsx(:i18n_scope => [:active_admin, :axlsx, :users],
-       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
-
-    # deleting columns from the report
-    delete_columns :id, :created_at, :updated_at , :encrypted_password , :reset_password_token , :reset_password_sent_at ,:remember_created_at, :current_sign_in_ip, :last_sign_in_ip
-
-    column :sign_in_count
-  end
+  #xlsx(:i18n_scope => [:active_admin, :axlsx, :users],
+  #     :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+  #
+  #  # deleting columns from the report
+  #  delete_columns :id, :created_at, :updated_at , :encrypted_password , :reset_password_token , :reset_password_sent_at ,:remember_created_at, :current_sign_in_ip, :last_sign_in_ip
+  #
+  #    column :sign_in_count
+  #end
   # -----------------------------------------------------------------------------------
   # CONTROLLER
   controller do

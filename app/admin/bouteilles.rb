@@ -122,22 +122,22 @@ ActiveAdmin.register Bouteille do
   
   # -----------------------------------------------------------------------------------
   # XLS
-  xlsx(:i18n_scope => [:active_admin, :axlsx, :bouteilles],
-       :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
+  # xlsx(:i18n_scope => [:active_admin, :axlsx, :bouteilles],
+  #      :header_style => {:bg_color => 'FF0000', :fg_color => 'FF' }) do
 
-    # deleting columns from the report
-    delete_columns :id, :created_at, :updated_at , :type, :domaine, :cuvee, :region, :volume, :description, :millesime  , :appellation, :prix, :nouveau
+  #   # deleting columns from the report
+  #   delete_columns :id, :created_at, :updated_at , :type, :domaine, :cuvee, :region, :volume, :description, :millesime  , :appellation, :prix, :nouveau
 
-    column (:type)        { |bouteille| bouteille.type.libelle    }
-    column (:appellation) { |bouteille| bouteille.appellation    }
-    column (:domaine)     { |bouteille| bouteille.domaine.libelle }
-    column (:cuvee)       { |bouteille| bouteille.cuvee.libelle   }
-    column (:region)      { |bouteille| bouteille.region.libelle if bouteille.region   }
-    column (:volume)      { |bouteille| bouteille.volume.valeur   }
-    column (:millesime)   { |bouteille| bouteille.millesime.valeur   }
-    column (:prix)        { |bouteille| bouteille.prix    }
-    column (:nouveau)     { |bouteille| bouteille.nouveau    }
-  end
+  #   column (:type)        { |bouteille| bouteille.type.libelle    }
+  #   column (:appellation) { |bouteille| bouteille.appellation    }
+  #   column (:domaine)     { |bouteille| bouteille.domaine.libelle }
+  #   column (:cuvee)       { |bouteille| bouteille.cuvee.libelle   }
+  #   column (:region)      { |bouteille| bouteille.region.libelle if bouteille.region   }
+  #   column (:volume)      { |bouteille| bouteille.volume.valeur   }
+  #   column (:millesime)   { |bouteille| bouteille.millesime.valeur   }
+  #   column (:prix)        { |bouteille| bouteille.prix    }
+  #   column (:nouveau)     { |bouteille| bouteille.nouveau    }
+  # end
 
   # -----------------------------------------------------------------------------------
   # CONTROLLER
