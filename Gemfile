@@ -14,7 +14,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-rails',   '2.3.0'
-  gem 'ckeditor_rails', :require => 'ckeditor-rails'
+
   gem 'therubyracer'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -49,7 +49,8 @@ end
   gem 'activeadmin-axlsx'
   gem 'roadie'
   gem 'just-datetime-picker'
-
+  gem 'ckeditor_rails', :require => 'ckeditor-rails'
+  gem 'haml'
 group :development, :test do
   gem 'sqlite3'
 end
