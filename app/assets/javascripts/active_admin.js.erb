@@ -472,7 +472,7 @@ $(document).ready(function(){
         $(this).closest("li").find(".inline-hints").css("color", "white");
         $(this).closest("li").find(".inline-hints").css("line-height", "8px");
       });
-      $(".has_many.newsletters_bouteilles .has_many_fields input[id*='prix']").last().attr('name', '').attr("disabled", "disabled");
+      $(".has_many.newsletters_bouteilles .has_many_fields").last().find("input[id*='prix']").attr('name', '').attr("disabled", "disabled");
       $(".has_many.newsletters_bouteilles .has_many_fields input[id*='prix']").closest("li").find("label").remove();
       $(".has_many.newsletters_bouteilles .has_many_fields input[id*='rabais']").last().attr('value', 0);
       $(".has_many.newsletters_bouteilles .bouteille-chzn-select").last().chosen().change(function() {
@@ -541,9 +541,16 @@ $(document).ready(function(){
 })
 
 function removeButtonManagement(){
-  $(".has_many_remove").wrap('<div class="table_action" title="'+$(".has_many_remove").first().text()+'">').text('')
-  $(".has_many_remove").prepend('<i class="icon-trash">')
-  $(".has_many_remove").removeClass('has_many_remove')
+  $(".has_many_remove label").attr('title', $(".has_many_remove").first().text())
+  $(".has_many_remove a").attr('title', $(".has_many_remove").first().text())
+  $(".has_many_remove input[type='checkbox']").wrap('<i class="icon-trash">')
+  $(".has_many_remove a").prepend('<i class="icon-trash">')
+  $(".has_many_remove label, .has_many_remove a").contents()
+  .filter(function() {
+    return this.nodeType == 3; //Node.TEXT_NODE
+  }).remove();
+  $(".has_many_remove a").removeClass('button')
+  $(".has_many_remove").removeClass('has_many_remove').addClass('has_many_delete');
 
 }
 function tooltipManagement(){

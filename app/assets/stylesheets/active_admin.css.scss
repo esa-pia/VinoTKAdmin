@@ -270,65 +270,111 @@ div.index_as_table th:last-child
           width:60px;
           line-height: 30px;
         }
-        
-
-        &.has_many_remove.button.boolean.input
+        &.has_many_delete
         {
-          margin-bottom: 17px;
-          margin-top: 1px;
-          float: right;
           label
           {
-            background: #8b9297;
-            background: -webkit-linear-gradient(-90deg, #8b9297, #484d51);
-            background: -moz-linear-gradient(-90deg, #8b9297, #484d51);
-            background: linear, -90deg, #8b9297, #484d51;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8B9297', endColorstr='#FF484D51');
-            -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8B9297', endColorstr='#FF484D51');
-            -webkit-border-radius: 200px;
-            -moz-border-radius: 200px;
-            border-radius: 200px;
-            display: inline-block;
-            font-weight: bold;
-            font-size: 1.0em;
-            font-family: Helvetica, Arial, sans-serif;
-            line-height: 12px;
-            margin-right: 3px;
-            padding: 7px 16px 6px;
-            text-decoration: none;
-            -webkit-font-smoothing: antialiased;
-            background: #838a90;
-            background: -webkit-linear-gradient(-90deg, #838a90, #414549);
-            background: -moz-linear-gradient(-90deg, #838a90, #414549);
-            background: linear, -90deg, #838a90, #414549;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF838A90', endColorstr='#FF414549');
-            -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF838A90', endColorstr='#FF414549');
-            text-shadow: black 0 1px 0;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 0 0px rgba(255, 255, 255, 0.2) inset;
-            border: solid 1px #484e53;
-            border-color: #484e53;
-            border-top-color: #616a71;
-            border-right-color: #484e53;
-            border-bottom-color: #363b3f;
-            border-left-color: #484e53;
-            color: #efefef;
-            cursor: pointer;
-            input
+            width:15px!important;
+          }
+          background-color: rgba(255, 255, 255, 0);
+          border-radius: 5px;
+          padding: 0px 7px 7px 0px;
+          margin: 12px 12px 0px 0px;
+          width: 20px;
+          height: 20px;
+          float: right;
+          a
+          {
+            padding: 0px 0px 0px 5px;
+            line-height: 29px;
+          }
+          &:hover
+          {
+            background-color: #AAAAAA;
+            cursor: pointer!important;
+            i
             {
-              display: none;
+              color: #FFFFFF;
             }
+          
+          }
+          input
+          {
+            display: none;
           }
         }
       }
-      .table_action {
-          float: right;
-          margin-top: 10px !important;
-          margin-right: 10px !important;
-        }
     }
   }
 }
+#newsletters_evenements_section 
+{
 
+  div.has_many.evenements
+  {
+    &.sortable
+    {
+      .inputs.has_many_fields
+      {
+        ol{
+          li.number.input.optional.numeric.stringish:first-child
+          {
+            label, input{
+              display: none;
+            }
+            height: 30px;
+            padding-left: 0px;
+            margin: 0px 0px 0px 3px;
+          }
+
+        }
+        &:hover 
+          {
+            background: rgb(250, 250, 250);
+            -webkit-box-shadow: inset 0 1px 4px #888888;
+            li.number.input.optional.numeric.stringish:first-child
+            {
+              background: url('/assets/grippy_large.png') no-repeat 1px 50%!important;
+            }
+          }
+      }
+    }
+    .inputs.has_many_fields
+    {
+      li
+      {
+        &.has_many_delete
+        {
+          background-color: rgba(255, 255, 255, 0);
+          border-radius: 5px;
+          padding: 4px 6px 3px 3px;
+          margin: 0px 0px 5px 14px;
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          a
+          {
+            padding: 0px 0px 0px 5px;
+            line-height: 24px;
+          }
+          &:hover
+          {
+            background-color: #AAAAAA;
+            i
+            {
+              color: #FFFFFF;
+            }
+          }
+          input
+          {
+            display: none;
+          }
+
+        }
+      }
+    }
+  }
+}
 /***********datepicker*************/
 
 body.active_admin .ui-datepicker .ui-datepicker-header a {

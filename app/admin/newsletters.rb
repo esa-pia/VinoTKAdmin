@@ -131,7 +131,7 @@ ActiveAdmin.register Newsletter do
         end
       end    
     end
-    f.inputs I18n.t('newsletters.evenement_section_title') do   
+    f.inputs I18n.t('newsletters.evenement_section_title') , :id => "newsletters_evenements_section" do  
      f.has_many :evenements do |fff|
       fff.input :titre  , :label => I18n.t('newsletters.titre_evenement')
       fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url()) if fff.object.image)
