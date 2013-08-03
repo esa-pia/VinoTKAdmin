@@ -16,7 +16,6 @@ ActiveAdmin.register Newsletter do
       link_to I18n.t('newsletters.send'), '#', :class => 'member_link send_newsletter', :pdf => send_newsletter_admin_newsletter_path(newsletter)
     end
     default_actions
-    
   end
 
   show do |newsletter|
