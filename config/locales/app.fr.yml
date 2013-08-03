@@ -206,6 +206,7 @@ fr:
     unsubscribe_0: "Vous recevez ce message car vous êtes inscrits à la newsletter Vino TK.</br>Vous pouvez vous "
     unsubscribe_1: "désabonner ici"
     unsubscribe: "Vous êtes désabonné."
+    social: "<b>Ne ratez rien.</b></br> Restez au courant de ce qui se passe.</br> Suivez- nous sur :"
   millesimes:
     section_title: "Détails millésime"
     id: "Id"

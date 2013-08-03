@@ -2,10 +2,11 @@
   <meta charset="UTF-8">
   </head>
   <body>
-    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 10px;margin-bottom: 10px;">
       <tbody>
         <tr>
-           <td style="TEXT-ALIGN:center;LINE-HEIGHT:12px" width="719" align="middle"><font style="FONT-FAMILY:Arial,Helvetica,sans-serif;COLOR:#333333;FONT-SIZE:10px"><%= raw(I18n.t("newsletters.see_to_navigator_0")) %> <%= link_to I18n.t("newsletters.see_to_navigator_1"), see_path(@newsletter, @client), :target => "_blank", :style => "COLOR:#ee3897;background-color: white;TEXT-DECORATION:none" %>. 
+           <td style="text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;padding: 5px;
+background-color: rgb(214, 214, 214);"><%= raw(I18n.t("newsletters.see_to_navigator_0")) %> <%= link_to I18n.t("newsletters.see_to_navigator_1"), see_path(@newsletter, @client), :target => "_blank", :style => "color:#e30014;background-color: rgb(214, 214, 214);text-decoration:none" %>. 
           </font></td>
          </tr>
       </tbody>
@@ -16,7 +17,7 @@
           <td rowspan="2" style="a
             width: 120px;
             height: 60px;
-            "><a href="http://www.vinotk-paris.fr/" style="background-color: white;"><img src="<%= asset_path("logo120x120.png") %>" width="120" height="120"></a></td>
+            "><a href="http://www.vinotk-paris.fr/" alt="vino TK" style="background-color: white;"><img src="<%= asset_path("logo120x120.png") %>" width="120" height="120"></a></td>
           <td style="
             text-transform: uppercase;
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -234,6 +235,7 @@
               </p>
 
   <% else %>
+    <% if !(I18n.l(evenement.date_debut,  format: :time_short).eql?("00:00") && I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
               <p style=" line-height:0px;
               "><span style="
               color: #333333;
@@ -241,15 +243,19 @@
               color: #e30014; font-weight: bold;
               "><%= I18n.l(evenement.date_debut,  format: :time_short) %></span></span>
               </p>
+    <% end %>        
     <% if  !( evenement.date_fin.blank?) %>
               <p style="line-height:0px;
               ">Au <span style="
               color: #e30014;
               font-weight: bold;
-              "><%= I18n.l(evenement.date_fin,  format: :date_short) %></span></p> <p style=" line-height:0px;
+              "><%= I18n.l(evenement.date_fin,  format: :date_short) %></span></p>
+      <% if !(I18n.l(evenement.date_debut,  format: :time_short).eql?("00:00") && I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
+             <p style=" line-height:0px;
               ">A <span style="
               color: #e30014; font-weight: bold;padding-left: 8px;
               "><%= I18n.l(evenement.date_fin,  format: :time_short) %></span>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
@@ -316,32 +322,37 @@
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
       <tbody>
         <tr>
-          <td width="265" height="70" style="
-            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;  text-decoration: underline;  padding-left: 10px;">
-            <p style="line-height: 4px;"><a href="https://www.facebook.com/VinoTkParis" style="color: #e30014;background-color: #ffffff;">Facebook</a></p>
-            <p style="line-height: 4px;"><a href="https://twitter.com/VinoTK_Paris" style="color: #e30014;background-color: #ffffff;">Twitter</a></p>
-            <p style="line-height: 4px;"><a href="http://www.vinotk-paris.fr/" style="color: #e30014;background-color: #ffffff;">Notre site</a></p>
+          <td width="150" height="70" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; padding-left: 10px;color: #e30014;"><%= raw(I18n.t('newsletters.social')) %>
+          </td>
+          <td width="115" height="70" style="
+              vertical-align: top;
+              padding-left: 39px;">
+            <a href="https://www.facebook.com/VinoTkParis" style="background-color: white;"><img src="<%= asset_path("facebook.png") %>" alt="facebook" width="34" height="45"></a>
+
+            <a href="https://twitter.com/VinoTK_Paris" style="background-color: white;"><img src="<%= asset_path("twitter.png") %>" alt="twitter" width="34" height="45"></a>
           </td>
           <td width="265" height="70" style="
-            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;  text-decoration: none;  padding-left: 10px;">
-            <p style="line-height: 1px;color: #e30014"><%= I18n.t('vinotk.name') %></p>
-            <p style="line-height: 1px;color: #e30014"><%= I18n.t('vinotk.address')%></p>
-            <p style="line-height: 1px;color: #e30014"><%= I18n.t('vinotk.city')%></p>
-            <p style="line-height: 1px;color: #e30014"><%= I18n.t('vinotk.phone')%></p>
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;  text-decoration: none; color: #e30014";  padding-left: 10px;">
+            <%= I18n.t('vinotk.name') %></br>
+            <%= I18n.t('vinotk.address')%></br>
+            <%= I18n.t('vinotk.city')%></br>
+            <%= I18n.t('vinotk.phone')%>
           </td>
           <td style="
             width: 70px;
             height: 70px;
-            "><a href="http://www.vinotk-paris.fr/" style="background-color: white;"><img src="<%= asset_path("logo70x70.png") %>" width="70" height="70"></a></td>
+            "><a href="http://www.vinotk-paris.fr/" style="background-color: white;"><img src="<%= asset_path("logo70x70.png") %>" width="70" height="70" alt="vinotk"></a></td>
         </tr>
       </tbody>
     </table>
 <% if ! @client.nil?%>
-   <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 40px;margin-bottom: 10px;">
+   <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 10px;margin-bottom: 10px;">
       <tbody>
         <tr>
-           <td style="TEXT-ALIGN:center;FONT-FAMILY:Arial,Helvetica,sans-serif;COLOR:#000000;FONT-SIZE:12px"
-           <span style="FONT-SIZE:10px"><%= raw(I18n.t("newsletters.unsubscribe_0")) %><%= link_to I18n.t("newsletters.unsubscribe_1"), unsubscribe_url(@client.id), :target => "_blank", :style => "background-color: white;COLOR:#e30014;TEXT-DECORATION:none" %></span>
+           <td style="text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;padding: 5px;
+background-color: rgb(214, 214, 214);">
+           <%= raw(I18n.t("newsletters.unsubscribe_0")) %><%= link_to I18n.t("newsletters.unsubscribe_1"), unsubscribe_url(@client.id), :target => "_blank", :style => "background-color: rgb(214, 214, 214);color:#e30014;text-decoration:none" %>
            </td>
          </tr>
       </tbody>
