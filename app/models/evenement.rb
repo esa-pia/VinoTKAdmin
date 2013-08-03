@@ -7,5 +7,5 @@ class Evenement < ActiveRecord::Base
 
   attr_accessible :image
   belongs_to :newsletter
-  attr_accessible :date_debut, :date_fin, :description, :titre
+  attr_accessible :date_debut, :date_fin, :description, :titre, :position
 end

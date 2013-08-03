@@ -470,6 +470,9 @@ $(document).ready(function(){
           $(".has_many.evenements .has_many_fields").last().find(".just-datetime-picker-time-hour").closest(".ui-spinner").after("<span class='separator'>:</span>")
           $(".has_many.evenements .has_many_fields").last().find("li.file p.inline-hints").html("<img alt='Missing' src='/assets/missing.png'>")
           $(".has_many.evenements .has_many_fields li:last-child").last().addClass("has_many_remove button boolean input optional")
+          $(".has_many.evenements .has_many_fields input[id*='position']").each(function( index ) {
+            $(this).attr('value', index);
+          });
           removeButtonManagement();
           $('iframe').attr('title', '')
           tooltipManagement()  
@@ -528,6 +531,7 @@ $(document).ready(function(){
       $(".has_many.newsletters_bouteilles .has_many_fields input[id*='position']").each(function( index ) {
         $(this).attr('value', index);
       });
+
       disabledOptionAllreadyUsed();
       removeButtonManagement();
       tooltipManagement()

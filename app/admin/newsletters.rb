@@ -12,18 +12,6 @@ ActiveAdmin.register Newsletter do
     column  I18n.t('newsletters.nb_promotion') do |newsletter|
       newsletter.newsletters_bouteilles.count
     end
-    #column I18n.t('newsletters.date_debut')do |newsletter| 
-    #  I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?
-    #end
-    #column I18n.t('newsletters.date_fin')do |newsletter| 
-    #  I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?
-    #end
-    #column  I18n.t('newsletters.nb_bouteille') do |catalogue|
-    #  newsletter.bouteilles.count
-    #end
-    #column I18n.t('catalogues.image1'), :image1 do |catalogue|
-    #  image_tag(catalogue.image1(:thumb)) if catalogue.image1
-    #end
     column do |newsletter|
       link_to I18n.t('newsletters.send'), '#', :class => 'member_link send_newsletter', :pdf => send_newsletter_admin_newsletter_path(newsletter)
     end
@@ -88,14 +76,18 @@ ActiveAdmin.register Newsletter do
         end
       end
     end
-    panel I18n.t('newsletters.evenement_section_title') do
-    #  attributes_table_for newsletter do
-    #    row (I18n.t('newsletters.titre_evenement')) {newsletter.titre_evenement}
-    #    row (I18n.t('newsletters.evenement_image')) {image_tag(newsletter.evenement_image(:thumb)) if newsletter.evenement_image}
-    #    row (I18n.t('newsletters.date_debut')) {I18n.l(newsletter.date_debut, format: :time) if newsletter.date_debut?}
-    #    row (I18n.t('newsletters.date_fin')) {I18n.l(newsletter.date_fin, format: :time) if newsletter.date_fin?}
-    #    row (I18n.t('newsletters.evenement_description')) {raw(newsletter.evenement_description)}
-    #  end
+    if(newsletter.evenements.count>0)
+      panel I18n.t('newsletters.evenement_section_title') do
+        table_for newsletter.evenements.order(:position)  do |t|
+        #  t.column :id
+        #  t.column :position
+          t.column (I18n.t('newsletters.titre_evenement')), :titre do  |evenement| evenement.titre end
+          t.column (I18n.t('newsletters.evenement_image')), :image do  |evenement| image_tag(evenement.image(:thumb)) if evenement.image end
+          t.column (I18n.t('newsletters.date_debut')), :date_debut do  |evenement| I18n.l(evenement.date_debut, format: :time) if evenement.date_debut? end
+          t.column (I18n.t('newsletters.date_fin')),   :date_fin   do  |evenement| I18n.l(evenement.date_fin, format: :time) if evenement.date_fin? end
+          t.column (I18n.t('newsletters.evenement_description')), :description   do  |evenement| raw(evenement.description) end
+        end
+      end
     end
     panel I18n.t('newsletters.info_section_title') do
       attributes_table_for newsletter do
@@ -118,10 +110,10 @@ ActiveAdmin.register Newsletter do
       f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
         ff.input :position
-        ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.joins(:type, :domaine, :cuvee, :volume, :millesime).order('types.libelle ASC , appellation ASC, domaines.libelle ASC, cuvees.libelle ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
-        ff.input :prix,         :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
-        ff.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
-        ff.input :nouveau_prix, :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 16px;width: 50px;"}
+        ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.joins(:type, :domaine, :cuvee, :volume, :millesime).order('types.libelle ASC , appellation ASC, domaines.libelle ASC, cuvees.libelle ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur} - #{o.millesime.valeur}", o.id]}
+        ff.input :prix,         :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 15px;text-decoration: line-through;width: 45px;"}
+        ff.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 40px", :class => "spinner_percent"} 
+        ff.input :nouveau_prix, :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 15px;width: 45px;"}
         if ff.object.new_record?
           ff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
                  :wrapper_html => {:style => "display: none;"}
@@ -132,9 +124,10 @@ ActiveAdmin.register Newsletter do
       end    
     end
     f.inputs I18n.t('newsletters.evenement_section_title') , :id => "newsletters_evenements_section" do  
-     f.has_many :evenements do |fff|
+     f.has_many :evenements , :sortable => :position do |fff|
+      fff.input :position
       fff.input :titre  , :label => I18n.t('newsletters.titre_evenement')
-      fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url()) if fff.object.image),  :wrapper_html => {:class => "image_section"}  
+      fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url(:thumb)) if fff.object.image),  :wrapper_html => {:class => "image_section"}  
       fff.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker, :wrapper_html => {:class => "date_debut_section"}        
       fff.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker ,:wrapper_html => {:class => "date_fin_section"}
       fff.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared description_section" }

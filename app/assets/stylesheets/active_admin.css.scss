@@ -320,7 +320,9 @@ div.index_as_table th:last-child
         ol{
           li.number.input.optional.numeric.stringish:first-child
           {
-            label, input{
+            float: left;
+            label, input
+            {
               display: none;
             }
             height: 30px;
@@ -345,22 +347,17 @@ div.index_as_table th:last-child
     {
       li
       {
-       /* &.image_section
+        &.image_section
         {
           p
           {
-            float: right;
-            padding: 0px;
-            margin-top: -50px;
-            margin-right: 0px;
-            width: 170px;
-            min-height: 134px;
+            width: 60px;
             img
             {
-              width: 170px;
+              width: 60px;
             }
           }
-        }*/
+        }
         &.date_fin_section
         {
            width: 44%!important;

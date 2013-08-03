@@ -18,6 +18,9 @@ fr:
       newsletters_bouteille: 
         one: "Promotion"
         other: "Promotions"
+      evenement: 
+        one: "Evènement"
+        other: "Evènements"
       region: 
         one: "Région viticole"
         other: "Régions viticoles"
@@ -187,13 +190,13 @@ fr:
     date_debut: "Date de début"
     date_fin: "Date de fin"
     description: "Description"
-    voir: "Visualiser la Newsletter"
+    voir: "Visualiser Newsletter"
     info: "Titre"
     statut: "Etat"
     info_description: "Description"
     promotions_titre: "Titre"
-    send: "Envoyer aux clients"
-    send_me:  "Envoyez à moi"
+    send: "Envoyer Newsletter"
+    send_me:  "Envoyez-moi"
     info_section_title: "Le saviez vous ..."
     bouteille_section_title: "Le détail des promotions"
     rabais: "Rabais"
