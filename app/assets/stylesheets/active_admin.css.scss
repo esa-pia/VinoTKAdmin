@@ -275,6 +275,7 @@ div.index_as_table th:last-child
           label
           {
             width:15px!important;
+            cursor: pointer;
           }
           background-color: rgba(255, 255, 255, 0);
           border-radius: 5px;
@@ -327,6 +328,7 @@ div.index_as_table th:last-child
             margin: 0px 0px 0px 3px;
           }
 
+
         }
         &:hover 
           {
@@ -343,15 +345,58 @@ div.index_as_table th:last-child
     {
       li
       {
+       /* &.image_section
+        {
+          p
+          {
+            float: right;
+            padding: 0px;
+            margin-top: -50px;
+            margin-right: 0px;
+            width: 170px;
+            min-height: 134px;
+            img
+            {
+              width: 170px;
+            }
+          }
+        }*/
+        &.date_fin_section
+        {
+           width: 44%!important;
+           float: right;
+           margin: 0px 0px 0px 0px;
+           label
+           {
+             width: 45%;
+           }
+        }
+        &.date_debut_section
+        {
+           width: 44%!important;
+           float: left;
+           label
+           {
+             width: 45%;
+           }
+        }
+        &.description_section
+        {
+           padding-top: 55px;
+        }
+        
         &.has_many_delete
         {
           background-color: rgba(255, 255, 255, 0);
           border-radius: 5px;
           padding: 4px 6px 3px 3px;
-          margin: 0px 0px 5px 14px;
+          margin: -44px 0px 0px 14px;
           width: 20px;
           height: 20px;
           cursor: pointer;
+          label{
+            cursor: pointer;
+          }
           a
           {
             padding: 0px 0px 0px 5px;
@@ -1053,3 +1098,6 @@ body.active_admin
     margin-left: 20%!important;
   }
 }
+
+.chzn-container-multi .chzn-drop .result-selected { display: none; }
+.chzn-container .chzn-results .disabled-result { display: none; }

@@ -8,3 +8,9 @@ pre {
 	border:1px solid #DADADA;
 	margin:1em 1em 1em 0em;
 }
+.cke_bottom{
+	display: none;
+}
+body.active_admin table.cke_editor{
+	margin-bottom: 3px
+}

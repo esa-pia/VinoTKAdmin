@@ -118,7 +118,7 @@ ActiveAdmin.register Newsletter do
       f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
         ff.input :position
-        ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.order('type_id ASC , appellation ASC, domaine_id ASC, cuvee_id ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
+        ff.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.bouteilles'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.joins(:type, :domaine, :cuvee, :volume, :millesime).order('types.libelle ASC , appellation ASC, domaines.libelle ASC, cuvees.libelle ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur}- #{o.millesime.valeur}", o.id]}
         ff.input :prix,         :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 16px;text-decoration: line-through;width: 50px;"}
         ff.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 50px", :class => "spinner_percent"} 
         ff.input :nouveau_prix, :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 16px;width: 50px;"}
@@ -134,10 +134,10 @@ ActiveAdmin.register Newsletter do
     f.inputs I18n.t('newsletters.evenement_section_title') , :id => "newsletters_evenements_section" do  
      f.has_many :evenements do |fff|
       fff.input :titre  , :label => I18n.t('newsletters.titre_evenement')
-      fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url()) if fff.object.image)
-      fff.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker             
-      fff.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker 
-      fff.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared" } 
+      fff.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (fff.template.image_tag(fff.object.image.url()) if fff.object.image),  :wrapper_html => {:class => "image_section"}  
+      fff.input :date_debut , :label => I18n.t('newsletters.date_debut')  , :as => :just_datetime_picker, :wrapper_html => {:class => "date_debut_section"}        
+      fff.input :date_fin , :label => I18n.t('newsletters.date_fin')    , :as => :just_datetime_picker ,:wrapper_html => {:class => "date_fin_section"}
+      fff.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared description_section" }
       if fff.object.new_record?
           fff.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
                  :wrapper_html => {:style => "display: none;"}
