@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803185109) do
+ActiveRecord::Schema.define(:version => 20130817130245) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -180,6 +180,20 @@ ActiveRecord::Schema.define(:version => 20130803185109) do
 
   add_index "newsletters_bouteilles", ["bouteille_id"], :name => "index_newsletters_bouteilles_on_bouteille_id"
   add_index "newsletters_bouteilles", ["newsletter_id"], :name => "index_newsletters_bouteilles_on_newsletter_id"
+
+  create_table "produit_phares", :force => true do |t|
+    t.integer  "bouteille_id"
+    t.decimal  "rabais"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "produit_phares", ["bouteille_id"], :name => "index_produit_phares_on_bouteille_id"
 
   create_table "regions", :force => true do |t|
     t.string   "libelle"

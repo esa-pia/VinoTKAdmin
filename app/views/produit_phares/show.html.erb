@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bouteille:</b>
+  <%= @produit_phare.bouteille %>
+</p>
+
+<p>
+  <b>Rabais:</b>
+  <%= @produit_phare.rabais %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @produit_phare.description %>
+</p>
+
+<p>
+  <b>Image file name:</b>
+  <%= @produit_phare.image_file_name %>
+</p>
+
+<p>
+  <b>Image content type:</b>
+  <%= @produit_phare.image_content_type %>
+</p>
+
+<p>
+  <b>Image file size:</b>
+  <%= @produit_phare.image_file_size %>
+</p>
+
+<p>
+  <b>Image updated at:</b>
+  <%= @produit_phare.image_updated_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_produit_phare_path(@produit_phare) %> |
+<%= link_to 'Back', produit_phares_path %>

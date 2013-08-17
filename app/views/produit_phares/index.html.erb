@@ -1,0 +1,35 @@
+<h1>Listing produit_phares</h1>
+
+<table>
+  <tr>
+    <th>Bouteille</th>
+    <th>Rabais</th>
+    <th>Description</th>
+    <th>Image file name</th>
+    <th>Image content type</th>
+    <th>Image file size</th>
+    <th>Image updated at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @produit_phares.each do |produit_phare| %>
+  <tr>
+    <td><%= produit_phare.bouteille %></td>
+    <td><%= produit_phare.rabais %></td>
+    <td><%= produit_phare.description %></td>
+    <td><%= produit_phare.image_file_name %></td>
+    <td><%= produit_phare.image_content_type %></td>
+    <td><%= produit_phare.image_file_size %></td>
+    <td><%= produit_phare.image_updated_at %></td>
+    <td><%= link_to 'Show', produit_phare %></td>
+    <td><%= link_to 'Edit', edit_produit_phare_path(produit_phare) %></td>
+    <td><%= link_to 'Destroy', produit_phare, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Produit phare', new_produit_phare_path %>
