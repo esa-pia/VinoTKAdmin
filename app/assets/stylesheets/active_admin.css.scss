@@ -209,8 +209,80 @@ div.index_as_table th:last-child
 }
 
 /**** affichage de l'euro en hint **/
-#bouteille_prix_input p.inline-hints {
+#bouteille_prix_input p.inline-hints{
   margin: -2em 0 0 26%;
+}
+.has_many.produit_phares
+{
+  padding: 0px 10px!important;
+  li[id*='_prix_input']
+  {
+    float: left;
+    padding: 9px 0 9px 20.5%;
+    p.inline-hints{
+      margin: -2.5em 0 0 104%;
+      color: white;
+    }}
+  li[id*='_rabais_input']
+  {
+    float: left;
+    width: 130px;
+    padding: 9px 30px 0px 30px;
+    label {
+      width: 60px;
+      padding-top: 5px;
+    }
+    p.inline-hints{
+      margin: -2em 0 0 100%;
+    }
+  }
+  li[id*='_nouveau_prix_input']
+  {
+    float: left;
+    padding: 9px 0 9px 0;
+    p.inline-hints{
+      margin: -2.5em 0 0 104%;
+      color: white;
+    }
+  }
+  li[id*='_image_input']
+  {
+    margin-top: 50px;
+  }
+  li[id*='_description_input']
+  {
+     margin-top: 50px;
+  
+  }
+  li.has_many_delete
+  {
+    width: 15px;
+    margin: -40px 5px 5px 5px;
+    border-radius: 5px;
+    label
+    {
+      padding-left: 0px!important;
+      width: 10px;
+      cursor: pointer !important;
+    }
+    input[type='checkbox']
+    {
+      display: none;
+    }
+    &:hover 
+    {
+      background-color: #AAAAAA;
+      i
+      {
+        color:white;
+      }
+    }
+  }
+  
+}
+
+#newsletter_produit_phare_prix_input p.inline-hints, #newsletter_produit_phare_nouveau_prix_input p.inline-hints {
+margin: -2em 0 0 5.5%;
 }
 #batch_actions_selector li
 {

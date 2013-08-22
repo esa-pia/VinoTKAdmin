@@ -13,9 +13,11 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
     </table>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;">
       <tbody>
-        <tr>
-          <td rowspan="2" style="a
-            width: 120px;
+        <tr style="
+            vertical-align: top;
+            ">
+          <td rowspan="2" width="60" style="
+            width: 60px;
             height: 60px;
             "><a href="http://www.vinotk-paris.fr/" alt="vino TK" style="background-color: white;"><img src="<%= asset_path("logo120x120.png") %>" width="120" height="120"></a></td>
           <td style="
@@ -41,8 +43,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
       </tbody>
     </table>
 
-    </table>
-    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;margin-top: 10px;">
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;margin-top: 10px;margin-bottom: 10px;">
       <tbody>
 <% if !@newsletter.promotions_titre.blank? %>
         <tr>
@@ -58,10 +59,133 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             "><%= @newsletter.promotions_titre %></td> 
         </tr>
 <% end %>
+      </tboby>
+    </table>
+<% @newsletter.produit_phares.each do |produit_phare| %>
+<table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 0px;margin-bottom: 0px;">
+      <tbody>
+        <tr>
+          <td rowspan="5" style="
+            width: 120px;
+            height: 60px;
+            "><img src="<%= produit_phare.image.url(:medium) %>" width="400" ></td>
+          <td colspan="3" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 20px;
+            padding-top: 10px;
+            "><%= produit_phare.bouteille.cuvee.libelle %></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #333333; 
+            font-size: 16px;  text-align: left; padding-left: 20px;
+            line-height: 23px;
+            padding-left: 20px;
+            display: inline-block;
+            ">
+            <span style="
+                display: inline-block;
+                background-color: <%= produit_phare.bouteille.type.couleur %>;
+                margin: 5px 0px 8px 0px;
+                padding: 5px 5px 0px 0px;
+                height: 5px;     
+                width: 5px;          -moz-border-radius: 5px;     -webkit-border-radius: 5px;     -khtml-border-radius: 5px;     border-radius: 5px;
+                float: left;
+                "></span>
+<% if produit_phare.bouteille.millesime.valeur.length > 2 %>
+                <span style="
+              padding-left: 5px;
+              "><%= produit_phare.bouteille.millesime.valeur %></span>
+<% end %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #333333; 
+            font-size: 10px;  text-align: left; padding-left: 20px; top: 20px;
+            line-height: 17px;
+            "><%= produit_phare.bouteille.appellation %></td>
+        </tr>
+        <tr height="130">
+          <td height="130" colspan="3" style="
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
+            color: #555555; 
+            vertical-align:top; 
+            font-size: 13px;  text-align: left; 
+            padding-left: 20px; 
+            padding-top: 10px;
+            padding-right: 32px;
+            line-height: 15px;
+            "><%= raw(produit_phare.description) %></td>
+        </tr>
+        <tr style="vertical-align: bottom;">
+          <td style="
+            position: relative;
+            ">
+            <p style="
+              background-color: rgba(225, 0, 19, 0.40);
+              margin: 0px 0px 0px 20px;
+              padding: 0px;
+              height: 50px;
+              width: 80px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              text-decoration: line-through;
+              ">
+              <span style="
+                font-size: 18px;
+                line-height: 49px;
+                "><%= number_to_currency(produit_phare.bouteille.prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span><span style=" 
+                bottom: 1px; 
+                font-size: 0.7em;  
+                vertical-align:super; 
+                "> €</span>
+            </p>
+          </td>
+          <td>
+            <p style="
+              background-color: #e10013;
+              margin: 0px 0px 0px 1px;
+              padding: 0px;
+              height: 50px;
+              width: 80px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              ">
+              <span style="
+                font-size: 18px;
+                line-height: 49px;
+                "><%= number_to_currency(produit_phare.nouveau_prix, unit: "", separator: ",", delimiter: "", format: "%n") %></span><span style=" 
+                bottom: 1px; 
+                font-size: 0.7em;  
+                vertical-align:super; 
+                "> €</span>
+            </p>
+          </td>
+          <td width="60">
+            &nbsp; 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+<% end %>    
+
+
+    <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;margin-top: 0px;">
+      <tbody>
 <% @newsletter.newsletters_bouteilles.each do |promotion| %>
   <% if !promotion.bouteille.nil? %>
           <tr style="
-          background-color: <%= cycle('#ffffff;', '#fbf4f4;') %>
+          background-color: <%= cycle('#fbf4f4;', '#ffffff;') %>
           ">
           <td width="420" height="50" style="
             border-top: 1px solid white;
@@ -300,9 +424,10 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
           <td style="
             text-transform: uppercase; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
             color: #555555; 
-            font-size: 30px; font-weight: bold; text-align: left; 
+            font-size: 20px; font-weight: bold; text-align: left; 
             padding-left: 10px;
             padding-right: 10px;
+            line-height: 20px;
             "><%= @newsletter.info %>
           </td>
         </tr>
@@ -341,9 +466,9 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
           <td width="90" height="70" style="
             width: 90px; height: 70px;
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12px;  text-decoration: none; color: #e30014";  padding-left: 10px;">
-            <b style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;"><%= I18n.t('vinotk.name') %></b></br>
-            <%= I18n.t('vinotk.address')%></br>
-            <%= I18n.t('vinotk.city')%></br>
+            <b style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;"><%= I18n.t('vinotk.name') %></b><br>
+            <%= I18n.t('vinotk.address')%><br>
+            <%= I18n.t('vinotk.city')%><br>
 
             <%= I18n.t('vinotk.phone')%>
           </td>
@@ -357,7 +482,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
         <tr>
            <td style="text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:10px;padding:5px;
 background-color:#F4F4F4;color:#888888;">
-           <%= raw(I18n.t("newsletters.unsubscribe_0")) %><%= link_to I18n.t("newsletters.unsubscribe_1"), unsubscribe_url(@client.id), :target => "_blank", :style => "background-color:#F4F4F4;color:#e30014;text-decoration:none" %>
+           <%= raw(I18n.t("newsletters.unsubscribe_0")) %><%= link_to I18n.t("newsletters.unsubscribe_1"), unsubscribe_url(@client.id), :target => "_blank", :style => "color:#e30014;background-color:#f4f4f4;text-decoration:none" %>
            </td>
          </tr>
       </tbody>

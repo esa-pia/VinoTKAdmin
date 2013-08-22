@@ -33,6 +33,22 @@ ActiveAdmin.register Newsletter do
         attributes_table_for newsletter do
           row (I18n.t('newsletters.promotions_titre')) {newsletter.promotions_titre}
         end
+        if(newsletter.produit_phares.count>0)
+          panel I18n.t('newsletters.produit_phare_section_title') do   
+            attributes_table_for newsletter do 
+              row (I18n.t("bouteilles.cuvee") ) { newsletter.produit_phares.first().bouteille.cuvee.libelle }
+              row (I18n.t("bouteilles.appellation") ) { newsletter.produit_phares.first().bouteille.appellation }
+              row (I18n.t("bouteilles.type") ) {   status_tag(newsletter.produit_phares.first().bouteille.type.libelle.parameterize, :style => 'background-color:' + newsletter.produit_phares.first().bouteille.type.couleur + ';')}
+              row (I18n.t("bouteilles.format") ) { newsletter.produit_phares.first().bouteille.volume.valeur }
+              row (I18n.t("bouteilles.millesime") ) { newsletter.produit_phares.first().bouteille.millesime.valeur }
+              row (I18n.t("bouteilles.prix") ) { number_to_currency newsletter.produit_phares.first().prix }
+              row (I18n.t("newsletters.rabais") ) { "#{newsletter.produit_phares.first().rabais} %" }
+              row (I18n.t("newsletters.nouveau_prix") ) { number_to_currency newsletter.produit_phares.first().nouveau_prix }
+              row (I18n.t("newsletters.evenement_image") ) { image_tag(newsletter.produit_phares.first().image(:thumb)) if newsletter.produit_phares.first().image }
+              row (I18n.t("newsletters.description")) { raw(newsletter.produit_phares.first().description) }
+            end
+          end
+        end
         table_for newsletter.newsletters_bouteilles.order(:position)  do |t|
           #t.column :id
           #t.column :position
@@ -106,6 +122,22 @@ ActiveAdmin.register Newsletter do
     f.inputs I18n.t('newsletters.bouteille_section_title') , :id => "newsletters_bouteilles_section" do  
       f.input :promotions_titre  , :label => I18n.t('newsletters.promotions_titre')
 
+      f.has_many  :produit_phares, :name => "Produit Phare", :id => "produit_phare" do |pf|
+        pf.input :bouteille, :as => :select,                       :input_html => { :class => 'bouteille-chzn-select', :width => 'auto', "data-placeholder" => I18n.t('newsletters.choose.produit_phare'),   "data-no_results_text" => I18n.t('no_results_text')  }, :collection => (Bouteille.joins(:type, :domaine, :cuvee, :volume, :millesime).order('types.libelle ASC , appellation ASC, domaines.libelle ASC, cuvees.libelle ASC').all).map{|o| [ "#{o.type.libelle} - #{o.appellation} - #{o.domaine.libelle} - #{o.cuvee.libelle} - #{o.volume.valeur} - #{o.millesime.valeur}", o.id]}
+        pf.input :prix,         :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 15px;text-decoration: line-through;width: 45px;"}
+        pf.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 40px", :class => "spinner_percent"} 
+        pf.input :nouveau_prix, :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 15px;width: 45px;"}
+        pf.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (pf.template.image_tag(pf.object.image.url(:thumb)) if pf.object.image),  :wrapper_html => {:class => "image_section"}  
+        pf.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared description_section" }
+        if pf.object.new_record?
+          pf.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
+                 :wrapper_html => {:style => "display: none;"}
+        else
+          pf.input :_destroy, :as => :boolean, :wrapper_html => {:class => "has_many_remove button"}, 
+          :label => I18n.t('active_admin.has_many_delete')
+        end
+      end   
+  
       f.has_many :newsletters_bouteilles , :sortable => :position do |ff|
         #ff.inputs
         ff.input :position

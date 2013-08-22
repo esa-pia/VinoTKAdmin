@@ -20,81 +20,24 @@
 $(document).ready(function(){
 
   if($('#newsletter_description').length>=1){
-   CKEDITOR.replace( 'newsletter_description', { 
-
-  language: 'fr',
-  fontSize_defaultLabel: '12px',
-  font_defaultLabel: 'Arial',
-  toolbar: 'Easy',
-  uiColor: '#efefef',
-  height: 100,
-  autoParagraph: false,
-  enterMode: CKEDITOR.ENTER_BR,
-  shiftEnterMode: CKEDITOR.ENTER_P,
-  toolbar_Easy:
-    [
-        ['Source','-','Preview'],
-        ['Cut','Copy','Paste','PasteText','PasteFromWord',],
-        ['Undo','Redo','-','SelectAll','RemoveFormat'],
-        ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'],
-        ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
-        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-        ['Link','Unlink'],
-        ['HorizontalRule','SpecialChar']
-    ]
-    } );
+   textareaToCkeditor('newsletter_description');
   } 
+  
+  var id =$(".has_many.produit_phares .has_many_fields").last().find("textarea[id*='description']").attr('id');
+      if($('#'+ id +'').length>=1){
+          textareaToCkeditor( id);
+        } 
+
+
    var nb = $(".has_many.evenements .has_many_fields").length
   for (var i = 0; i < nb; i++) {
     if($('#newsletter_evenements_attributes_'+i+'_description').length>=1){
-      CKEDITOR.replace( 'newsletter_evenements_attributes_'+i+'_description', { 
-        language: 'fr',
-        fontSize_defaultLabel: '12px',
-        font_defaultLabel: 'Arial',
-        toolbar: 'Easy',
-        uiColor: '#efefef',
-        height: 100,
-        autoParagraph: false,
-        enterMode: CKEDITOR.ENTER_BR,
-        shiftEnterMode: CKEDITOR.ENTER_P,
-        toolbar_Easy:
-          [
-            ['Source','-','Preview'],
-            ['Cut','Copy','Paste','PasteText','PasteFromWord',],
-            ['Undo','Redo','-','SelectAll','RemoveFormat'],
-            ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'],
-            ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
-            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-            ['Link','Unlink'],
-            ['HorizontalRule','SpecialChar']
-          ] 
-      } );
+      textareaToCkeditor( 'newsletter_evenements_attributes_'+i+'_description');
     } 
   }
   
   if($('#newsletter_info_description').length>=1){
-    CKEDITOR.replace( 'newsletter_info_description', { 
-        language: 'fr',
-        fontSize_defaultLabel: '12px',
-        font_defaultLabel: 'Arial',
-        toolbar: 'Easy',
-        uiColor: '#efefef',
-        height: 100,
-        autoParagraph: false,
-        enterMode: CKEDITOR.ENTER_BR,
-        shiftEnterMode: CKEDITOR.ENTER_P,
-        toolbar_Easy:
-          [
-            ['Source','-','Preview'],
-            ['Cut','Copy','Paste','PasteText','PasteFromWord',],
-            ['Undo','Redo','-','SelectAll','RemoveFormat'],
-            ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor','BGColor'], ['Maximize','-'],
-            ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
-            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-            ['Link','Unlink'],
-            ['HorizontalRule','SpecialChar']
-          ] 
-      }  );
+    textareaToCkeditor( 'newsletter_info_description');
   }
   
   if($('#wrapper').length>=1)
@@ -152,12 +95,7 @@ $(document).ready(function(){
   });
   
    /** INPUT FILE**/
-  $('input:file').customFileInput({
-    button_position : 'right',
-    feedback_text   : '',
-    button_text     : 'Parcourir...',
-    button_change_text  : 'Changer'
-  });
+   changeStyleToFileInput($(this));
   /** AUTOCOMPLETE AUTO SUGGEST**/
   
   $(".chzn-select").chosen();
@@ -303,10 +241,10 @@ $(document).ready(function(){
                 $(choosen).closest('li').find('option').removeAttr('selected');
                 $(choosen).closest('li').find('option[value='+selectedValue+']').attr('selected', 'selected')
                 var prix = data.prix;
-                $(choosen).closest('.has_many_fields').find("input[id*='prix']").attr('value', prix);
-                var rabais =  $(choosen).closest('.has_many_fields').find("input[id*='rabais']").val();
+                $(choosen).closest('fieldset').find("input[id*='prix']").attr('value', prix);
+                var rabais =  $(choosen).closest('fieldset').find("input[id*='rabais']").val();
                 var nouveau_prix = prix * (1 - (rabais/100))
-                $(choosen).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+                $(choosen).closest('fieldset').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
                 disabledOptionAllreadyUsed();
                 stopSpinner();
               }
@@ -383,16 +321,16 @@ $(document).ready(function(){
       step: 0.05,
       start: 100, 
       spin: function( event, ui ) {
-          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
+          var prix = $(event.currentTarget).closest('fieldset').find("input[id*='prix']")[0].value
           var rabais = ui.value
           var nouveau_prix = prix * (1 - (rabais/100))
-          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+          $(event.currentTarget).closest('fieldset').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
       },
       change: function( event, ui ) {
-          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
+          var prix = $(event.currentTarget).closest('fieldset').find("input[id*='prix']")[0].value
           var rabais = event.currentTarget.value
           var nouveau_prix = prix * (1 - (rabais/100))
-          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+          $(event.currentTarget).closest('fieldset').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
       }
     });
     
@@ -425,7 +363,143 @@ $(document).ready(function(){
     $('.has_many.evenements a.button').on("click", function( event ) {
       var id =$(".has_many.evenements .has_many_fields").last().find("textarea[id*='description']").attr('id');
       if($('#'+ id +'').length>=1){
-          CKEDITOR.replace( id, { 
+          textareaToCkeditor(id);
+        } 
+
+        changeStyleToFileInput($(".has_many.evenements .has_many_fields").last());
+         $(".has_many.evenements .has_many_fields").last().find('.just-datetime-picker-time-hour').spinner({
+            min: 0,
+            max: 23,
+            step: 1,
+            start: 0
+          });
+           $(".has_many.evenements .has_many_fields").last().find('.just-datetime-picker-time-minute').spinner({
+            min: 0,
+            max: 59,
+            step: 1,
+            start: 0
+          });
+          $(".has_many.evenements .has_many_fields").last().find(".just-datetime-picker-time-hour").closest(".ui-spinner").after("<span class='separator'>:</span>")
+          $(".has_many.evenements .has_many_fields").last().find("li.file p.inline-hints").html("<img alt='Missing' src='/assets/missing.png'>")
+          $(".has_many.evenements .has_many_fields li:last-child").last().addClass("has_many_remove button boolean input optional")
+          $(".has_many.evenements .has_many_fields input[id*='position']").each(function( index ) {
+            $(this).attr('value', index);
+          });
+          removeButtonManagement();
+          removetitleToCkEditor();
+          tooltipManagement();
+          removetitleToCkEditor();
+    });
+    
+    if($(".has_many.produit_phares fieldset").length>0)
+    {
+      $(".has_many.produit_phares a.button").last().hide();
+      $(".has_many.produit_phares fieldset .has_many_remove.button").on("click", function( event ) {
+        $(this).closest('.has_many_fields').hide();
+        $(".has_many.produit_phares a.button").last().show()
+        return true;
+    });
+    }
+
+    $('.has_many.produit_phares a.button').on("click", function( event ) {
+      $('.has_many.produit_phares a.button').last().hide();
+      var id =$(".has_many.produit_phares .has_many_fields").last().find("textarea[id*='description']").attr('id');
+      if($('#'+ id +'').length>=1){
+          textareaToCkeditor( id );
+        } 
+      disabledOptionAllreadyUsed();
+      removeButtonManagement();
+      tooltipManagement();
+      removetitleToCkEditor();
+       $(".has_many.produit_phares .has_many_fields a").last().attr('onclick','');
+      $(".has_many.produit_phares .has_many_fields a").last().on("click", function( event ) {
+        $(this).closest('.has_many_fields').remove();
+        $('.has_many.produit_phares a.button').last().show();
+        return true;
+      });
+      changeStyleToFileInput($(".has_many.produit_phares .has_many_fields").last());
+    });
+
+    $('.has_many.newsletters_bouteilles a.button, .has_many.produit_phares a.button').on("click", function( event ) {
+      $(".has_many_fields input[id*='prix']").each(function( index ) {
+        $(this).closest("li").find(".inline-hints").css("color", "white");
+        $(this).closest("li").find(".inline-hints").css("line-height", "8px");
+      });
+
+      
+      $(this).closest('.has_many').find(".has_many_fields").last().find("input[id*='prix']").attr('name', '').attr("disabled", "disabled");
+      $(this).closest('.has_many').find(".has_many_fields input[id*='prix']").closest("li").find("label").remove();
+      $(this).closest('.has_many').find(".has_many_fields input[id*='rabais']").last().attr('value', 0);
+      $(this).closest('.has_many').find(".bouteille-chzn-select").last().chosen().change(function() {
+          launchSpinner();
+          var choosen = this;
+          var selectedValue = $(this).val()
+          $.ajax({
+              url: '/admin/bouteilles/'+selectedValue+'.json',
+              type: 'GET',
+              success: function(data) {
+                console.log(selectedValue)
+                $(choosen).closest('li').find('option').removeAttr('selected');
+                $(choosen).closest('li').find('option[value='+selectedValue+']').attr('selected', 'selected')
+                var prix = data.prix;
+                $(choosen).closest('fieldset').find("input[id*='prix']").attr('value', prix);
+                var rabais =  $(choosen).closest('fieldset').find("input[id*='rabais']").val();
+                var nouveau_prix = prix * (1 - (rabais/100))
+                $(choosen).closest('fieldset').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+                disabledOptionAllreadyUsed();
+                stopSpinner();
+              }
+          });
+      
+       });
+
+      $('fieldset .spinner_percent').spinner({
+        min: 0,
+        max: 1000,
+        step: 0.05,
+        start: 1000,
+        spin: function( event, ui ) {
+          var prix = $(event.currentTarget).closest('fieldset').find("input[id*='prix']")[0].value
+          var rabais = ui.value
+          var nouveau_prix = prix * (1 - (rabais/100))
+          $(event.currentTarget).closest('fieldset').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+        },
+        change: function( event, ui ) {
+          var prix = $(event.currentTarget).closest('fieldset').find("input[id*='prix']")[0].value
+          var rabais = event.currentTarget.value
+          var nouveau_prix = prix * (1 - (rabais/100))
+          $(event.currentTarget).closest('fieldset').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
+      }
+      });
+      $(this).closest('.has_many').find(".has_many_fields").last().find("li:last-child").last().addClass("has_many_remove button boolean input optional")
+      $("fieldset .has_many_fields input[id*='position']").each(function( index ) {
+        $(this).attr('value', index);
+      });
+
+      disabledOptionAllreadyUsed();
+      removeButtonManagement();
+      tooltipManagement()
+
+    });
+    removeButtonManagement();
+    /** TOOLTIPS**/
+    
+    tooltipManagement();
+    
+    setTimeout(function()
+      {
+        $('#wrapper').animate({
+          opacity: 1
+          }, 1000, function() 
+          {
+            $(".filter-chzn-select").closest("div").find('.chzn-container').css("width", "240px");
+            removetitleToCkEditor();
+          });
+    });
+})
+function textareaToCkeditor(id)
+{
+  CKEDITOR.replace( id, { 
             language: 'fr',
             fontSize_defaultLabel: '12px',
             font_defaultLabel: 'Arial',
@@ -447,117 +521,25 @@ $(document).ready(function(){
                 ['HorizontalRule','SpecialChar']
               ] 
           } );
-        } 
+}
+function changeStyleToFileInput(target){
+  target.find('input:file').customFileInput({
+        button_position : 'right',
+        feedback_text   : '',
+        button_text     : 'Parcourir...',
+        button_change_text  : 'Changer'
+  });
 
-        $(".has_many.evenements .has_many_fields").last().find('input:file').customFileInput({
-          button_position : 'right',
-          feedback_text   : '',
-          button_text     : 'Parcourir...',
-          button_change_text  : 'Changer'
-        });
-         $(".has_many.evenements .has_many_fields").last().find('.just-datetime-picker-time-hour').spinner({
-            min: 0,
-            max: 23,
-            step: 1,
-            start: 0
-          });
-           $(".has_many.evenements .has_many_fields").last().find('.just-datetime-picker-time-minute').spinner({
-            min: 0,
-            max: 59,
-            step: 1,
-            start: 0
-          });
-          $(".has_many.evenements .has_many_fields").last().find(".just-datetime-picker-time-hour").closest(".ui-spinner").after("<span class='separator'>:</span>")
-          $(".has_many.evenements .has_many_fields").last().find("li.file p.inline-hints").html("<img alt='Missing' src='/assets/missing.png'>")
-          $(".has_many.evenements .has_many_fields li:last-child").last().addClass("has_many_remove button boolean input optional")
-          $(".has_many.evenements .has_many_fields input[id*='position']").each(function( index ) {
-            $(this).attr('value', index);
-          });
-          removeButtonManagement();
-          $('iframe').attr('title', '')
-          tooltipManagement()  
-    
-    });
-    $('.has_many.newsletters_bouteilles a.button').on("click", function( event ) {
-      $(".has_many_fields input[id*='prix']").each(function( index ) {
-        $(this).closest("li").find(".inline-hints").css("color", "white");
-        $(this).closest("li").find(".inline-hints").css("line-height", "8px");
-      });
-      $(".has_many.newsletters_bouteilles .has_many_fields").last().find("input[id*='prix']").attr('name', '').attr("disabled", "disabled");
-      $(".has_many.newsletters_bouteilles .has_many_fields input[id*='prix']").closest("li").find("label").remove();
-      $(".has_many.newsletters_bouteilles .has_many_fields input[id*='rabais']").last().attr('value', 0);
-      $(".has_many.newsletters_bouteilles .bouteille-chzn-select").last().chosen().change(function() {
-          launchSpinner();
-          var choosen = this;
-          var selectedValue = $(this).val()
-          $.ajax({
-              url: '/admin/bouteilles/'+selectedValue+'.json',
-              type: 'GET',
-              success: function(data) {
-                console.log(selectedValue)
-                $(choosen).closest('li').find('option').removeAttr('selected');
-                $(choosen).closest('li').find('option[value='+selectedValue+']').attr('selected', 'selected')
-                var prix = data.prix;
-                $(choosen).closest('.has_many_fields').find("input[id*='prix']").attr('value', prix);
-                var rabais =  $(choosen).closest('.has_many_fields').find("input[id*='rabais']").val();
-                var nouveau_prix = prix * (1 - (rabais/100))
-                $(choosen).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
-                disabledOptionAllreadyUsed();
-                stopSpinner();
-              }
-          });
-      
-       });
 
-      $('.has_many.newsletters_bouteilles .spinner_percent').spinner({
-        min: 0,
-        max: 1000,
-        step: 0.05,
-        start: 1000,
-        spin: function( event, ui ) {
-          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
-          var rabais = ui.value
-          var nouveau_prix = prix * (1 - (rabais/100))
-          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
-        },
-        change: function( event, ui ) {
-          var prix = $(event.currentTarget).closest('.has_many_fields').find("input[id*='prix']")[0].value
-          var rabais = event.currentTarget.value
-          var nouveau_prix = prix * (1 - (rabais/100))
-          $(event.currentTarget).closest('.has_many_fields').find("input[id*='nouveau_prix']").attr('value',nouveau_prix.toFixed(2))
-      }
-      });
-      $(".has_many.newsletters_bouteilles .has_many_fields li:last-child").last().addClass("has_many_remove button boolean input optional")
-      $(".has_many.newsletters_bouteilles .has_many_fields input[id*='position']").each(function( index ) {
-        $(this).attr('value', index);
-      });
+}
 
-      disabledOptionAllreadyUsed();
-      removeButtonManagement();
-      tooltipManagement()
-
-    });
-    removeButtonManagement();
-    /** TOOLTIPS**/
-    
-    tooltipManagement();
-    
-    setTimeout(function()
-      {
-        $('#wrapper').animate({
-          opacity: 1
-          }, 1000, function() 
-          {
-            $(".filter-chzn-select").closest("div").find('.chzn-container').css("width", "240px");
-            setTimeout(function()
-            {
-              $('iframe').attr('title', '')
-              stopSpinner();
-            },500);
-          });
-    });
-})
-
+function removetitleToCkEditor(){
+  setTimeout(function()
+  {
+    $('iframe').attr('title', '')
+      stopSpinner();
+    },500);
+}
 function removeButtonManagement(){
   $(".has_many_remove label").attr('title', $(".has_many_remove").first().text())
   $(".has_many_remove a").attr('title', $(".has_many_remove").first().text())
@@ -596,15 +578,15 @@ function tooltipManagement(){
 }
 function disabledOptionAllreadyUsed(){
   
-  $('.has_many select option[disabled]').removeAttr("disabled")
-  $('.has_many ul.chzn-results li').removeClass('disabled-result').addClass('active-result');
+  $('fieldset select option[disabled]').removeAttr("disabled")
+  $('fieldset ul.chzn-results li').removeClass('disabled-result').addClass('active-result');
 
-  $('.has_many select option[selected]').each(function( index ) {
+  $('fieldset select option[selected]').each(function( index ) {
     var value = $(this).attr('value')
-    $('.has_many select option[value='+value+']:not(:selected)').attr('disabled', 'disabled');
+    $('fieldset select option[value='+value+']:not(:selected)').attr('disabled', 'disabled');
   });
   
-  $('.has_many select option[disabled]').each(function( index ) {
+  $('fieldset select option[disabled]').each(function( index ) {
     var position = $(this).closest('select').find('option').index($(this))-1;
     var item = $(this).closest('li').find("ul.chzn-results li").get(position);
     $(item).addClass('disabled-result').removeClass('active-result');
