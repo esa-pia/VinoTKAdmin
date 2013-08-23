@@ -62,9 +62,9 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
       </tboby>
     </table>
 <% @newsletter.produit_phares.each do |produit_phare| %>
-<table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 0px;margin-bottom: 0px;">
+<table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 0px;margin-bottom: 10px;">
       <tbody>
-        <tr>
+        <tr style="vertical-align: top;">
           <td rowspan="5" style="
             width: 120px;
             height: 60px;
@@ -120,7 +120,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             vertical-align:top; 
             font-size: 13px;  text-align: left; 
             padding-left: 20px; 
-            padding-top: 10px;
+            padding-top: 0px;
             padding-right: 32px;
             line-height: 15px;
             "><%= raw(produit_phare.description) %></td>
@@ -392,7 +392,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             vertical-align:top; 
             font-size: 13px;  text-align: left; 
             padding-left: 10px; 
-            padding-top: 10px;
+            padding-top: 0px;
             padding-right: 32px;
             line-height: 15px;
             "><%= raw(evenement.description) %></td>
@@ -402,7 +402,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             text-transform: uppercase; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; color: #333; 
             font-size: 13px;  text-align: left; 
             padding-left: 10px; 
-            padding-top: 36px;
+            padding-top: 30px;
             "><span style="
             background-color: #e30014; 
             font-size: 12px;

@@ -127,7 +127,7 @@ ActiveAdmin.register Newsletter do
         pf.input :prix,         :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 0.4);margin-right: -12px;border-style: none;font-size: 15px;text-decoration: line-through;width: 45px;"}
         pf.input :rabais,        :hint => "%" ,                    :input_html => { :style => "width: 40px", :class => "spinner_percent"} 
         pf.input :nouveau_prix, :disabled => "true", label: false, :hint =>I18n.t('number.currency.format.unit'), :input_html => { :style => "text-align: right;color:white;background-color: rgba(225, 0, 19, 1);margin-right: -12px;border-style: none;font-size: 15px;width: 45px;"}
-        pf.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (pf.template.image_tag(pf.object.image.url(:medium)) if pf.object.image),  :wrapper_html => {:class => "image_section"}  
+        pf.input :image, :label => I18n.t('newsletters.evenement_image'), :as => :file, :input_html => {:onchange => "readURL(event)"}, :hint => (pf.template.image_tag(pf.object.image.url(:medium )) if pf.object.image),  :wrapper_html => {:class => "image_section"}  
         pf.input :description, :label => I18n.t('newsletters.evenement_description'), :wrapper_html => { :class => "cleared description_section" }
         if pf.object.new_record?
           pf.action :cancel , label:  I18n.t('active_admin.has_many_delete'), :as => :link, :url => "#",
