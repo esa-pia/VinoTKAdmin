@@ -68,7 +68,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
           <td rowspan="5" style="
             width: 120px;
             height: 60px;
-            "><img src="<%= produit_phare.image.url(:medium) %>" width="400" ></td>
+            "><img src="<%= produit_phare.image.url(:medium) %>" width="350" ></td>
           <td colspan="3" style="
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
             color: #333;
@@ -129,9 +129,23 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
           <td style="
             position: relative;
             ">
+            <% if(produit_phare.rabais ==0 ) %>
+            <p style="
+              background-color: rgba(225, 0, 19, 0);
+              margin: 5px 0px 0px 70px;
+              padding: 0px;
+              height: 50px;
+              width: 80px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              text-decoration: line-through;
+              ">
+            </p>
+            <% else %>
             <p style="
               background-color: rgba(225, 0, 19, 0.40);
-              margin: 0px 0px 0px 20px;
+              margin: 5px 0px 0px 70px;
               padding: 0px;
               height: 50px;
               width: 80px;
@@ -149,11 +163,12 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
                 vertical-align:super; 
                 "> €</span>
             </p>
+            <% end %>
           </td>
           <td>
             <p style="
               background-color: #e10013;
-              margin: 0px 0px 0px 1px;
+              margin: 5px 0px 0px 1px;
               padding: 0px;
               height: 50px;
               width: 80px;
@@ -235,6 +250,21 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             position: relative;
             border-top: 1px solid white;
             ">
+            <% if (promotion.rabais == 0) %>
+            <p style="
+              background-color: rgba(225, 0, 19, 0);
+              margin: 0px 0px 0px 0px;
+              padding: 0px;
+              height: 50px;
+              width: 80px;
+              text-align: center;
+              vertical-align: middle;
+              color: white;
+              text-decoration: line-through;
+              ">
+            </p>            
+            <% else %>
+
             <p style="
               background-color: rgba(225, 0, 19, 0.40);
               margin: 0px 0px 0px 0px;
@@ -255,6 +285,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
                 vertical-align:super; 
                 "> €</span>
             </p>
+            <% end %>
           </td>
           <td style="
             border-top: 1px solid white;
@@ -296,7 +327,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
       <tbody>
         <tr>
            <% if cycle('true', 'false').eql? "true"  %>
-          <td width="200" style="
+          <td width="250" style="
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
             color: #333;
             font-size: 16px;
@@ -309,14 +340,14 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             width: 120px;
             height: 60px;
             vertical-align: top;
-            "><img src="<%= evenement.image.url(:medium) %>" width="400" ></td>
+            "><img src="<%= evenement.image.url(:medium) %>" width="350" ></td>
           <% else %>
           <td rowspan="5" style="
             width: 120px;
             height: 60px;
             vertical-align: top;
-            "><img src="<%= evenement.image.url(:medium) %>" width="400" ></td>
-          <td width="200" style="
+            "><img src="<%= evenement.image.url(:medium) %>" width="350" ></td>
+          <td width="250" style="
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
             color: #333;
             font-size: 16px;
@@ -345,13 +376,12 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
               color: #e30014;
               font-weight: bold;
               padding-left: 4px;
-              "><%= I18n.l(evenement.date_debut,  format: :date_short) %></span></span></p>
+              "><%= I18n.l(evenement.date_debut,  format: :date_short) %></span></span>
          
   <% if  !( evenement.date_fin.blank?) && I18n.l(evenement.date_debut,  format: :date_short) ==  I18n.l(evenement.date_fin,  format: :date_short) %>
-               <p style="line-height:0px;
-              "><span style="
+               <span style="
               color: #333333;
-              ">De <span style="
+              ">de <span style="
               color: #e30014; font-weight: bold;
               "><%= I18n.l(evenement.date_debut,  format: :time_short) %></span> à <span style="
               color: #e30014; font-weight: bold;
@@ -360,26 +390,25 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
 
   <% else %>
     <% if !(I18n.l(evenement.date_debut,  format: :time_short).eql?("00:00") && I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
-              <p style=" line-height:0px;
-              "><span style="
+              <span style="
               color: #333333;
-              ">De <span style="
+              ">de <span style="
               color: #e30014; font-weight: bold;
               "><%= I18n.l(evenement.date_debut,  format: :time_short) %></span></span>
               </p>
     <% end %>        
     <% if  !( evenement.date_fin.blank?) %>
-              <p style="line-height:0px;
+              </p><p style="line-height:0px;
               ">Au <span style="
               color: #e30014;
               font-weight: bold;
-              "><%= I18n.l(evenement.date_fin,  format: :date_short) %></span></p>
-      <% if !(I18n.l(evenement.date_debut,  format: :time_short).eql?("00:00") && I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
-             <p style=" line-height:0px;
-              ">A <span style="
-              color: #e30014; font-weight: bold;padding-left: 8px;
+              "><%= I18n.l(evenement.date_fin,  format: :date_short) %></span>
+      <% if !(I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
+             à <span style="
+              color: #e30014; font-weight: bold;padding-left: 0px;
               "><%= I18n.l(evenement.date_fin,  format: :time_short) %></span>
       <% end %>
+      </p>
     <% end %>
   <% end %>
 <% end %>
@@ -403,15 +432,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             font-size: 13px;  text-align: left; 
             padding-left: 10px; 
             padding-top: 30px;
-            "><span style="
-            background-color: #e30014; 
-            font-size: 12px;
-            margin: 0px 0px 0px 0px; 
-            padding: 8px 16px;   text-align: center; vertical-align: middle; color: white;
-            "><a href="http://www.vinotk-paris.fr" style="
-                color: white;
-                text-decoration: none;
-                background-color: #e30014;">en savoir plus</a></span></td>
+            "></td>
         </tr>
       </tbody>
     </table>
