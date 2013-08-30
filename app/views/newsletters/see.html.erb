@@ -397,7 +397,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
               </p>
 
   <% else %>
-    <% if !(I18n.l(evenement.date_debut,  format: :time_short).eql?("00:00") && I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
+    <% if !(I18n.l(evenement.date_debut,  format: :time_short).eql?("00:00")) && ( ( evenement.date_fin.blank?) || I18n.l(evenement.date_fin,  format: :time_short).eql?("00:00"))%>
               <span style="
               color: #333333;
               ">de <span style="
