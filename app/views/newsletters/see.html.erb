@@ -380,7 +380,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
 <% if !( evenement.date_debut.blank?)%>
             <p style=" 
               line-height:0px;
-              "><span>Le <span style="
+              "><span><% if ( evenement.date_fin.blank?) || (!( evenement.date_fin.blank?) && I18n.l(evenement.date_debut,  format: :date_short) ==  I18n.l(evenement.date_fin,  format: :date_short))%>Le <% else %>Du <% end %><span style="
               color: #e30014;
               font-weight: bold;
               padding-left: 4px;
