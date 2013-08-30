@@ -3,7 +3,7 @@ class Evenement < ActiveRecord::Base
   just_define_datetime_picker :date_debut, :add_to_attr_accessible => true
   just_define_datetime_picker :date_fin, :add_to_attr_accessible => true
 
-  has_attached_file :image, :styles => {:medium => "350", :thumb => "60"}
+  has_attached_file :image, :styles => {:medium => "350x475>", :thumb => "60x90>"}
 
   attr_accessible :image
   belongs_to :newsletter

@@ -3,7 +3,7 @@ class ProduitPhare < ActiveRecord::Base
   belongs_to :newsletter
   belongs_to :bouteille
   
-  has_attached_file :image, :styles => {:medium => "350", :thumb => "60"}
+  has_attached_file :image, :styles => {:medium => "350x475>", :thumb => "60x90>"}
   attr_accessible :image
   
   belongs_to :newsletter
