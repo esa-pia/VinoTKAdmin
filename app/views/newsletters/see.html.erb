@@ -30,7 +30,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             padding-left: 20px;
             padding-top: 10px;
             line-height: 30px;
-            "><%= @newsletter.titre %></td>
+            "><%= raw(@newsletter.titre) %></td>
         </tr>
         <tr>
           <td style="
@@ -42,10 +42,10 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
         </tr>
       </tbody>
     </table>
-
+<% if !@newsletter.promotions_titre.blank? %>
     <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0;margin-top: 10px;margin-bottom: 10px;">
       <tbody>
-<% if !@newsletter.promotions_titre.blank? %>
+
         <tr>
           <td colspan="4" width="600" height="50" style="
             text-transform: uppercase;
@@ -58,9 +58,9 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             padding-top: 10px;
             "><%= @newsletter.promotions_titre %></td> 
         </tr>
-<% end %>
       </tboby>
     </table>
+<% end %>
 <% @newsletter.produit_phares.each do |produit_phare| %>
 <table align="center" cellpadding="0" cellspacing="0" border="0" width="600" style="background:#fff;border: 0; margin-top: 0px;margin-bottom: 10px;">
       <tbody>
@@ -341,7 +341,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             padding-left: 10px;
             padding-top: 0px;
             width: 100%;
-            "><%= evenement.titre %></td>
+            "><%= raw(evenement.titre) %></td>
           <td rowspan="5" style="
             width: 120px;
             height: 60px;
@@ -363,10 +363,11 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             padding-left: 10px;
             padding-top: 0px;
             width: 100%;
-            "><%= evenement.titre %></td>
+            "><%= raw(evenement.titre) %></td>
           <% end %>
           
         </tr>
+<% if !( evenement.date_debut.blank?) %>
         <tr>
           <td style="
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
@@ -422,6 +423,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
 <% end %>
           </td>
         </tr>
+<% end %>
         <tr>
           <td style="
             font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; 
@@ -457,7 +459,7 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             padding-left: 10px;
             padding-right: 10px;
             line-height: 20px;
-            "><%= @newsletter.info %>
+            "><%= raw(@newsletter.info) %>
           </td>
         </tr>
         <tr>
@@ -480,28 +482,23 @@ background-color:#F4F4F4;color:#888888;"><%= raw(I18n.t("newsletters.see_to_navi
             width: 70px;
             height: 70px;
             "><a href="http://www.vinotk-paris.fr/" style="background-color: white;"><img src="<%= asset_path("logo70x70.png") %>" width="70" height="70" alt="vinotk"></a></td>
-          <td width="120" height="70" style="
-             width: 120px; height: 70px;
-            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; padding-left: 10px;color: #e30014;"><%= raw(I18n.t('newsletters.social')) %>
-          </td>
-          <td width="280" height="70" style="
-               width: 280px; height: 70px;
-              vertical-align: middle;
-              padding-left: 0px;">
-            <a href="https://www.facebook.com/VinoTkParis" style="background-color: white;"><img src="<%= asset_path("facebook.png") %>" alt="facebook" width="37" height="37"></a>
-
-            <a href="https://twitter.com/VinoTK_Paris" style="background-color: white;"><img src="<%= asset_path("twitter.png") %>" alt="twitter" width="37" height="37"></a>
-          </td>
-          <td width="120" height="70" style="
-            width: 120px; height: 70px;
-            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12px;  text-decoration: none; color: #e30014";  padding-left: 10px;">
+          <td width="440" height="70" style="
+            width: 420px; height: 70px;
+            font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12px;  text-decoration: none; color: #e30014; padding-left: 40px;">
             <b style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px;"><%= I18n.t('vinotk.name') %></b><br>
             <%= I18n.t('vinotk.address')%><br>
             <%= I18n.t('vinotk.city')%><br>
 
             <%= I18n.t('vinotk.phone')%>
           </td>
+          <td width="80" height="70" style="
+               width: 80px; height: 70px;
+              vertical-align: middle;
+              padding-left: 0px;">
+            <a href="https://www.facebook.com/VinoTkParis" style="background-color: white;"><img src="<%= asset_path("facebook.png") %>" alt="facebook" width="37" height="37"></a>
 
+            <a href="https://twitter.com/VinoTK_Paris" style="background-color: white;"><img src="<%= asset_path("twitter.png") %>" alt="twitter" width="37" height="37"></a>
+          </td>
         </tr>
       </tbody>
     </table>
